@@ -1,0 +1,19 @@
+#navbar{
+    background-color: #ffcc66;
+    opacity: 0.4;
+    height: 40px;
+}
+#navContent{
+    background-color: #ffcc66;
+    text-align: center;
+    
+}
+.navContent2{
+    margin: 0px 50px 0px 0px;
+    
+}
+#menu{
+    width: 30px;
+    height: 30px;
+    float: left;
+}
