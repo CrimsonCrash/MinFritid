@@ -1,12 +1,11 @@
 body{
-    background-image: url("/assets/Images/Background.jpg");
+    background-image: url("/assets/Images/background.jpg");
     height: 100%;
     background-position: center;
-    background-repeat: no-repeat;
     background-size: cover;
-    
-    justify-content: center;
-    align-items: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 920px;
     
     
     
