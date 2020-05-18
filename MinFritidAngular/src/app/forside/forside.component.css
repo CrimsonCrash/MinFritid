@@ -1,13 +1,14 @@
 .activitiesImg{
- height: 300px;
+ height: auto;
  width: 300px;
  
 }
-.background{
+.activityBackground{
     background-color: blanchedalmond;
     background-size: auto;
-    width: 350px;
-    margin: 30px 0px 0px 0px;
+    padding: 1%;
+    width: fit-content;
+    margin-top: 2%;
     text-align: center;
     margin-left:auto;
     margin-right:auto;
