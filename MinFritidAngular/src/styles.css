@@ -31,6 +31,12 @@ time, mark, audio, video {
 
 body {
     line-height:1;
+    background-image: url("/assets/Images/background.jpg");
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 article,aside,details,figcaption,figure,
