@@ -13,8 +13,18 @@
     margin: 0px 50px 0px 0px;
     
 }
-#menu{
+#menuimg{
     width: 35px;
     height: 40px;
     float: left;
+}
+.submenu{
+    display: none;
+    
+}
+#menu:hover + .submenu{
+    display: block;
+}
+.submenu:hover{
+    display: block;
 }
