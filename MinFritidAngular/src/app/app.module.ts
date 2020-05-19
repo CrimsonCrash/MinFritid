@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ForsideComponent } from './forside/forside.component';
 import { NavComponent } from './nav/nav.component';
 import { AktivitetComponent } from './aktivitet/aktivitet.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { AktivitetComponent } from './aktivitet/aktivitet.component';
     ForsideComponent,
     routingComponent,
     NavComponent,
-    AktivitetComponent
+    AktivitetComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
