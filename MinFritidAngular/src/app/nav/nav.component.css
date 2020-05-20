@@ -1,8 +1,8 @@
 #navbar{
     background-color: #ffffff;
-    opacity: 0.8;
+    opacity: 0.9;
     height: 40px;
-    min-height: 40px;
+    min-height: 2%;
 }
 #navContent{
     background-color: #ffffff;
@@ -20,7 +20,7 @@
 }
 .submenu{
     display: none;
-    
+
 }
 #menuimg:hover + .submenu{
     background-color: darkorange;
