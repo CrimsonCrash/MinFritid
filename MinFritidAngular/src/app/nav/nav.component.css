@@ -22,9 +22,24 @@
     display: none;
 
 }
-#menu:hover + .submenu{
+#menuimg:hover + .submenu{
+    background-color: darkorange;
     display: block;
+    text-align: left;
+    position: fixed;
+    margin-top: 40px;
+    padding: 1rem;
 }
 .submenu:hover{
     display: block;
+    text-align: left;
+    float: none;
+    background-color: darkorange;
+    position: fixed;
+    margin-top: 40px;
+    padding: 1rem;
 }
+
+ 
+
+
