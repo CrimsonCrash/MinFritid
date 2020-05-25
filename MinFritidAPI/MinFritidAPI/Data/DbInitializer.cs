@@ -10,6 +10,8 @@ namespace MinFritidAPI.Data
         public static void Initializer(MinFritidContext context)
         {
             context.Database.EnsureCreated();
+
+            context.SaveChanges();
         }
     }
 }
