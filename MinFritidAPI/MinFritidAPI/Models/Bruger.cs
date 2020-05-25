@@ -19,7 +19,7 @@ namespace MinFritidAPI.Models
 
         public string Password { get; set; }
 
-        public Boolean Verificeret { get; set; }
+        public bool Verificeret { get; set; }
 
     }
 }
