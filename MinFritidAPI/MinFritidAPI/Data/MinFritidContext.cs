@@ -13,5 +13,10 @@ namespace MinFritidAPI.Data
         public DbSet<Aktivitet> Aktivitet { get; set; }
 
         public DbSet<Bruger> Bruger { get; set; }
+
+        public MinFritidContext(DbContextOptions<MinFritidContext> options) : base(options)
+        {
+
+        }
     }
 }
