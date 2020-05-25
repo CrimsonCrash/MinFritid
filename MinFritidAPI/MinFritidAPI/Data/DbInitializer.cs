@@ -7,5 +7,9 @@ namespace MinFritidAPI.Data
 {
     public class DbInitializer
     {
+        public static void Initializer(MinFritidContext context)
+        {
+            context.Database.EnsureCreated();
+        }
     }
 }
