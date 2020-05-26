@@ -18,6 +18,7 @@ import { VennerComponent } from './venner/venner.component';
 import { FavoritterComponent } from './favoritter/favoritter.component';
 import { SoegComponent } from './soeg/soeg.component';
 import { MineAktiviteterComponent } from './mine-aktiviteter/mine-aktiviteter.component';
+import { RedigerProfilComponent } from './rediger-profil/rediger-profil.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MineAktiviteterComponent } from './mine-aktiviteter/mine-aktiviteter.co
     VennerComponent,
     FavoritterComponent,
     SoegComponent,
-    MineAktiviteterComponent
+    MineAktiviteterComponent,
+    RedigerProfilComponent
   ],
   imports: [
     BrowserModule,
