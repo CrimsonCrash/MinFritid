@@ -10,7 +10,7 @@ using MinFritidAPI.Models;
 
 namespace MinFritidAPI.Controller
 {
-    [Route("api/[controller]")]
+    [Route("api/bruger")]
     [ApiController]
     public class BrugerController : ControllerBase
     {

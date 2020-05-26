@@ -24,5 +24,6 @@ namespace MinFritidAPI.Models
 
         public bool Verificeret { get; set; }
 
+        public bool Aktiv { get; set; }
     }
 }
