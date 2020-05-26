@@ -19,7 +19,7 @@ namespace MinFritidAPI.Data
         //opsætter en constructor
         public MinFritidContext(DbContextOptions<MinFritidContext> options) : base(options)
         {
-            //skal være en blank constuctor
+            //skal være en blank constuctor, den opretter en blank instans af context
         }
     }
 }
