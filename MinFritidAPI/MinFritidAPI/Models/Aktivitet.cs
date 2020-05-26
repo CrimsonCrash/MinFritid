@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +8,9 @@ namespace MinFritidAPI.Models
 {
     public class Aktivitet
     {
+        [Key]
+        public int AktivitetID { get; set; }
+
         public string Titel { get; set; }
 
         public string Beskrivelse { get; set; }
