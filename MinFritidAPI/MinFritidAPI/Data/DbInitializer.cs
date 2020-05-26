@@ -9,8 +9,10 @@ namespace MinFritidAPI.Data
     {
         public static void Initializer(MinFritidContext context)
         {
+            //sikre sig at databasen eksisterer
             context.Database.EnsureCreated();
 
+            //gemmer ændringer
             context.SaveChanges();
         }
     }
