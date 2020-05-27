@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MinFritidAPI.Data;
 using MinFritidAPI.Models;
 
-namespace MinFritidAPI.Controller
+namespace MinFritidAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/aktivitet")]
     [ApiController]
     public class AktivitetController : ControllerBase
     {
-        private readonly MinFritidContext _context;
+        private MinFritidContext _context { get; }
 
         public AktivitetController(MinFritidContext context)
         {
@@ -23,9 +24,10 @@ namespace MinFritidAPI.Controller
 
         // GET: api/Aktivitet
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Aktivitet>>> GetAktivitets()
+        [EnableCors("AnotherPolicy")]
+        public IActionResult GetAllAktivitets()
         {
-            return await _context.Aktivitets.ToListAsync();
+            return new JsonResult(_context.Aktivitets);
         }
 
         // GET: api/Aktivitet/5

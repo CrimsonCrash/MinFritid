@@ -48,7 +48,8 @@ namespace MinFritidAPI
             });
 
             services.AddDbContext<MinFritidContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(@"Server = 192.168.4.125; Database = MinFritid; User Id = sa; Password = Passw0rd;"));
             services.AddMvc();
         }
 

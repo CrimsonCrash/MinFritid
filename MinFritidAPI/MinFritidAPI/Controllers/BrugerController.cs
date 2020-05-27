@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using MinFritidAPI.Data;
 using MinFritidAPI.Models;
 
-namespace MinFritidAPI.Controller
+namespace MinFritidAPI.Controllers
 {
     [Route("api/bruger")]
     [ApiController]
     public class BrugerController : ControllerBase
     {
-        private readonly MinFritidContext _context;
+        private MinFritidContext _context { get; }
 
         public BrugerController(MinFritidContext context)
         {
@@ -23,24 +23,28 @@ namespace MinFritidAPI.Controller
 
         // GET: api/Bruger
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Bruger>>> GetBrugers()
+        public IActionResult GetBrugers()
         {
-            return await _context.Brugers.ToListAsync();
+            return new JsonResult(_context.Brugers);
         }
 
         // GET: api/Bruger/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Bruger>> GetBruger(int id)
+        public IActionResult GetBruger(int id)
         {
-            var bruger = await _context.Brugers.FindAsync(id);
+            var brugers = _context.Brugers;
+
+            var bruger = brugers.FirstOrDefault(Bruger => Bruger.BrugerID == id);
 
             if (bruger == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
 
-            return bruger;
+            return new JsonResult(bruger);
         }
+
+        
 
         // PUT: api/Bruger/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -105,6 +109,11 @@ namespace MinFritidAPI.Controller
         private bool BrugerExists(int id)
         {
             return _context.Brugers.Any(e => e.BrugerID == id);
+        }
+
+        private IActionResult HttpNotFound()
+        {
+            throw new NotImplementedException();
         }
     }
 }
