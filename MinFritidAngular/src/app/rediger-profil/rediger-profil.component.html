@@ -18,8 +18,12 @@
             <input class="navContent2" type="text">
         </div>
         <br>
-
         
+    </div>
+    <div class="person2">
+        <img [src]="url" class="profileimg">
+        <input class="btnclick" type="file" (chance)="onSelectImg($event.target.files)">
+        <button class="btnclick" routerLink="/">Tilbage til forsiden</button>
     </div>
 
 </body>
