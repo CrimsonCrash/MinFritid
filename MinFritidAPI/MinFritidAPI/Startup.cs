@@ -27,6 +27,7 @@ namespace MinFritidAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //adding the cors policy that allows data to move between different entities
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
