@@ -9,6 +9,8 @@ namespace MinFritidAPI.Models
 {
     public class Aktivitet
     {
+        private bool aktiv = true;
+
         [Key]
         public int ID { get; set; }
         [ForeignKey("ID")]
@@ -30,6 +32,6 @@ namespace MinFritidAPI.Models
         [ForeignKey("PostNummer")]
         public int PostNummer { get; set; }
 
-        public bool Aktiv { get; set; }
+        public bool Aktiv { get => aktiv; set => aktiv = value; }
     }
 }
