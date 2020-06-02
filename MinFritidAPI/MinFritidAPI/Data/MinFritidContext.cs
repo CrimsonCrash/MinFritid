@@ -27,6 +27,9 @@ namespace MinFritidAPI.Data
         {
             
         }
+
+        
+        public DbSet<MinFritidAPI.Models.Admin> Admin { get; set; }
         
     }
 }
