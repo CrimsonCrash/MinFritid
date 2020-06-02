@@ -8,6 +8,9 @@ namespace MinFritidAPI.Models
 {
     public class Bruger
     {
+        private bool verificeret = false;
+        private bool aktiv = true;
+
         [Key]
         public int ID { get; set; }
         public string Fornavn { get; set; }
@@ -22,8 +25,7 @@ namespace MinFritidAPI.Models
 
         public string Password { get; set; }
 
-        public bool Verificeret { get; set; } = false;
-
-        public bool Aktiv { get; set; } = true;
+        public bool Verificeret { get => verificeret; set => verificeret = value; }
+        public bool Aktiv { get => aktiv; set => aktiv = value; }
     }
 }
