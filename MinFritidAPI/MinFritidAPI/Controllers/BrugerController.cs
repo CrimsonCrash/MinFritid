@@ -94,18 +94,19 @@ namespace MinFritidAPI.Controllers
 
         // DELETE: api/Bruger/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Bruger>> DeleteBruger(int id)
+        public IActionResult DeleteBruger(int id)
         {
-            var bruger = await _context.Bruger.FindAsync(id);
-            if (bruger == null)
+            var DeleteBruger = _context.Admin.FirstOrDefault(Bruger => Bruger.ID == id);
+            if (DeleteBruger != null)
             {
-                return NotFound();
+                _context.Admin.Remove(DeleteBruger);
+                _context.SaveChanges();
+                return Ok("Removed Book");
             }
-
-            _context.Bruger.Remove(bruger);
-            await _context.SaveChangesAsync();
-
-            return bruger;
+            else
+            {
+                return NotFound("Not found");
+            }
         }
 
         private bool BrugerExists(int id)

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,7 +18,7 @@ namespace MinFritidAPI.Models
         public string Fornavn { get; set; }
 
         public string Efternavn { get; set; }
-
+        [Column(TypeName = "Date")]
         public DateTime Foedselsdato { get; set; }
 
         public int PostNummer { get; set; }

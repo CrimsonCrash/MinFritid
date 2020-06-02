@@ -41,7 +41,7 @@ namespace MinFritidAPI.Controllers
                 return NotFound();
             }
 
-            return admin;
+            return new JsonResult(admin);
         }
 
         // POST: api/Admin
@@ -73,7 +73,7 @@ namespace MinFritidAPI.Controllers
             {
                     _context.Admin.Remove(DeleteAdmin);
                     _context.SaveChanges();
-                    return Ok("Removed Book");
+                    return Ok("Removed Admin");
             }
             else
                 {
