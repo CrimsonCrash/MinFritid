@@ -16,6 +16,7 @@
 .time{
     margin: 0px 10px 0px 10px;
     width: 60px;
+    background-color: #ffc266;
 }
 .message{
     display: block;
@@ -24,4 +25,7 @@
 }
 .address{
     width: 250px;
+}
+.readonly{
+    background-color: #ffc266;
 }
