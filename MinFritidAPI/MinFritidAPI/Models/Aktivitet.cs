@@ -30,6 +30,6 @@ namespace MinFritidAPI.Models
         [ForeignKey("PostNummer")]
         public int PostNummer { get; set; }
 
-        public bool Aktiv { get; set; }
+        public bool Aktiv { get; set; } = true;
     }
 }

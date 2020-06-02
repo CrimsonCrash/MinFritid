@@ -22,8 +22,8 @@ namespace MinFritidAPI.Models
 
         public string Password { get; set; }
 
-        public bool Verificeret { get; set; }
+        public bool Verificeret { get; set; } = false;
 
-        public bool Aktiv { get; set; }
+        public bool Aktiv { get; set; } = true;
     }
 }
