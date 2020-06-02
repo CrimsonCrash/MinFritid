@@ -22,6 +22,8 @@ namespace MinFritidAPI.Data
         //er et kald på Brugere synlig for databasen
         public DbSet<Bruger> Bruger { get; set; }
 
+        public DbSet<By> By { get; set; }
+
         
         public MinFritidContext(DbContextOptions<MinFritidContext> options) : base(options)
         {

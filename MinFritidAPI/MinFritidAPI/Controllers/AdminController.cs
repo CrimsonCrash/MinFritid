@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using MinFritidAPI.Models;
 namespace MinFritidAPI.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("AnotherPolicy")]
     [ApiController]
     public class AdminController : ControllerBase
     {
@@ -30,9 +32,9 @@ namespace MinFritidAPI.Controllers
 
         // GET: api/Admin/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Admin>> GetAdmin(int id)
+        public IActionResult GetAdmins(int id)
         {
-            var admin = await _context.Admin.FindAsync(id);
+            var admin =  _context.Admin;
 
             if (admin == null)
             {
@@ -40,62 +42,45 @@ namespace MinFritidAPI.Controllers
             }
 
             return admin;
-        }
-
-        // PUT: api/Admin/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAdmin(int id, Admin admin)
-        {
-            if (id != admin.ID)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(admin).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AdminExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
         }
 
         // POST: api/Admin
         [HttpPost]
-        public async Task<ActionResult<Admin>> PostAdmin(Admin admin)
+        public IActionResult PostAdmin([FromBody]Admin admin)
         {
-            _context.Admin.Add(admin);
-            await _context.SaveChangesAsync();
+            using (var PostAdmin = _context)
+            {
 
-            return CreatedAtAction("GetAdmin", new { id = admin.ID }, admin);
+                if (PostAdmin != null)
+                {
+                    _context.Admin.Add(admin);
+                    _context.SaveChanges();
+                    return Ok("Added Admin");
+                }
+                else
+                {
+                    return NotFound("Not found");
+                }
+            }
         }
 
         // DELETE: api/Admin/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Admin>> DeleteAdmin(int id)
+        [HttpDelete("{ID}")]
+        public IActionResult DeleteAdmin(int id)
         {
-            var admin = await _context.Admin.FindAsync(id);
-            if (admin == null)
+            var DeleteAdmin =  _context.Admin.FirstOrDefault(Admin => Admin.ID == id);
+            if (DeleteAdmin != null)
             {
-                return NotFound();
+                    _context.Admin.Remove(DeleteAdmin);
+                    _context.SaveChanges();
+                    return Ok("Removed Book");
+            }
+            else
+                {
+            return NotFound("Not found");
             }
 
-            _context.Admin.Remove(admin);
-            await _context.SaveChangesAsync();
-
-            return admin;
+            
         }
 
         private bool AdminExists(int id)
