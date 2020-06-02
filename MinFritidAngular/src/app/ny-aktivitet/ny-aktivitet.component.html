@@ -1,1 +1,67 @@
-<p>ny-aktivitet works!</p>
+ <body>
+    <div class="boxBackground">
+        <div>
+            <label>Titel</label>
+            <br>
+            <input class="navContent2" type="text">
+        </div>
+        <br>
+        <div>
+            <label>Adresse til mødestedet</label>
+            <br>
+            <input class="navContent2" class="address" type="text">
+        </div>
+        <br>
+        
+    </div>
+    <div class="person2">
+        <img [src]="url" class="profileimg">
+        <input class="btnclick" type="file" (chance)="onSelectImg($event.target.files)">
+    </div>
+    <div class="boxBackground">
+        <div>
+            <label>Dato for aktivitet</label>
+            <br>
+            <input class="navContent2" type="text">
+        </div>
+        <br>
+        <div>
+            <label>Tidspunkt for aktivitet</label>
+            <br>
+            <input class="navContent2" class="time" type="text">
+            <input class="navContent2" class="time" type="text">
+        </div>
+        <br>
+        <div>
+            <label>Beskrivelse</label>
+            <br>
+            
+        </div>
+        <br>
+    </div>
+    <textarea class="message"></textarea>
+    <div class="boxBackground">
+        <div>
+            <label>Max antal deltagere</label>
+            <br>
+            <input class="navContent2" type="text">
+            <br>
+            <label>Note: Opretteren vil selv optage en plads</label>
+        </div>
+        <br>
+        <div>
+            <label>Tilmeldingspris</label>
+            <br>
+            <input class="navContent2" type="text">
+        </div>
+        <br>
+        <div>
+            <label>huskeliste</label>
+            
+        </div>
+        <br>
+        
+    </div>
+    <textarea class="message"></textarea>
+    <button class="btnclick" routerLink="/">Opret aktivitet</button>
+</body>
