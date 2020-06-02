@@ -9,14 +9,14 @@ namespace MinFritidAPI.Models
     public class Bruger
     {
         [Key]
-        public int BrugerID { get; set; }
+        public int ID { get; set; }
         public string Fornavn { get; set; }
 
         public string Efternavn { get; set; }
 
         public DateTime Foedselsdato { get; set; }
 
-        public int By { get; set; }
+        public int PostNummer { get; set; }
 
         public string Email { get; set; }
 

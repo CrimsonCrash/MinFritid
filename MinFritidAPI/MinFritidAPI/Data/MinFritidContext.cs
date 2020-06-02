@@ -17,10 +17,10 @@ namespace MinFritidAPI.Data
         }
 
         //er et kald på Aktiviteter synlig for databasen
-        public DbSet<Aktivitet> Aktivitets { get; set; }
+        public DbSet<Aktivitet> Aktivitet { get; set; }
 
-        //er et kald på Brugerer synlig for databasen
-        public DbSet<Bruger> Brugers { get; set; }
+        //er et kald på Brugere synlig for databasen
+        public DbSet<Bruger> Bruger { get; set; }
 
         
         public MinFritidContext(DbContextOptions<MinFritidContext> options) : base(options)

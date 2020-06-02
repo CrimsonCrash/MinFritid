@@ -23,18 +23,18 @@ namespace MinFritidAPI.Controllers
 
         // GET: api/Bruger
         [HttpGet]
-        public IActionResult GetBrugers()
+        public IActionResult GetBrugere()
         {
-            return new JsonResult(_context.Brugers);
+            return new JsonResult(_context.Bruger);
         }
 
         // GET: api/Bruger/5
         [HttpGet("{id}")]
         public IActionResult GetBruger(int id)
         {
-            var brugers = _context.Brugers;
+            var brugers = _context.Bruger;
 
-            var bruger = brugers.FirstOrDefault(Bruger => Bruger.BrugerID == id);
+            var bruger = brugers.FirstOrDefault(Bruger => Bruger.ID == id);
 
             if (bruger == null)
             {
@@ -52,7 +52,7 @@ namespace MinFritidAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBruger(int id, Bruger bruger)
         {
-            if (id != bruger.BrugerID)
+            if (id != bruger.ID)
             {
                 return BadRequest();
             }
@@ -84,23 +84,23 @@ namespace MinFritidAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Bruger>> PostBruger(Bruger bruger)
         {
-            _context.Brugers.Add(bruger);
+            _context.Bruger.Add(bruger);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBruger", new { id = bruger.BrugerID }, bruger);
+            return CreatedAtAction("GetBruger", new { id = bruger.ID }, bruger);
         }
 
         // DELETE: api/Bruger/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Bruger>> DeleteBruger(int id)
         {
-            var bruger = await _context.Brugers.FindAsync(id);
+            var bruger = await _context.Bruger.FindAsync(id);
             if (bruger == null)
             {
                 return NotFound();
             }
 
-            _context.Brugers.Remove(bruger);
+            _context.Bruger.Remove(bruger);
             await _context.SaveChangesAsync();
 
             return bruger;
@@ -108,7 +108,7 @@ namespace MinFritidAPI.Controllers
 
         private bool BrugerExists(int id)
         {
-            return _context.Brugers.Any(e => e.BrugerID == id);
+            return _context.Bruger.Any(e => e.ID == id);
         }
 
         private IActionResult HttpNotFound()

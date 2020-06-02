@@ -25,16 +25,16 @@ namespace MinFritidAPI.Controllers
         // GET: api/Aktivitet
         [HttpGet]
         [EnableCors("AnotherPolicy")]
-        public IActionResult GetAllAktivitets()
+        public IActionResult GetAllAktiviteter()
         {
-            return new JsonResult(_context.Aktivitets);
+            return new JsonResult(_context.Aktivitet);
         }
 
         // GET: api/Aktivitet/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Aktivitet>> GetAktivitet(int id)
         {
-            var aktivitet = await _context.Aktivitets.FindAsync(id);
+            var aktivitet = await _context.Aktivitet.FindAsync(id);
 
             if (aktivitet == null)
             {
@@ -50,7 +50,7 @@ namespace MinFritidAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAktivitet(int id, Aktivitet aktivitet)
         {
-            if (id != aktivitet.AktivitetID)
+            if (id != aktivitet.ID)
             {
                 return BadRequest();
             }
@@ -82,23 +82,23 @@ namespace MinFritidAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Aktivitet>> PostAktivitet(Aktivitet aktivitet)
         {
-            _context.Aktivitets.Add(aktivitet);
+            _context.Aktivitet.Add(aktivitet);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAktivitet", new { id = aktivitet.AktivitetID }, aktivitet);
+            return CreatedAtAction("GetAktivitet", new { id = aktivitet.ID }, aktivitet);
         }
 
         // DELETE: api/Aktivitet/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Aktivitet>> DeleteAktivitet(int id)
         {
-            var aktivitet = await _context.Aktivitets.FindAsync(id);
+            var aktivitet = await _context.Aktivitet.FindAsync(id);
             if (aktivitet == null)
             {
                 return NotFound();
             }
 
-            _context.Aktivitets.Remove(aktivitet);
+            _context.Aktivitet.Remove(aktivitet);
             await _context.SaveChangesAsync();
 
             return aktivitet;
@@ -106,7 +106,7 @@ namespace MinFritidAPI.Controllers
 
         private bool AktivitetExists(int id)
         {
-            return _context.Aktivitets.Any(e => e.AktivitetID == id);
+            return _context.Aktivitet.Any(e => e.ID == id);
         }
     }
 }

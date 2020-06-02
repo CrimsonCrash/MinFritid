@@ -9,7 +9,9 @@ namespace MinFritidAPI.Models
     public class Aktivitet
     {
         [Key]
-        public int AktivitetID { get; set; }
+        public int ID { get; set; }
+
+        public int BrugerID { get; set; }
 
         public string Titel { get; set; }
 
@@ -25,6 +27,8 @@ namespace MinFritidAPI.Models
 
         public DateTime SlutTidspunkt { get; set; }
 
-        public int By { get; set; }
+        public int PostNummer { get; set; }
+
+        public bool Aktiv { get; set; }
     }
 }
