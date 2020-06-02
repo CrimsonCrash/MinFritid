@@ -12,6 +12,7 @@ using MinFritidAPI.Models;
 namespace MinFritidAPI.Controllers
 {
     [Route("api/aktivitet")]
+    [EnableCors("AnotherPolicy")]
     [ApiController]
     public class AktivitetController : ControllerBase
     {
@@ -24,7 +25,6 @@ namespace MinFritidAPI.Controllers
 
         // GET: api/Aktivitet
         [HttpGet]
-        [EnableCors("AnotherPolicy")]
         public IActionResult GetAllAktiviteter()
         {
             return new JsonResult(_context.Aktivitet);

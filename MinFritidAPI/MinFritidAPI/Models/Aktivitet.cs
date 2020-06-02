@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace MinFritidAPI.Models
     {
         [Key]
         public int ID { get; set; }
-
+        [ForeignKey("ID")]
         public int BrugerID { get; set; }
 
         public string Titel { get; set; }
@@ -26,7 +27,7 @@ namespace MinFritidAPI.Models
         public DateTime StartTidspunkt { get; set; }
 
         public DateTime SlutTidspunkt { get; set; }
-
+        [ForeignKey("PostNummer")]
         public int PostNummer { get; set; }
 
         public bool Aktiv { get; set; }
