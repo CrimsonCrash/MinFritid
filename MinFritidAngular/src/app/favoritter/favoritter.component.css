@@ -1,0 +1,10 @@
+.favorit{
+    display: block;
+    float: left;
+    text-align: left;
+}
+.quantity{
+    display: block;
+    float: right;
+    margin: 0px 0px 0px 10px;
+}
