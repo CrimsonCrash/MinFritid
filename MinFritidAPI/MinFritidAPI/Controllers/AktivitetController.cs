@@ -50,19 +50,21 @@ namespace MinFritidAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public IActionResult PutAktivitet(int Id)
+        public IActionResult PutAktivitet(int Id, Aktivitet aktivitet)
         {
-            var PutAktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.ID == Id);
-            if (PutAktivitet != null)
-            {
-                _context.Aktivitet.Update(PutAktivitet);
-                _context.SaveChanges();
-                return Ok("Opdateret Aktivitet");
-            }
-            else
+            //var PutAktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.ID == Id);
+            if (aktivitet == null)
             {
                 return NotFound("Ikke fundet");
             }
+            if (aktivitet.ID == Id)
+            {
+                _context.Aktivitet.Update(aktivitet);
+                _context.SaveChanges();
+                return Ok("Opdateret Aktivitet");
+            }
+            return BadRequest();
+            
         }
 
         // POST: api/Aktivitet
