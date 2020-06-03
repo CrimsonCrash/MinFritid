@@ -52,44 +52,40 @@ namespace MinFritidAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBruger(int id, Bruger bruger)
+        public IActionResult PutBruger(int Id)
         {
-            if (id != bruger.ID)
+            var PutBruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.ID == Id);
+            if (PutBruger != null)
             {
-                return BadRequest();
+                _context.Bruger.Update(PutBruger);
+                _context.SaveChanges();
+                return Ok("Updated Bruger");
             }
-
-            _context.Entry(bruger).State = EntityState.Modified;
-
-            try
+            else
             {
-                await _context.SaveChangesAsync();
+                return NotFound("Not found");
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BrugerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
         }
 
         // POST: api/Bruger
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Bruger>> PostBruger(Bruger bruger)
+        public IActionResult PostBruger([FromBody] Bruger bruger)
         {
-            _context.Bruger.Add(bruger);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetBruger", new { id = bruger.ID }, bruger);
+            using (var PostBruger = _context)
+            {
+                if (PostBruger != null)
+                {
+                    _context.Bruger.Add(bruger);
+                    _context.SaveChanges();
+                    return Ok("Added Bruger");
+                }
+                else
+                {
+                    return NotFound("Not added");
+                }
+            }
         }
 
         // DELETE: api/Bruger/5
@@ -101,7 +97,7 @@ namespace MinFritidAPI.Controllers
             {
                 _context.Admin.Remove(DeleteBruger);
                 _context.SaveChanges();
-                return Ok("Removed Book");
+                return Ok("Removed Bruger");
             }
             else
             {
