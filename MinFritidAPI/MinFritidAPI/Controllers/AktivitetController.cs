@@ -32,76 +32,75 @@ namespace MinFritidAPI.Controllers
 
         // GET: api/Aktivitet/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Aktivitet>> GetAktivitet(int id)
+        public IActionResult GetAktivitet(int id)
         {
-            var aktivitet = await _context.Aktivitet.FindAsync(id);
+            var aktivitet = _context.Aktivitet;
+
+            var AktivitetTemp = aktivitet.FirstOrDefault(Aktivitet => Aktivitet.ID == id);
 
             if (aktivitet == null)
             {
                 return NotFound();
             }
 
-            return aktivitet;
+            return new JsonResult(AktivitetTemp);
         }
 
         // PUT: api/Aktivitet/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAktivitet(int id, Aktivitet aktivitet)
+        public IActionResult PutAktivitet(int Id)
         {
-            if (id != aktivitet.ID)
+            var PutAktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.ID == Id);
+            if (PutAktivitet != null)
             {
-                return BadRequest();
+                _context.Aktivitet.Update(PutAktivitet);
+                _context.SaveChanges();
+                return Ok("Opdateret Aktivitet");
             }
-
-            _context.Entry(aktivitet).State = EntityState.Modified;
-
-            try
+            else
             {
-                await _context.SaveChangesAsync();
+                return NotFound("Ikke fundet");
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AktivitetExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
         }
 
         // POST: api/Aktivitet
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Aktivitet>> PostAktivitet(Aktivitet aktivitet)
+        public IActionResult PostAktivitet(Aktivitet aktivitet)
         {
-            _context.Aktivitet.Add(aktivitet);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetAktivitet", new { id = aktivitet.ID }, aktivitet);
+            using (var PostAktivitet = _context)
+            {
+                if (PostAktivitet != null)
+                {
+                    _context.Aktivitet.Add(aktivitet);
+                    _context.SaveChanges();
+                    return Ok("Tilfoejet Aktivitet");
+                }
+                else
+                {
+                    return NotFound("Ikke Tilfoejet");
+                }
+            }
         }
 
         // DELETE: api/Aktivitet/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Aktivitet>> DeleteAktivitet(int id)
+        public IActionResult DeleteAktivitet(int Id)
         {
-            var aktivitet = await _context.Aktivitet.FindAsync(id);
-            if (aktivitet == null)
+            var DeleteAktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.ID == Id);
+            if (DeleteAktivitet != null)
             {
-                return NotFound();
+                _context.Aktivitet.Remove(DeleteAktivitet);
+                _context.SaveChanges();
+                return Ok("Aktivitet Fjernet");
             }
-
-            _context.Aktivitet.Remove(aktivitet);
-            await _context.SaveChangesAsync();
-
-            return aktivitet;
+            else
+            {
+                return NotFound("Ikke fundet");
+            }
         }
 
         private bool AktivitetExists(int id)
