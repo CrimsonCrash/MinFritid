@@ -46,7 +46,7 @@ namespace MinFritidAPI.Controllers
             return new JsonResult(bruger);
         }
 
-        
+
 
         // PUT: api/Bruger/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -114,6 +114,63 @@ namespace MinFritidAPI.Controllers
         private IActionResult HttpNotFound()
         {
             throw new NotImplementedException();
+        }
+
+        // PUT: api/bruger/aktiv/5
+        [HttpPut("aktiv/{id}")]
+        public IActionResult AktiverBruger(int Id)
+        {
+            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == Id);
+            if (bruger == null)
+            {
+                return NotFound("Not found");
+            }
+            if (bruger.BrugerID == Id)
+            {
+                bruger.Aktiv = true;
+                _context.Bruger.Update(bruger);
+                _context.SaveChanges();
+                return Ok("Updated Bruger Aktiv");
+            }
+            return BadRequest();
+        }
+
+        // PUT: api/bruger/deaktiv/5
+        [HttpPut("deaktiv/{id}")]
+        public IActionResult DeaktiverBruger(int Id)
+        {
+            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == Id);
+            if (bruger == null)
+            {
+                return NotFound("Not found");
+            }
+            if (bruger.BrugerID == Id)
+            {
+                bruger.Aktiv = false;
+                _context.Bruger.Update(bruger);
+                _context.SaveChanges();
+                return Ok("Updated Bruger Deaktiveret");
+            }
+            return BadRequest();
+        }
+
+        // PUT: api/bruger/verify/5
+        [HttpPut("verify/{id}")]
+        public IActionResult VerificerBruger(int Id)
+        {
+            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == Id);
+            if (bruger == null)
+            {
+                return NotFound("Not found");
+            }
+            if (bruger.BrugerID == Id)
+            {
+                bruger.Verificeret = true;
+                _context.Bruger.Update(bruger);
+                _context.SaveChanges();
+                return Ok("Updated Bruger Verificeret");
+            }
+            return BadRequest();
         }
     }
 }
