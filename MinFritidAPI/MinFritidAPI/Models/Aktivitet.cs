@@ -12,8 +12,8 @@ namespace MinFritidAPI.Models
         private bool aktiv = true;
 
         [Key]
-        public int ID { get; set; }
-        [ForeignKey("ID")]
+        public int AktivitetID { get; set; }
+        [ForeignKey("BrugerID")]
         public int BrugerID { get; set; }
 
         public string Titel { get; set; }

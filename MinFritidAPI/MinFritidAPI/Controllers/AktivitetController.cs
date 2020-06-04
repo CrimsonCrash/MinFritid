@@ -36,7 +36,7 @@ namespace MinFritidAPI.Controllers
         {
             var aktivitet = _context.Aktivitet;
 
-            var AktivitetTemp = aktivitet.FirstOrDefault(Aktivitet => Aktivitet.ID == id);
+            var AktivitetTemp = aktivitet.FirstOrDefault(Aktivitet => Aktivitet.AktivitetID == id);
 
             if (aktivitet == null)
             {
@@ -57,7 +57,7 @@ namespace MinFritidAPI.Controllers
             {
                 return NotFound("Ikke fundet");
             }
-            if (aktivitet.ID == Id)
+            if (aktivitet.AktivitetID == Id)
             {
                 _context.Aktivitet.Update(aktivitet);
                 _context.SaveChanges();
@@ -92,7 +92,7 @@ namespace MinFritidAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteAktivitet(int Id)
         {
-            var DeleteAktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.ID == Id);
+            var DeleteAktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.AktivitetID == Id);
             if (DeleteAktivitet != null)
             {
                 _context.Aktivitet.Remove(DeleteAktivitet);
@@ -107,7 +107,7 @@ namespace MinFritidAPI.Controllers
 
         private bool AktivitetExists(int id)
         {
-            return _context.Aktivitet.Any(e => e.ID == id);
+            return _context.Aktivitet.Any(e => e.AktivitetID == id);
         }
     }
 }
