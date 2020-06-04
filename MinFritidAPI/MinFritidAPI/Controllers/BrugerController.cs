@@ -46,7 +46,7 @@ namespace MinFritidAPI.Controllers
             return new JsonResult(bruger);
         }
 
-        
+
 
         // PUT: api/Bruger/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -114,6 +114,42 @@ namespace MinFritidAPI.Controllers
         private IActionResult HttpNotFound()
         {
             throw new NotImplementedException();
+        }
+
+        [HttpPut("aktiv/{id}")]
+        public IActionResult SetAktiv(int Id)
+        {
+            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == Id);
+            if (bruger == null)
+            {
+                return NotFound("Not found");
+            }
+            if (bruger.BrugerID == Id)
+            {
+                bruger.Aktiv = true;
+                _context.Bruger.Update(bruger);
+                _context.SaveChanges();
+                return Ok("Updated Bruger Aktiv");
+            }
+            return BadRequest();
+        }
+
+        [HttpPut("deaktiv/{id}")]
+        public IActionResult SetDeAktiv(int Id)
+        {
+            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == Id);
+            if (bruger == null)
+            {
+                return NotFound("Not found");
+            }
+            if (bruger.BrugerID == Id)
+            {
+                bruger.Aktiv = false;
+                _context.Bruger.Update(bruger);
+                _context.SaveChanges();
+                return Ok("Updated Bruger Deaktiveret");
+            }
+            return BadRequest();
         }
     }
 }
