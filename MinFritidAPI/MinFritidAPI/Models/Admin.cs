@@ -8,7 +8,7 @@ namespace MinFritidAPI.Models
 {
     public class Admin
     {
-        [ForeignKey("ID")]
-        public int ID { get; set; }
+        [ForeignKey("BrugerID")]
+        public int AdminID { get; set; }
     }
 }

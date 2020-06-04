@@ -29,6 +29,7 @@ namespace MinFritidAPI.Controllers
         }
 
         // GET: By/Details/5
+        // Returnerer Bynavn ud fra Postnummer
         [HttpGet("{PostNummer}")]
         public IActionResult GetBynavnByPostNr(int PostNummer)
         {
