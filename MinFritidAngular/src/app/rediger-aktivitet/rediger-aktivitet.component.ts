@@ -19,7 +19,6 @@ export class RedigerAktivitetComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
 
       reader.onload = (event) => {
-
         this.url = event.target.result as string;
       }
     }
