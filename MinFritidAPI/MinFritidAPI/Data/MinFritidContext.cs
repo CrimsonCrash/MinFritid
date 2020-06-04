@@ -34,7 +34,7 @@ namespace MinFritidAPI.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Her sætter vi AktivitetID og BrugerID som en composite key
-            modelBuilder.Entity<AktivitetBrugerTilmeldt>().HasKey(akt => new { akt.AktivitetID, akt.BrugerID });
+            modelBuilder.Entity<AktivitetBrugerTilmeldt>().HasKey(abt => new { abt.AktivitetID, abt.BrugerID });
         }
 
     }
