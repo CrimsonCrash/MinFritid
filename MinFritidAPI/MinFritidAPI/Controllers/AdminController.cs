@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -24,31 +25,29 @@ namespace MinFritidAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Admin
+        // GET: api/admin
         // Henter en liste over alle brugere der er admin
         [HttpGet]
         public IActionResult GetAllAdmins()
         {
-            //var admins = _context.Admin;
-
-            //MinFritidContext db = new MinFritidContext();
-
             var admins = from a in _context.Admin
                          join b in _context.Bruger on a.AdminID equals b.BrugerID
-                         select a;
+                         select b;
 
             return new JsonResult(admins);
         }
 
-        // GET: api/Admin/5
-        // Henter én specifik admin
-        // Fejler
+        // GET: api/admin/id
+        // Henter én specifik admin ud fra BrugerID
         [HttpGet("{id}")]
         public IActionResult GetAdmin(int id)
         {
-            var admins = _context.Admin;
+            var admins = from a in _context.Admin
+                         join b in _context.Bruger on a.AdminID equals b.BrugerID
+                         where a.AdminID == id
+                         select b;
 
-            var admin = admins.FirstOrDefault(Admin => Admin.AdminID == id);
+            var admin = admins.FirstOrDefault();
 
             if (admin == null)
             {
@@ -58,54 +57,56 @@ namespace MinFritidAPI.Controllers
             return new JsonResult(admin);
         }
 
-        // POST: api/Admin
-        // Tilføj en ny bruger som admin
-        [HttpPost]
-        public IActionResult PostAdmin([FromBody]Admin admin)
+        // POST: api/admin/id
+        // Tilføj en ny bruger som admin ud fra BrugerID
+        [HttpPost("{id}")]
+        public IActionResult PostAdmin(int id)
         {
-            using (var PostAdmin = _context)
-            {
+                var admins = from a in _context.Admin
+                             join b in _context.Bruger on id equals b.BrugerID
+                             select b;
 
-                if (PostAdmin != null)
+                var admin = admins.FirstOrDefault();
+
+                if (admin != null)
                 {
-                    _context.Admin.Add(admin);
+                _context.Admin.Add(new Admin { AdminID = id } );
                     _context.SaveChanges();
-                    return Ok("Added Admin");
+                    return Ok("Admin successfully created");
                 }
                 else
                 {
-                    return NotFound("Not found");
+                    return HttpNotFound();
                 }
-            }
         }
 
-        // DELETE: api/Admin/5
-        [HttpDelete("{ID}")]
+        // DELETE: api/admin/id
+        // Slet en bruger som admin ud fra BrugerID
+        [HttpDelete("{id}")]
         public IActionResult DeleteAdmin(int id)
         {
-            var DeleteAdmin =  _context.Admin.FirstOrDefault(Admin => Admin.AdminID == id);
-            if (DeleteAdmin != null)
+            var admins = from a in _context.Admin
+                         join b in _context.Bruger on a.AdminID equals b.BrugerID
+                         where b.BrugerID == id
+                         select a;
+
+            var admin = admins.FirstOrDefault();
+
+            if (admin != null)
             {
-                    _context.Admin.Remove(DeleteAdmin);
+                    _context.Admin.Remove(admin);
                     _context.SaveChanges();
-                    return Ok("Removed Admin");
+                    return Ok("Admin successfully removed");
             }
             else
                 {
-            return NotFound("Not found");
+            return HttpNotFound();
             }
-
-            
-        }
-
-        private bool AdminExists(int id)
-        {
-            return _context.Admin.Any(e => e.AdminID == id);
         }
 
         private IActionResult HttpNotFound()
         {
-            throw new NotImplementedException();
+            return StatusCode(StatusCodes.Status400BadRequest, "Bad request");
         }
     }
 }
