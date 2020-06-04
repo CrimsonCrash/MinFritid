@@ -32,6 +32,8 @@ namespace MinFritidAPI.Models
         [ForeignKey("PostNummer")]
         public int PostNummer { get; set; }
 
+        public IList<AktivitetBrugerTilmeldt> AktivitetBrugerTilmeldte { get; set; }
+
         public bool Aktiv { get => aktiv; set => aktiv = value; }
     }
 }

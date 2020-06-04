@@ -24,14 +24,18 @@ namespace MinFritidAPI.Data
 
         public DbSet<By> By { get; set; }
 
-        
+        public DbSet<Admin> Admin { get; set; }
+
         public MinFritidContext(DbContextOptions<MinFritidContext> options) : base(options)
         {
             
         }
 
-        
-        public DbSet<MinFritidAPI.Models.Admin> Admin { get; set; }
-        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Her sætter vi AktivitetID og BrugerID som en composite key
+            modelBuilder.Entity<AktivitetBrugerTilmeldt>().HasKey(akt => new { akt.AktivitetID, akt.BrugerID });
+        }
+
     }
 }
