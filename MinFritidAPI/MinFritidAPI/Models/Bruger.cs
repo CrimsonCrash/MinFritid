@@ -14,7 +14,7 @@ namespace MinFritidAPI.Models
         private bool aktiv = true;
 
         [Key]
-        public int ID { get; set; }
+        public int BrugerID { get; set; }
         public string Fornavn { get; set; }
 
         public string Efternavn { get; set; }

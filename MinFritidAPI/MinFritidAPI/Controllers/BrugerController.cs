@@ -36,7 +36,7 @@ namespace MinFritidAPI.Controllers
         {
             var brugers = _context.Bruger;
 
-            var bruger = brugers.FirstOrDefault(Bruger => Bruger.ID == id);
+            var bruger = brugers.FirstOrDefault(Bruger => Bruger.BrugerID == id);
 
             if (bruger == null)
             {
@@ -59,7 +59,7 @@ namespace MinFritidAPI.Controllers
             {
                 return NotFound("Not found");
             }
-            if (bruger.ID == Id)
+            if (bruger.BrugerID == Id)
             {
                 _context.Bruger.Update(bruger);
                 _context.SaveChanges();
@@ -93,10 +93,10 @@ namespace MinFritidAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteBruger(int id)
         {
-            var DeleteBruger = _context.Admin.FirstOrDefault(Bruger => Bruger.ID == id);
+            var DeleteBruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == id);
             if (DeleteBruger != null)
             {
-                _context.Admin.Remove(DeleteBruger);
+                _context.Bruger.Remove(DeleteBruger);
                 _context.SaveChanges();
                 return Ok("Removed Bruger");
             }
@@ -108,7 +108,7 @@ namespace MinFritidAPI.Controllers
 
         private bool BrugerExists(int id)
         {
-            return _context.Bruger.Any(e => e.ID == id);
+            return _context.Bruger.Any(e => e.BrugerID == id);
         }
 
         private IActionResult HttpNotFound()

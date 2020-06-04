@@ -34,7 +34,7 @@ namespace MinFritidAPI.Controllers
             //MinFritidContext db = new MinFritidContext();
 
             var admins = from a in _context.Admin
-                         join b in _context.Bruger on a.AdminID equals b.ID
+                         join b in _context.Bruger on a.AdminID equals b.BrugerID
                          select a;
 
             return new JsonResult(admins);
