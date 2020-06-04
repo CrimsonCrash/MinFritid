@@ -22,7 +22,7 @@
     </div>
     <div class="person2">
         <img [src]="url" class="profileimg">
-        <input class="btnclick" type="file" (chance)="onSelectImg($event.target.files)">
+        <input class="btnclick" type="file" (change)="onSelectImg($event)">
         <button class="btnclick" routerLink="/">Tilbage til forsiden</button>
     </div>
 
