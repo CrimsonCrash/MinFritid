@@ -116,8 +116,9 @@ namespace MinFritidAPI.Controllers
             throw new NotImplementedException();
         }
 
+        // PUT: api/bruger/aktiv/5
         [HttpPut("aktiv/{id}")]
-        public IActionResult SetAktiv(int Id)
+        public IActionResult AktiverBruger(int Id)
         {
             var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == Id);
             if (bruger == null)
@@ -134,8 +135,9 @@ namespace MinFritidAPI.Controllers
             return BadRequest();
         }
 
+        // PUT: api/bruger/deaktiv/5
         [HttpPut("deaktiv/{id}")]
-        public IActionResult SetDeAktiv(int Id)
+        public IActionResult DeaktiverBruger(int Id)
         {
             var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == Id);
             if (bruger == null)
@@ -148,6 +150,25 @@ namespace MinFritidAPI.Controllers
                 _context.Bruger.Update(bruger);
                 _context.SaveChanges();
                 return Ok("Updated Bruger Deaktiveret");
+            }
+            return BadRequest();
+        }
+
+        // PUT: api/bruger/verify/5
+        [HttpPut("verify/{id}")]
+        public IActionResult VerificerBruger(int Id)
+        {
+            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == Id);
+            if (bruger == null)
+            {
+                return NotFound("Not found");
+            }
+            if (bruger.BrugerID == Id)
+            {
+                bruger.Verificeret = true;
+                _context.Bruger.Update(bruger);
+                _context.SaveChanges();
+                return Ok("Updated Bruger Verificeret");
             }
             return BadRequest();
         }
