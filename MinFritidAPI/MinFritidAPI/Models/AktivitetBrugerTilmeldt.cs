@@ -9,10 +9,16 @@ namespace MinFritidAPI.Models
 {
     public class AktivitetBrugerTilmeldt
     {
+        [Key]
+        [Column(Order = 1)]
+        [ForeignKey("Aktivetet")]
         public int AktivitetID { get; set; }
-        public Aktivitet Aktivitet { get; set; }
+        public virtual Aktivitet Aktivitet { get; set; }
 
+        [Key]
+        [Column(Order = 2)]
+        [ForeignKey("Bruger")]
         public int BrugerID { get; set; }
-        public Bruger Bruger { get; set; }
+        public virtual Bruger Bruger { get; set; }
     }
 }

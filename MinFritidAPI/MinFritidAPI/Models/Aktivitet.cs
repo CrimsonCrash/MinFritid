@@ -13,7 +13,7 @@ namespace MinFritidAPI.Models
 
         [Key]
         public int AktivitetID { get; set; }
-        [ForeignKey("BrugerID")]
+        [ForeignKey("Bruger")]
         public int BrugerID { get; set; }
 
         public string Titel { get; set; }
@@ -29,7 +29,7 @@ namespace MinFritidAPI.Models
         public DateTime StartTidspunkt { get; set; }
 
         public DateTime SlutTidspunkt { get; set; }
-        [ForeignKey("PostNummer")]
+        [ForeignKey("By")]
         public int PostNummer { get; set; }
 
         public IList<AktivitetBrugerTilmeldt> AktivitetBrugerTilmeldte { get; set; }

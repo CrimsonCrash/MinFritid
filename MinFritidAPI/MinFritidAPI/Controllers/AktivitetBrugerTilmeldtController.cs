@@ -32,11 +32,25 @@ namespace MinFritidAPI.Controllers
             return await _context.AktivitetBrugerTilmeldt.ToListAsync();
         }
 
-        // GET: api/AktivitetBrugerTilmeldt/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<AktivitetBrugerTilmeldt>> GetAktivitetBrugerTilmeldt(int id)
+        // GET: api/AktivitetBrugerTilmeldt/Aktivitet/5
+        [HttpGet("aktivitet/{id}")]
+        public async Task<ActionResult<IEnumerable<AktivitetBrugerTilmeldt>>> GetListByAktivitetID(int id)
         {
-            var aktivitetBrugerTilmeldt = await _context.AktivitetBrugerTilmeldt.FindAsync(id);
+            var aktivitetBrugerTilmeldt = await _context.AktivitetBrugerTilmeldt.Where(a => a.AktivitetID == id).ToListAsync();
+
+            if (aktivitetBrugerTilmeldt == null)
+            {
+                return NotFound();
+            }
+
+            return aktivitetBrugerTilmeldt;
+        }
+
+        // GET: api/AktivitetBrugerTilmeldt/Bruger/5
+        [HttpGet("bruger/{id}")]
+        public async Task<ActionResult<IEnumerable<AktivitetBrugerTilmeldt>>> GetListByBrugerID(int id)
+        {
+            var aktivitetBrugerTilmeldt = await _context.AktivitetBrugerTilmeldt.Where(b => b.BrugerID == id).ToListAsync();
 
             if (aktivitetBrugerTilmeldt == null)
             {
@@ -50,45 +64,65 @@ namespace MinFritidAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<AktivitetBrugerTilmeldt>> PostAktivitetBrugerTilmeldt(AktivitetBrugerTilmeldt aktivitetBrugerTilmeldt)
         {
-            _context.AktivitetBrugerTilmeldt.Add(aktivitetBrugerTilmeldt);
-            try
+            if (MaxParticipantsReached(aktivitetBrugerTilmeldt.AktivitetID) == false)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (AktivitetBrugerTilmeldtExists(aktivitetBrugerTilmeldt.AktivitetID))
+                _context.AktivitetBrugerTilmeldt.Add(aktivitetBrugerTilmeldt);
+                try
                 {
-                    return Conflict();
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateException)
                 {
-                    throw;
+                    if (AktivitetBrugerTilmeldtExists(aktivitetBrugerTilmeldt.AktivitetID, aktivitetBrugerTilmeldt.BrugerID))
+                    {
+                        return Conflict();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
-            }
 
-            return CreatedAtAction("GetAktivitetBrugerTilmeldt", new { id = aktivitetBrugerTilmeldt.AktivitetID }, aktivitetBrugerTilmeldt);
+                return CreatedAtAction("GetAktivitetBrugerTilmeldt", new { id = aktivitetBrugerTilmeldt.AktivitetID }, aktivitetBrugerTilmeldt);
+            }
+            else
+            {
+                return BadRequest("Aktiviteten har ikke plads til flere deltagere.");
+            }
         }
 
-        // DELETE: api/AktivitetBrugerTilmeldt/5
-        [HttpDelete("{id}")]
+        // DELETE: api/AktivitetBrugerTilmeldt
+        [HttpDelete]
         public async Task<ActionResult<AktivitetBrugerTilmeldt>> DeleteAktivitetBrugerTilmeldt(AktivitetBrugerTilmeldt aktivitetBrugerTilmeldt)
         {
-            var aktivitet = await _context.AktivitetBrugerTilmeldt.FindAsync(aktivitetBrugerTilmeldt.AktivitetID);
-            if (aktivitetBrugerTilmeldt == null)
+            var abt = await _context.AktivitetBrugerTilmeldt.FindAsync(aktivitetBrugerTilmeldt.AktivitetID, aktivitetBrugerTilmeldt.BrugerID);
+            if (abt == null)
             {
                 return NotFound();
             }
 
-            _context.AktivitetBrugerTilmeldt.Remove(aktivitetBrugerTilmeldt);
+            _context.AktivitetBrugerTilmeldt.Remove(abt);
             await _context.SaveChangesAsync();
 
-            return aktivitetBrugerTilmeldt;
+            return abt;
         }
 
-        private bool AktivitetBrugerTilmeldtExists(int id)
+        private bool AktivitetBrugerTilmeldtExists(int aktivitetID, int brugerID)
         {
-            return _context.AktivitetBrugerTilmeldt.Any(e => e.AktivitetID == id);
+            return _context.AktivitetBrugerTilmeldt.Any(e => e.AktivitetID == aktivitetID && e.BrugerID == brugerID);
+        }
+
+        public bool MaxParticipantsReached(int aktivitetID)
+        {
+            var aktivitetBrugerTilmeldt = _context.AktivitetBrugerTilmeldt.Where(a => a.AktivitetID == aktivitetID).ToList();
+            var aktivitet = _context.Aktivitet.Find(aktivitetID);
+            
+            if (aktivitetBrugerTilmeldt.Count() >= aktivitet.MaxDeltagere)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
