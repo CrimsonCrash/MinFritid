@@ -105,6 +105,7 @@ namespace MinFritidAPI.Controllers
             }
         }
 
+        // PUT: api/aktivitet/deaktiv/5
         [HttpPut("deaktiv/{id}")]
         public IActionResult DeaktiverAktivitet(int Id)
         {
