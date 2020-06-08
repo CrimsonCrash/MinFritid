@@ -105,6 +105,24 @@ namespace MinFritidAPI.Controllers
             }
         }
 
+        [HttpPut("deaktiv/{id}")]
+        public IActionResult DeaktiverAktivitet(int Id)
+        {
+            var aktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.AktivitetID == Id);
+            if (aktivitet == null)
+            {
+                return NotFound("Not found");
+            }
+            if (aktivitet.AktivitetID == Id)
+            {
+                aktivitet.Aktiv = false;
+                _context.Aktivitet.Update(aktivitet);
+                _context.SaveChanges();
+                return Ok("Updated Bruger Deaktiveret");
+            }
+            return BadRequest();
+        }
+
         private bool AktivitetExists(int id)
         {
             return _context.Aktivitet.Any(e => e.AktivitetID == id);
