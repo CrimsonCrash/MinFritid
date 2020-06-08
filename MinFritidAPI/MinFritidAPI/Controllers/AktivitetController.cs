@@ -118,7 +118,7 @@ namespace MinFritidAPI.Controllers
                 aktivitet.Aktiv = false;
                 _context.Aktivitet.Update(aktivitet);
                 _context.SaveChanges();
-                return Ok("Updated Bruger Deaktiveret");
+                return Ok("Updated Aktivitet Deaktiveret");
             }
             return BadRequest();
         }
