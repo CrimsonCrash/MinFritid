@@ -19,6 +19,9 @@ import { FavoritterComponent } from './favoritter/favoritter.component';
 import { SoegComponent } from './soeg/soeg.component';
 import { MineAktiviteterComponent } from './mine-aktiviteter/mine-aktiviteter.component';
 import { RedigerProfilComponent } from './rediger-profil/rediger-profil.component';
+import { BrugerAktivitetComponent } from './bruger-aktivitet/bruger-aktivitet.component';
+import { HttpClientModule} from '@angular/common/http'
+import { DataService} from './data.service';
 
 @NgModule({
   declarations: [
@@ -39,13 +42,15 @@ import { RedigerProfilComponent } from './rediger-profil/rediger-profil.componen
     FavoritterComponent,
     SoegComponent,
     MineAktiviteterComponent,
-    RedigerProfilComponent
+    RedigerProfilComponent,
+    BrugerAktivitetComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

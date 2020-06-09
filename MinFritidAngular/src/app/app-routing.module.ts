@@ -15,6 +15,7 @@ import { RedigerAktivitetComponent } from './rediger-aktivitet/rediger-aktivitet
 import { SoegComponent } from './soeg/soeg.component';
 import { VennerComponent } from './venner/venner.component';
 import { RedigerProfilComponent } from './rediger-profil/rediger-profil.component';
+import { BrugerAktivitetComponent } from './bruger-aktivitet/bruger-aktivitet.component';
 
 const routes: Routes = [
   {path: '', component: ForsideComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'minProfil', component: MinProfilComponent},
   {path: 'redigerProfil', component: RedigerProfilComponent},
   {path: 'brugerProfil', component: BrugerProfilComponent},
+  {path: 'brugerAktivitet', component: BrugerAktivitetComponent},
   {path: 'favorit', component: FavoritterComponent},
   {path: 'kontakt', component: KontaktComponent},
   {path: 'mineAktiviteter', component: MineAktiviteterComponent},
@@ -41,4 +43,4 @@ const routes: Routes = [
 export class AppRoutingModule { }
 export const routingComponent = [ForsideComponent, AktivitetComponent, OmosComponent, BrugerProfilComponent,
   FavoritterComponent, KontaktComponent, MinProfilComponent, MineAktiviteterComponent, NyAktivitetComponent,
-  RedigerAktivitetComponent, SoegComponent, VennerComponent, RedigerProfilComponent]
+  RedigerAktivitetComponent, SoegComponent, VennerComponent, RedigerProfilComponent, BrugerAktivitetComponent]
