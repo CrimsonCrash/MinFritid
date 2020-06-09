@@ -34,7 +34,18 @@ namespace MinFritidAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetAktivitet(int id)
         {
-            var aktivitet = _context.Aktivitet;
+            var aktivitet = _context.Aktivitet.Include("AktivitetBrugerTilmeldt").Select(a => new AktivitetDto
+            {
+                AktivitetID = a.AktivitetID,
+                Titel = a.Titel,
+                Beskrivelse = a.Beskrivelse,
+
+                ABTilmeldt = a.AktivitetBrugerTilmeldte.Select(b => new TilmeldteDto
+                    {
+                        BrugerID = b.BrugerID,
+                        Bruger = b.Bruger
+                    })
+            });
 
             var AktivitetTemp = aktivitet.FirstOrDefault(Aktivitet => Aktivitet.AktivitetID == id);
 
