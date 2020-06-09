@@ -14,7 +14,7 @@ export class ForsideComponent implements OnInit {
 
   
   ngOnInit() {
-    this.dataService.getAktivitet()
+    this.dataService.getAktiviteter()
     .subscribe(data => this.Forsider = data)
   }
   
