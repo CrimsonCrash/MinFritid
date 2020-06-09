@@ -39,22 +39,29 @@ namespace MinFritidAPI.Controllers
                 AktivitetID = a.AktivitetID,
                 Titel = a.Titel,
                 Beskrivelse = a.Beskrivelse,
-
-                ABTilmeldt = a.AktivitetBrugerTilmeldte.Select(b => new TilmeldteDto
+                Huskeliste = a.Huskeliste,
+                Pris = a.Pris,
+                MaxDeltagere = a.MaxDeltagere,
+                StartTidspunkt = a.StartTidspunkt,
+                SlutTidspunkt = a.SlutTidspunkt,
+                Postnummer = a.PostNummer,
+                Aktiv = a.Aktiv,
+                ATilmeldt = a.AktivitetBrugerTilmeldte.Select(t => new TilmeldteDto
                     {
-                        BrugerID = b.BrugerID,
-                        Bruger = b.Bruger
+                        BrugerID = t.BrugerID,
+                        BrugerAktiv = t.Bruger.Aktiv,
+                        BrugerFornavn = t.Bruger.Fornavn,
+                        BrugerEfternavn = t.Bruger.Efternavn,
+                        BrugerFoedselsdag = t.Bruger.Foedselsdato
                     })
             });
-
-            var AktivitetTemp = aktivitet.FirstOrDefault(Aktivitet => Aktivitet.AktivitetID == id);
 
             if (aktivitet == null)
             {
                 return NotFound();
             }
 
-            return new JsonResult(AktivitetTemp);
+            return new JsonResult(aktivitet);
         }
 
         // PUT: api/Aktivitet/5
