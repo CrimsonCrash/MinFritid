@@ -11,6 +11,7 @@ export class RedigerAktivitetComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  // vælg en billed fra drevet
   onSelectImg(event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
