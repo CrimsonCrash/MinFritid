@@ -20,7 +20,7 @@ import { SoegComponent } from './soeg/soeg.component';
 import { MineAktiviteterComponent } from './mine-aktiviteter/mine-aktiviteter.component';
 import { RedigerProfilComponent } from './rediger-profil/rediger-profil.component';
 import { BrugerAktivitetComponent } from './bruger-aktivitet/bruger-aktivitet.component';
-import { DataService } from './data.service';
+import { DataService} from './data.service';
 
 @NgModule({
   declarations: [
