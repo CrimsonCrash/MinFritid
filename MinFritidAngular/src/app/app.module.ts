@@ -20,6 +20,8 @@ import { SoegComponent } from './soeg/soeg.component';
 import { MineAktiviteterComponent } from './mine-aktiviteter/mine-aktiviteter.component';
 import { RedigerProfilComponent } from './rediger-profil/rediger-profil.component';
 import { BrugerAktivitetComponent } from './bruger-aktivitet/bruger-aktivitet.component';
+import { HttpClientModule} from '@angular/common/http'
+import { DataService} from './data.service';
 
 @NgModule({
   declarations: [
@@ -45,9 +47,10 @@ import { BrugerAktivitetComponent } from './bruger-aktivitet/bruger-aktivitet.co
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
