@@ -29,7 +29,7 @@ export class DataService {
   }
 
   getAktivitet(): Observable<Iaktivitet[]>{
-    return this.http.get<Iaktivitet[]>('http://localhost:5001/api/aktivitet/')
+    return this.http.get<Iaktivitet[]>('http://localhost:5001/api/aktivitet/') 
   }
 
 }

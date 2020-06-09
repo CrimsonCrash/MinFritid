@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-forside',
@@ -8,12 +9,14 @@ import { Router } from "@angular/router";
 })
 export class ForsideComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService : DataService) { }
+  public Forsider = [];
 
-  ngOnInit(): void {
+  
+  ngOnInit() {
+    this.dataService.getAktivitet()
+    .subscribe(data => this.Forsider = data)
   }
-  btnClickAktivitet= function() {
-    this.router.navigateByUrl("/aktivitet")
-  };
+  
 
 }

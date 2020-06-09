@@ -1,25 +1,15 @@
-<html>
-    <body>
-        <div class="boxBackground">
-            <img class="activitiesImg" src="assets/Images/walking.jpg">
-            <p>Vandretur</p>
-            <p>Århus</p>
-            <p>Vi skal på en vandre tur i skoven</p>
-            <button routerLink="/aktivitet">Se aktiviteten</button>
-        </div>
-        <div class="boxBackground">
-            <img class="activitiesImg" src="assets/Images/walking.jpg">
-            <p>Vandretur</p>
-            <p>Århus</p>
-            <p>Vi skal på en vandre tur i skoven</p>
-            <button>Se aktiviteten</button>
-        </div>
-        <div class="boxBackground">
-            <img class="activitiesImg" src="assets/Images/walking.jpg">
-            <p>Vandretur</p>
-            <p>Århus</p>
-            <p>Vi skal på en vandre tur i skoven</p>
-            <button>Se aktiviteten</button>
-        </div>
-    </body>
-</html>
+
+
+<div class="boxBackground" *ngFor="let Forside of Forsider">
+        
+    <div>
+        <img class="activitiesImg" src="assets/Images/walking.jpg">
+        <br>
+        {{Forside.titel}}
+        <br/>
+        {{Forside.postNummer}}
+                
+    </div>
+        
+</div>
+
