@@ -45,8 +45,8 @@ namespace MinFritidAPI.Controllers
                 StartTidspunkt = a.StartTidspunkt,
                 SlutTidspunkt = a.SlutTidspunkt,
                 Postnummer = a.PostNummer,
-                Aktiv = a.Aktiv,
-                ATilmeldt = a.AktivitetBrugerTilmeldte.Select(t => new TilmeldteDto
+                Aktiv = a.Aktiv
+                /*ATilmeldt = a.AktivitetBrugerTilmeldt.Select(t => new TilmeldteDto
                     {
                         BrugerID = t.BrugerID,
                         BrugerAktiv = t.Bruger.Aktiv,
@@ -54,6 +54,7 @@ namespace MinFritidAPI.Controllers
                         BrugerEfternavn = t.Bruger.Efternavn,
                         BrugerFoedselsdag = t.Bruger.Foedselsdato
                     })
+                    */
             });
 
             if (aktivitet == null)
