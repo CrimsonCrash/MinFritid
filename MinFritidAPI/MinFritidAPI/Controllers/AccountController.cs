@@ -87,30 +87,17 @@ namespace MinFritidAPI.Controllers
             // Hent Bruger fra database
             var user = await _userManager.FindByNameAsync(formdata.Email);
 
+            var result = await _signInManager.PasswordSignInAsync(user, formdata.Password, isPersistent: true, lockoutOnFailure: true);
+
             var roles = await _userManager.GetRolesAsync(user);
 
             var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_appSettings.Secret));
 
             double tokenExpiryTime = Convert.ToDouble(_appSettings.ExpireTime);
 
-            if (user != null && await _userManager.CheckPasswordAsync(user, formdata.Password))
+            //if (user != null && await _userManager.CheckPasswordAsync(user, formdata.Password))
+            if (result.Succeeded)
             {
-                int FailedCount = await _userManager.GetAccessFailedCountAsync(user);
-                bool LockoutEnabled = await _userManager.GetLockoutEnabledAsync(user);
-
-                if (_userManager.SupportsUserLockout && LockoutEnabled && FailedCount > 0)
-                {
-                    await _userManager.ResetAccessFailedCountAsync(user);
-                }
-
-                else
-                {
-                    if (_userManager.SupportsUserLockout && await _userManager.GetLockoutEnabledAsync(user))
-                    {
-                       await _userManager.AccessFailedAsync(user);
-                    }
-                }
-
                 // Conf Email
 
                 // JWT logik
@@ -138,6 +125,14 @@ namespace MinFritidAPI.Controllers
                 var token = tokenHandler.CreateToken(tokenDescriptor);
 
                 return Ok(new { token = tokenHandler.WriteToken(token), expiration = token.ValidTo, email = user.Email, userRole = roles.FirstOrDefault() });
+            }
+            if (result.IsLockedOut)
+            {
+                ModelState.AddModelError("", "Account is locked out");
+                return Unauthorized(new { LoginError = "You've been locked out fool" });
+            }
+            {
+
             }
 
             // Bruger ikke fundet
