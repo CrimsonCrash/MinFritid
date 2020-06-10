@@ -30,7 +30,7 @@ namespace MinFritidAPI.Controllers
             return new JsonResult(_context.Aktivitet);
         }
 
-        // GET: api/Aktivitet/5
+/*        // GET: api/Aktivitet/5
         [HttpGet("{id}")]
         public IActionResult GetAktivitet(int id)
         {
@@ -55,7 +55,7 @@ namespace MinFritidAPI.Controllers
             }
 
             return new JsonResult(AktivitetTemp);
-        }
+        }*/
 
         // PUT: api/Aktivitet/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

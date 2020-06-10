@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -52,8 +53,26 @@ namespace MinFritidAPI
 
             });
 
+            // Forbind til databasen
             services.AddDbContext<MinFritidContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            // Fortæller at vi vil bruge Identity Framework
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.User.RequireUniqueEmail = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<MinFritidContext>().AddDefaultTokenProviders();
+
             services.AddMvc();
 
             // Configure strongly typed settings objects
@@ -80,6 +99,7 @@ namespace MinFritidAPI
                     IssuerSigningKey = new SymmetricSecurityKey(key)
                 };
             });
+
         }
 
 
