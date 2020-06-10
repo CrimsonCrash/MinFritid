@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule, routingComponent } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ForsideComponent } from './forside/forside.component';
@@ -20,7 +20,6 @@ import { SoegComponent } from './soeg/soeg.component';
 import { MineAktiviteterComponent } from './mine-aktiviteter/mine-aktiviteter.component';
 import { RedigerProfilComponent } from './rediger-profil/rediger-profil.component';
 import { BrugerAktivitetComponent } from './bruger-aktivitet/bruger-aktivitet.component';
-import { HttpClientModule} from '@angular/common/http'
 import { DataService} from './data.service';
 
 @NgModule({
@@ -47,8 +46,8 @@ import { DataService} from './data.service';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

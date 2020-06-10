@@ -30,7 +30,7 @@ namespace MinFritidAPI.Controllers
             return new JsonResult(_context.Aktivitet);
         }
 
-/*        // GET: api/Aktivitet/5
+        // GET: api/Aktivitet/5
         [HttpGet("{id}")]
         public IActionResult GetAktivitet(int id)
         {
@@ -39,23 +39,30 @@ namespace MinFritidAPI.Controllers
                 AktivitetID = a.AktivitetID,
                 Titel = a.Titel,
                 Beskrivelse = a.Beskrivelse,
-
-                ABTilmeldt = a.AktivitetBrugerTilmeldte.Select(b => new TilmeldteDto
+                Huskeliste = a.Huskeliste,
+                Pris = a.Pris,
+                MaxDeltagere = a.MaxDeltagere,
+                StartTidspunkt = a.StartTidspunkt,
+                SlutTidspunkt = a.SlutTidspunkt,
+                Postnummer = a.PostNummer,
+                Aktiv = a.Aktiv,
+                ATilmeldt = a.AktivitetBrugerTilmeldte.Select(t => new TilmeldteDto
                     {
-                        BrugerID = b.BrugerID,
-                        Bruger = b.Bruger
+                        BrugerID = t.BrugerID,
+                        BrugerAktiv = t.Bruger.Aktiv,
+                        BrugerFornavn = t.Bruger.Fornavn,
+                        BrugerEfternavn = t.Bruger.Efternavn,
+                        BrugerFoedselsdag = t.Bruger.Foedselsdato
                     })
             });
-
-            var AktivitetTemp = aktivitet.FirstOrDefault(Aktivitet => Aktivitet.AktivitetID == id);
 
             if (aktivitet == null)
             {
                 return NotFound();
             }
-
-            return new JsonResult(AktivitetTemp);
-        }*/
+            
+            return new JsonResult(aktivitet);
+        }
 
         // PUT: api/Aktivitet/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -117,7 +124,7 @@ namespace MinFritidAPI.Controllers
         }
 
         // PUT: api/aktivitet/deaktiv/5
-        [HttpPut("deaktiv/{id}")]
+        [HttpGet("deaktiv/{id}")]
         public IActionResult DeaktiverAktivitet(int Id)
         {
             var aktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.AktivitetID == Id);

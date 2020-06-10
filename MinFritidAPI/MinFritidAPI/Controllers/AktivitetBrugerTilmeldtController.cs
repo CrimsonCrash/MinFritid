@@ -111,13 +111,12 @@ namespace MinFritidAPI.Controllers
         {
             return _context.AktivitetBrugerTilmeldt.Any(e => e.AktivitetID == aktivitetID && e.BrugerID == brugerID);
         }
-
         public bool MaxParticipantsReached(int aktivitetID)
         {
             var aktivitetBrugerTilmeldt = _context.AktivitetBrugerTilmeldt.Where(a => a.AktivitetID == aktivitetID).ToList();
-            var aktivitet = _context.Aktivitet.Find(aktivitetID);
+            int MaxAntalDeltagere = _context.Aktivitet.Find(aktivitetID).MaxDeltagere;
             
-            if (aktivitetBrugerTilmeldt.Count() >= aktivitet.MaxDeltagere)
+            if (aktivitetBrugerTilmeldt.Count() >= MaxAntalDeltagere)
             {
                 return true;
             }
