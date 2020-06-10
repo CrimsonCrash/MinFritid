@@ -27,8 +27,6 @@ namespace MinFritidAPI.Models
 
         public string Password { get; set; }
 
-        public IList<AktivitetBrugerTilmeldt> AktivitetBrugerTilmeldte { get; set; }
-
         public bool Verificeret { get => verificeret; set => verificeret = value; }
         public bool Aktiv { get => aktiv; set => aktiv = value; }
     }

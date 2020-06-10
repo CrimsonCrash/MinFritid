@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MinFritidAPI.Data;
 
 namespace MinFritidAPI.Migrations
 {
     [DbContext(typeof(MinFritidContext))]
-    partial class MinFritidContextModelSnapshot : ModelSnapshot
+    [Migration("20200609105018_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,14 +48,12 @@ namespace MinFritidAPI.Migrations
                         new
                         {
                             Id = "1",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
+                            Name = "Admin"
                         },
                         new
                         {
                             Id = "2",
-                            Name = "Bruger",
-                            NormalizedName = "BRUGER"
+                            Name = "Bruger"
                         });
                 });
 
@@ -343,7 +343,7 @@ namespace MinFritidAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MinFritidAPI.Models.Bruger", "Bruger")
-                        .WithMany()
+                        .WithMany("AktivitetBrugerTilmeldte")
                         .HasForeignKey("BrugerID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

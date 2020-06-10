@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MinFritidAPI.Models;
 using System;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MinFritidAPI.Data
 {
-    public class MinFritidContext : DbContext
+    public class MinFritidContext : IdentityDbContext<IdentityUser>
     {
         //opsætter en constructor
         public MinFritidContext()
@@ -23,8 +25,18 @@ namespace MinFritidAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
+                new { Id = "2", Name = "Bruger", NormalizedName = "BRUGER" }
+            );
+
             // Her sætter vi AktivitetID og BrugerID som en composite key
             modelBuilder.Entity<AktivitetBrugerTilmeldt>().HasKey(abt => new { abt.AktivitetID, abt.BrugerID });
+
+            modelBuilder.Entity<Bruger>().ToTable("Bruger");
+            modelBuilder.Entity<Aktivitet>().ToTable("Aktivitet");
         }
 
         //er et kald på Aktiviteter synlig for databasen

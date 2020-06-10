@@ -60,7 +60,7 @@ namespace MinFritidAPI.Controllers
             {
                 return NotFound();
             }
-
+            
             return new JsonResult(aktivitet);
         }
 
