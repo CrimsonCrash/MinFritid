@@ -35,9 +35,6 @@ namespace MinFritidAPI.Controllers
             _appSettings = appSettings.Value;
         }
 
-
-
-
 /*        private MinFritidContext _context { get; }
 
         public AccountController(MinFritidContext context)
@@ -95,7 +92,24 @@ namespace MinFritidAPI.Controllers
 
             double tokenExpiryTime = Convert.ToDouble(_appSettings.ExpireTime);
 
-            //if (user != null && await _userManager.CheckPasswordAsync(user, formdata.Password))
+            // Bruger er låst ude pga. forkerte login forsøg
+            if (result.IsLockedOut)
+            {
+                if (user.LockoutEnd > DateTime.UtcNow)
+                {
+                    ModelState.AddModelError("", "Account is locked out");
+                    return Unauthorized(new { LoginError = "You've been locked out fool" });
+                }
+                // Burde aldrig kunne ramme herned I guess, men better safe than sorry
+                if (user.LockoutEnd < DateTime.UtcNow)
+                {
+                    await _userManager.SetLockoutEndDateAsync(user, null);
+                    result = Microsoft.AspNetCore.Identity.SignInResult.Success;
+                    //await _userManager.ResetAccessFailedCountAsync(user);
+                }
+            }
+
+            // Bruger bliver logget ind
             if (result.Succeeded)
             {
                 // Conf Email
@@ -112,7 +126,6 @@ namespace MinFritidAPI.Controllers
                         new Claim(ClaimTypes.NameIdentifier, user.Id),
                         new Claim(ClaimTypes.Role, roles.FirstOrDefault()),
                         new Claim("LoggedOn", DateTime.Now.ToString()),
-
                     }),
 
                     SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature),
@@ -124,15 +137,10 @@ namespace MinFritidAPI.Controllers
                 // Opret JWT token til clienten
                 var token = tokenHandler.CreateToken(tokenDescriptor);
 
+                // Nulstil AccessFailedCount og LockoutEnd i databasen
+                await _userManager.SetLockoutEndDateAsync(user, null);
+                await _userManager.ResetAccessFailedCountAsync(user);
                 return Ok(new { token = tokenHandler.WriteToken(token), expiration = token.ValidTo, email = user.Email, userRole = roles.FirstOrDefault() });
-            }
-            if (result.IsLockedOut)
-            {
-                ModelState.AddModelError("", "Account is locked out");
-                return Unauthorized(new { LoginError = "You've been locked out fool" });
-            }
-            {
-
             }
 
             // Bruger ikke fundet
