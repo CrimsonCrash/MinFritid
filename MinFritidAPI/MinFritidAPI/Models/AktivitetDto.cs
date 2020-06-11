@@ -15,6 +15,10 @@ namespace MinFritidAPI.Models
         public DateTime SlutTidspunkt { get; set; }
         public int Postnummer { get; set; }
         public bool Aktiv { get; set; }
+        public int BrugerID { get; set; }
+        public string OpretterFornavn { get; set; }
+        public string OpretterEfternavn { get; set; }
+        public bool OpretterVerificeret { get; set; }
         public IEnumerable<TilmeldteDto> ATilmeldt { get; set; }
     }
 }

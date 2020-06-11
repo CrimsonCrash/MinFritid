@@ -29,5 +29,7 @@ namespace MinFritidAPI.Models
 
         public bool Verificeret { get => verificeret; set => verificeret = value; }
         public bool Aktiv { get => aktiv; set => aktiv = value; }
+
+        public ICollection<AktivitetBrugerTilmeldt> AktivitetBrugerTilmeldt { get; set; }
     }
 }

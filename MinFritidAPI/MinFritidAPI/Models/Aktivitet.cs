@@ -15,6 +15,7 @@ namespace MinFritidAPI.Models
         public int AktivitetID { get; set; }
         [ForeignKey("BrugerID")]
         public int BrugerID { get; set; }
+        public Bruger Bruger { get; set; }
 
         public string Titel { get; set; }
 
@@ -33,5 +34,7 @@ namespace MinFritidAPI.Models
         public int PostNummer { get; set; }
 
         public bool Aktiv { get => aktiv; set => aktiv = value; }
+
+        public ICollection<AktivitetBrugerTilmeldt> AktivitetBrugerTilmeldt { get; set; }
     }
 }

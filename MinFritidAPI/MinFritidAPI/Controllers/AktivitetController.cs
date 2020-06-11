@@ -45,17 +45,20 @@ namespace MinFritidAPI.Controllers
                 StartTidspunkt = a.StartTidspunkt,
                 SlutTidspunkt = a.SlutTidspunkt,
                 Postnummer = a.PostNummer,
-                Aktiv = a.Aktiv
-                /*ATilmeldt = a.AktivitetBrugerTilmeldt.Select(t => new TilmeldteDto
+                Aktiv = a.Aktiv,
+                
+                ATilmeldt = a.AktivitetBrugerTilmeldt.Select(t => new TilmeldteDto
                     {
                         BrugerID = t.BrugerID,
                         BrugerAktiv = t.Bruger.Aktiv,
                         BrugerFornavn = t.Bruger.Fornavn,
                         BrugerEfternavn = t.Bruger.Efternavn,
                         BrugerFoedselsdag = t.Bruger.Foedselsdato
-                    })
-                    */
-            });
+                    }),
+                OpretterFornavn = a.Bruger.Fornavn,
+                OpretterEfternavn = a.Bruger.Efternavn,
+                OpretterVerificeret = a.Bruger.Verificeret
+            }).Where(a => a.AktivitetID == id);
 
             if (aktivitet == null)
             {

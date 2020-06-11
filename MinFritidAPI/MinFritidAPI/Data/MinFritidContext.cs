@@ -33,7 +33,16 @@ namespace MinFritidAPI.Data
             );
 
             // Her sætter vi AktivitetID og BrugerID som en composite key
-            modelBuilder.Entity<AktivitetBrugerTilmeldt>().HasKey(abt => new { abt.AktivitetID, abt.BrugerID });
+            modelBuilder.Entity<AktivitetBrugerTilmeldt>()
+                .HasKey(abt => new { abt.AktivitetID, abt.BrugerID });
+            modelBuilder.Entity<AktivitetBrugerTilmeldt>()
+                .HasOne(ab => ab.Bruger)
+                .WithMany(b => b.AktivitetBrugerTilmeldt)
+                .HasForeignKey(ab => ab.BrugerID);
+            modelBuilder.Entity<AktivitetBrugerTilmeldt>()
+                .HasOne(ab => ab.Aktivitet)
+                .WithMany(a => a.AktivitetBrugerTilmeldt)
+                .HasForeignKey(ab => ab.AktivitetID);
 
             modelBuilder.Entity<Bruger>().ToTable("Bruger");
             modelBuilder.Entity<Aktivitet>().ToTable("Aktivitet");
