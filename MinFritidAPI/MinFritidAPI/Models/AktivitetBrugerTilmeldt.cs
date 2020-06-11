@@ -20,5 +20,8 @@ namespace MinFritidAPI.Models
         [ForeignKey("Bruger")]
         public int BrugerID { get; set; }
         public virtual Bruger Bruger { get; set; }
+
+        public bool Vaert { get; set; }
+        public bool Arrangoer { get; set; }
     }
 }

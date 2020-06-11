@@ -233,8 +233,6 @@ namespace MinFritidAPI.Migrations
 
                     b.HasKey("AktivitetID");
 
-                    b.HasIndex("BrugerID");
-
                     b.ToTable("Aktivitet");
                 });
 
@@ -337,23 +335,15 @@ namespace MinFritidAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MinFritidAPI.Models.Aktivitet", b =>
-                {
-                    b.HasOne("MinFritidAPI.Models.Bruger", "Bruger")
-                        .WithMany()
-                        .HasForeignKey("BrugerID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("MinFritidAPI.Models.AktivitetBrugerTilmeldt", b =>
                 {
                     b.HasOne("MinFritidAPI.Models.Aktivitet", "Aktivitet")
-                        .WithMany("AktivitetBrugerTilmeldt")
+                        .WithMany("AktivitetBrugerTilmeldte")
                         .HasForeignKey("AktivitetID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MinFritidAPI.Models.Bruger", "Bruger")
-                        .WithMany("AktivitetBrugerTilmeldt")
+                        .WithMany()
                         .HasForeignKey("BrugerID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

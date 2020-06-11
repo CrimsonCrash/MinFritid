@@ -5,10 +5,10 @@ namespace MinFritidAPI.Models
 {
     internal class TilmeldteDto
     {
-        public int BrugerID { get; set; }
-        public string BrugerFornavn { get; set; }
-        public string BrugerEfternavn { get; set; }
-        public DateTime BrugerFoedselsdag { get; set; }
-        public bool BrugerAktiv { get; set; }
+        public int ArrangoerID { get; set; }
+        public string ArrangoerFornavn { get; set; }
+        public string ArrangoerEfternavn { get; set; }
+        public DateTime ArrangoerFoedselsdag { get; set; }
+        public bool ArrangoerAktiv { get; set; }
     }
 }

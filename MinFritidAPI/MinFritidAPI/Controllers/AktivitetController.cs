@@ -48,16 +48,13 @@ namespace MinFritidAPI.Controllers
                 Aktiv = a.Aktiv,
                 
                 ATilmeldt = a.AktivitetBrugerTilmeldt.Select(t => new TilmeldteDto
-                    {
-                        BrugerID = t.BrugerID,
-                        BrugerAktiv = t.Bruger.Aktiv,
-                        BrugerFornavn = t.Bruger.Fornavn,
-                        BrugerEfternavn = t.Bruger.Efternavn,
-                        BrugerFoedselsdag = t.Bruger.Foedselsdato
-                    }),
-                OpretterFornavn = a.Bruger.Fornavn,
-                OpretterEfternavn = a.Bruger.Efternavn,
-                OpretterVerificeret = a.Bruger.Verificeret
+                {
+                    ArrangoerID = t.BrugerID,
+                    ArrangoerAktiv = t.Bruger.Aktiv,
+                    ArrangoerFornavn = t.Bruger.Fornavn,
+                    ArrangoerEfternavn = t.Bruger.Efternavn,
+                    ArrangoerFoedselsdag = t.Bruger.Foedselsdato
+                })
             }).Where(a => a.AktivitetID == id);
 
             if (aktivitet == null)

@@ -13,9 +13,6 @@ namespace MinFritidAPI.Models
 
         [Key]
         public int AktivitetID { get; set; }
-        [ForeignKey("BrugerID")]
-        public int BrugerID { get; set; }
-        public Bruger Bruger { get; set; }
 
         public string Titel { get; set; }
 

@@ -6,6 +6,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200611085240_test2.cs" />
+    <Compile Remove="Migrations\20200611085240_test2.Designer.cs" />
+    <Compile Remove="Migrations\20200611104040_test3.cs" />
+    <Compile Remove="Migrations\20200611104040_test3.Designer.cs" />
+    <Compile Remove="Migrations\20200611104847_Test4.cs" />
+    <Compile Remove="Migrations\20200611104847_Test4.Designer.cs" />
+    <Compile Remove="Migrations\20200611105105_Test5.cs" />
+    <Compile Remove="Migrations\20200611105105_Test5.Designer.cs" />
+    <Compile Remove="Migrations\20200611110723_Test6.cs" />
+    <Compile Remove="Migrations\20200611110723_Test6.Designer.cs" />
+    <Compile Remove="Migrations\20200611112344_Test7.cs" />
+    <Compile Remove="Migrations\20200611112344_Test7.Designer.cs" />
+    <Compile Remove="Migrations\20200611112446_Test8.cs" />
+    <Compile Remove="Migrations\20200611112446_Test8.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
