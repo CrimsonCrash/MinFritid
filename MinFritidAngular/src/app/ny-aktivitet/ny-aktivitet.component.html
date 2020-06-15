@@ -1,4 +1,4 @@
- <body>
+ <div class="boxBackground">
     <div class="boxBackground">
         <div>
             <label>Titel</label>
@@ -19,18 +19,11 @@
         <input class="btnclick" type="file" (change)="onSelectImg($event)">
     </div>
     <div class="boxBackground">
-        <div>
-            <label>Dato for aktivitet</label>
-            <br>
-            <input class="navContent2" type="text">
-        </div>
-        <br>
-        <div>
-            <label>Tidspunkt for aktivitet</label>
-            <br>
-            <input class="navContent2" class="time" type="text">
-            <input class="navContent2" class="time" type="text">
-        </div>
+        <div class="tempfix">
+                <label>Dato for aktivitet</label>
+                <br>
+                <input type="date">
+            </div>
         <br>
         <div>
             <label>Beskrivelse</label>
@@ -38,9 +31,10 @@
             
         </div>
         <br>
+        <textarea class="message"></textarea>
     </div>
-    <textarea class="message"></textarea>
-    <div class="boxBackground">
+    <br>
+    <div>
         <div>
             <label>Max antal deltagere</label>
             <br>
@@ -60,8 +54,8 @@
             
         </div>
         <br>
-        
-    </div>
-    <textarea class="message"></textarea>
+        <textarea class="message"></textarea>
     <button class="btnclick" routerLink="/">Opret aktivitet</button>
-</body>
+    </div>
+    
+</div>
