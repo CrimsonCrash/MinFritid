@@ -73,7 +73,7 @@ namespace MinFritidAPI.Controllers
             if (aktivitetBrugerTilmeldt.BrugerID == abt.BrugerID && aktivitetBrugerTilmeldt.AktivitetID == abt.AktivitetID && aktivitetBrugerTilmeldt.Prioritet != Prioritet.Vaert)
             {
                 _context.AktivitetBrugerTilmeldt.Update(aktivitetBrugerTilmeldt);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return Ok("Updated AktivitetBrugerTilmeldt ");
             }
             return BadRequest();
