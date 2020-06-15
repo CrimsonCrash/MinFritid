@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MinFritidAPI.Data;
 
 namespace MinFritidAPI.Migrations
 {
     [DbContext(typeof(MinFritidContext))]
-    partial class MinFritidContextModelSnapshot : ModelSnapshot
+    [Migration("20200615122842_BrugerAktivitetTilmeldt-Prioritet-02")]
+    partial class BrugerAktivitetTilmeldtPrioritet02
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

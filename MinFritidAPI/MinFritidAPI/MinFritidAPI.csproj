@@ -22,6 +22,8 @@
     <Compile Remove="Migrations\20200611112446_Test8.Designer.cs" />
     <Compile Remove="Migrations\20200611124245_Test9.cs" />
     <Compile Remove="Migrations\20200611124245_Test9.Designer.cs" />
+    <Compile Remove="Migrations\20200615115713_BrugerAktivitetTilmeldt-Prioritet-01.cs" />
+    <Compile Remove="Migrations\20200615115713_BrugerAktivitetTilmeldt-Prioritet-01.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

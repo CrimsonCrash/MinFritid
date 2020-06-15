@@ -60,6 +60,26 @@ namespace MinFritidAPI.Controllers
             return aktivitetBrugerTilmeldt;
         }
 
+        // PUT: api/AktivitetBrugerTilmeldt
+        [HttpPut]
+        public async Task<ActionResult<AktivitetBrugerTilmeldt>> PutAktivitetBrugerTilmeldt(AktivitetBrugerTilmeldt aktivitetBrugerTilmeldt)
+        {
+            var abt = await _context.AktivitetBrugerTilmeldt.FindAsync(aktivitetBrugerTilmeldt.AktivitetID, aktivitetBrugerTilmeldt.BrugerID);
+
+            if (aktivitetBrugerTilmeldt == null)
+            {
+                return NotFound("Not found");
+            }
+            if (aktivitetBrugerTilmeldt.BrugerID == abt.BrugerID && aktivitetBrugerTilmeldt.AktivitetID == abt.AktivitetID && aktivitetBrugerTilmeldt.Prioritet != Prioritet.Vaert)
+            {
+                _context.AktivitetBrugerTilmeldt.Update(aktivitetBrugerTilmeldt);
+                _context.SaveChanges();
+                return Ok("Updated AktivitetBrugerTilmeldt ");
+            }
+            return BadRequest();
+        }
+        // TODO giv Vært videre
+
         // POST: api/AktivitetBrugerTilmeldt
         [HttpPost]
         public async Task<ActionResult<AktivitetBrugerTilmeldt>> PostAktivitetBrugerTilmeldt(AktivitetBrugerTilmeldt aktivitetBrugerTilmeldt)

@@ -44,6 +44,13 @@ namespace MinFritidAPI.Data
                 .WithMany(a => a.AktivitetBrugerTilmeldt)
                 .HasForeignKey(ab => ab.AktivitetID);
 
+            modelBuilder
+                .Entity<AktivitetBrugerTilmeldt>()
+                .Property(e => e.Prioritet)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (Prioritet)Enum.Parse(typeof(Prioritet), v));
+
             modelBuilder.Entity<Bruger>().ToTable("Bruger");
             modelBuilder.Entity<Aktivitet>().ToTable("Aktivitet");
         }

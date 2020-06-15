@@ -21,7 +21,12 @@ namespace MinFritidAPI.Models
         public int BrugerID { get; set; }
         public virtual Bruger Bruger { get; set; }
 
-        public bool Vaert { get; set; }
-        public bool Arrangoer { get; set; }
+        public Prioritet? Prioritet { get; set; }
+    }
+    public enum Prioritet
+    {
+        Vaert = 0, // Opretteren
+        Arrangoer = 1, // Arragøre kan redigere dele af aktiviteten
+        Medarrangoer = 2
     }
 }

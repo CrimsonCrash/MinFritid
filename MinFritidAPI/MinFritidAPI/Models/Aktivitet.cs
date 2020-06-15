@@ -13,7 +13,7 @@ namespace MinFritidAPI.Models
 
         [Key]
         public int AktivitetID { get; set; }
-        public int BrugerID { get; set; } // TODO nyt Many-to-Many tabel som fortæller hvilken bruger har oprettet og hvem der er med arrangører
+        
         public string Titel { get; set; }
 
         public string Beskrivelse { get; set; }
