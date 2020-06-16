@@ -47,13 +47,15 @@ namespace MinFritidAPI.Controllers
                 Postnummer = a.AktivitetPostnummer,
                 Aktiv = a.Aktiv,
                 
-                ATilmeldt = a.AktivitetBrugerTilmeldt.Select(t => new TilmeldteDto
+                Deltagere = a.AktivitetBrugerTilmeldt.Select(t => new BrugerDto
                 {
-                    ArrangoerID = t.BrugerID,
-                    ArrangoerAktiv = t.Bruger.Aktiv,
-                    ArrangoerFornavn = t.Bruger.Fornavn,
-                    ArrangoerEfternavn = t.Bruger.Efternavn,
-                    ArrangoerFoedselsdag = t.Bruger.Foedselsdato
+                    BrugerID = t.Bruger.BrugerID,
+                    BrugerFornavn = t.Bruger.Fornavn,
+                    BrugerEfternavn = t.Bruger.Efternavn,
+                    BrugerAktiv = t.Bruger.Aktiv,
+                    BrugerFoedselsdag = t.Bruger.Foedselsdato,
+                    BrugerPostnummer = t.Bruger.BrugerPostnummer,
+                    BrugerEmail = t.Bruger.Email
                 })
             }).Where(a => a.AktivitetID == id);
 
@@ -66,8 +68,6 @@ namespace MinFritidAPI.Controllers
         }
 
         // PUT: api/Aktivitet/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public IActionResult PutAktivitet(int Id, Aktivitet aktivitet)
         {
@@ -87,8 +87,6 @@ namespace MinFritidAPI.Controllers
         }
 
         // POST: api/Aktivitet
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public IActionResult PostAktivitet(Aktivitet aktivitet)
         {
@@ -147,5 +145,21 @@ namespace MinFritidAPI.Controllers
         {
             return _context.Aktivitet.Any(e => e.AktivitetID == id);
         }
+
+        private static AktivitetDto AktivitetDto(Aktivitet aktivitet) =>
+            new AktivitetDto
+            {
+                AktivitetID = aktivitet.AktivitetID,
+                Titel = aktivitet.Titel,
+                Beskrivelse = aktivitet.Beskrivelse,
+                Huskeliste = aktivitet.Huskeliste,
+                Aktiv = aktivitet.Aktiv
+            };
+        private static TilmeldteDto TilmeldteDto(AktivitetBrugerTilmeldt aktivitetBrugerTilmeldt) =>
+            new TilmeldteDto
+            {
+                TilmeldtAktivitetID = aktivitetBrugerTilmeldt.AktivitetID,
+                TilmeldtBrugerID = aktivitetBrugerTilmeldt.BrugerID
+            };
     }
 }
