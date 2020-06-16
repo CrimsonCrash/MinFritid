@@ -31,11 +31,11 @@ namespace MinFritidAPI.Controllers
         // GET: By/Details/5
         // Returnerer Bynavn ud fra Postnummer
         [HttpGet("{PostNummer}")]
-        public IActionResult GetBynavnByPostNr(int PostNummer)
+        public IActionResult GetBynavnByPostNr(int Postnummer)
         {
             var byer = _context.By;
 
-            var by = byer.FirstOrDefault(By => By.PostNummer == PostNummer);
+            var by = byer.FirstOrDefault(By => By.Postnummer == Postnummer);
 
             if (by == null)
             {

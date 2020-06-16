@@ -24,6 +24,14 @@
     <Compile Remove="Migrations\20200611124245_Test9.Designer.cs" />
     <Compile Remove="Migrations\20200615115713_BrugerAktivitetTilmeldt-Prioritet-01.cs" />
     <Compile Remove="Migrations\20200615115713_BrugerAktivitetTilmeldt-Prioritet-01.Designer.cs" />
+    <Compile Remove="Migrations\20200616073656_postnummer_FKs.cs" />
+    <Compile Remove="Migrations\20200616073656_postnummer_FKs.Designer.cs" />
+    <Compile Remove="Migrations\20200616074342_postnummer_FKs.cs" />
+    <Compile Remove="Migrations\20200616074342_postnummer_FKs.Designer.cs" />
+    <Compile Remove="Migrations\20200616074807_postnummer_FKs.cs" />
+    <Compile Remove="Migrations\20200616074807_postnummer_FKs.Designer.cs" />
+    <Compile Remove="Migrations\20200616075657_postnummer_FKs.cs" />
+    <Compile Remove="Migrations\20200616075657_postnummer_FKs.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

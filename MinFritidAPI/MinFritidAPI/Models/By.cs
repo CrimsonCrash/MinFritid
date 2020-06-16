@@ -9,7 +9,7 @@ namespace MinFritidAPI.Models
     public class By
     {
         [Key]
-        public int PostNummer { get; set; }
+        public int Postnummer { get; set; }
 
         public string Bynavn { get; set; }
 

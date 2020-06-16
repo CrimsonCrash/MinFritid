@@ -21,7 +21,9 @@ namespace MinFritidAPI.Models
         [Column(TypeName = "Date")]
         public DateTime Foedselsdato { get; set; }
 
-        public int PostNummer { get; set; }
+        public int? BrugerPostnummer { get; set; }
+        [ForeignKey("BrugerPostnummer")]
+        public By By { get; set; }
 
         public string Email { get; set; }
 

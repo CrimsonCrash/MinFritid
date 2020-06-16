@@ -95,7 +95,7 @@ namespace MinFritidAPI.Controllers
                 {
                     if (AktivitetBrugerTilmeldtExists(aktivitetBrugerTilmeldt.AktivitetID, aktivitetBrugerTilmeldt.BrugerID))
                     {
-                        return Conflict();
+                        return Conflict("Brugeren er allerede på listen.");
                     }
                     else
                     {
@@ -112,7 +112,7 @@ namespace MinFritidAPI.Controllers
         }
 
         // DELETE: api/AktivitetBrugerTilmeldt
-        [HttpDelete]
+        [HttpDelete] // TODO Hvordan håndtere vi dette med dem som allerede har betalt?
         public async Task<ActionResult<AktivitetBrugerTilmeldt>> DeleteAktivitetBrugerTilmeldt(AktivitetBrugerTilmeldt aktivitetBrugerTilmeldt)
         {
             var abt = await _context.AktivitetBrugerTilmeldt.FindAsync(aktivitetBrugerTilmeldt.AktivitetID, aktivitetBrugerTilmeldt.BrugerID);
@@ -131,7 +131,7 @@ namespace MinFritidAPI.Controllers
         {
             return _context.AktivitetBrugerTilmeldt.Any(e => e.AktivitetID == aktivitetID && e.BrugerID == brugerID);
         }
-        public bool MaxParticipantsReached(int aktivitetID)
+        public bool MaxParticipantsReached(int aktivitetID) // Hvis aktiviteten er fyldt return true, else return false.
         {
             var aktivitetBrugerTilmeldt = _context.AktivitetBrugerTilmeldt.Where(a => a.AktivitetID == aktivitetID).ToList();
             int MaxAntalDeltagere = _context.Aktivitet.Find(aktivitetID).MaxDeltagere;

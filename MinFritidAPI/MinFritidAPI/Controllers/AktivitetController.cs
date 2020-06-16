@@ -44,7 +44,7 @@ namespace MinFritidAPI.Controllers
                 MaxDeltagere = a.MaxDeltagere,
                 StartTidspunkt = a.StartTidspunkt,
                 SlutTidspunkt = a.SlutTidspunkt,
-                Postnummer = a.PostNummer,
+                Postnummer = a.AktivitetPostnummer,
                 Aktiv = a.Aktiv,
                 
                 ATilmeldt = a.AktivitetBrugerTilmeldt.Select(t => new TilmeldteDto
