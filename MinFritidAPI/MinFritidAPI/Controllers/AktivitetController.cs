@@ -47,7 +47,7 @@ namespace MinFritidAPI.Controllers
                 Postnummer = a.AktivitetPostnummer,
                 Aktiv = a.Aktiv,
                 
-                Deltagere = a.AktivitetBrugerTilmeldt.Select(t => new BrugerDto
+                Deltagere = a.AktivitetBrugerTilmeldt.Select(t => new AktivitetsBrugerDto
                 {
                     BrugerID = t.Bruger.BrugerID,
                     BrugerFornavn = t.Bruger.Fornavn,
@@ -123,7 +123,7 @@ namespace MinFritidAPI.Controllers
         }
 
         // PUT: api/aktivitet/deaktiv/5
-        [HttpGet("deaktiv/{id}")]
+        [HttpPut("deaktiv/{id}")]
         public IActionResult DeaktiverAktivitet(int Id)
         {
             var aktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.AktivitetID == Id);
@@ -141,25 +141,28 @@ namespace MinFritidAPI.Controllers
             return BadRequest();
         }
 
+        // PUT: api/aktivitet/aktiv/5
+        [HttpPut("aktiv/{id}")]
+        public IActionResult GenaktiverAktivitet(int Id)
+        {
+            var aktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.AktivitetID == Id);
+            if (aktivitet == null)
+            {
+                return NotFound("Not found");
+            }
+            if (aktivitet.AktivitetID == Id && aktivitet.Aktiv == false)
+            {
+                aktivitet.Aktiv = true;
+                _context.Aktivitet.Update(aktivitet);
+                _context.SaveChanges();
+                return Ok("Updated Aktivitet Deaktiveret");
+            }
+            return BadRequest("Der opstod en fejl. Prøv at check om aktiviteten allerede er aktiv.");
+        }
+
         private bool AktivitetExists(int id)
         {
             return _context.Aktivitet.Any(e => e.AktivitetID == id);
         }
-
-        private static AktivitetDto AktivitetDto(Aktivitet aktivitet) =>
-            new AktivitetDto
-            {
-                AktivitetID = aktivitet.AktivitetID,
-                Titel = aktivitet.Titel,
-                Beskrivelse = aktivitet.Beskrivelse,
-                Huskeliste = aktivitet.Huskeliste,
-                Aktiv = aktivitet.Aktiv
-            };
-        private static TilmeldteDto TilmeldteDto(AktivitetBrugerTilmeldt aktivitetBrugerTilmeldt) =>
-            new TilmeldteDto
-            {
-                TilmeldtAktivitetID = aktivitetBrugerTilmeldt.AktivitetID,
-                TilmeldtBrugerID = aktivitetBrugerTilmeldt.BrugerID
-            };
     }
 }

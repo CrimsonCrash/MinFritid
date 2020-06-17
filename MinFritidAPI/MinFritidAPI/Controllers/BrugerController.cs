@@ -52,7 +52,33 @@ namespace MinFritidAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult PutBruger(int Id, Bruger bruger)
         {
-            //var PutBruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.ID == Id);
+            if (bruger == null)
+            {
+                return NotFound("Not found");
+            }
+            if (bruger.BrugerPostnummer != null)
+            {
+                var Postnummer = _context.By.Any(p => p.Postnummer == bruger.BrugerPostnummer);
+                
+                if (Postnummer == false)
+                {
+                    _context.Bruger.Update(bruger);
+                    _context.SaveChanges();
+                    return Ok("Updated Bruger");
+                }
+            }
+            else if(bruger.By != null)
+            {
+                var By = _context.By.Any(b => b.Bynavn == bruger.By.Bynavn);
+
+                if (bruger.BrugerID == Id)
+                {
+                    _context.Bruger.Update(bruger);
+                    _context.SaveChanges();
+                    return Ok("Updated Bruger");
+                }
+            }
+            /*var By = _context.By.FirstOrDefault(b => b.Postnummer == Id);
             if (bruger == null)
             {
                 return NotFound("Not found");
@@ -62,7 +88,7 @@ namespace MinFritidAPI.Controllers
                 _context.Bruger.Update(bruger);
                 _context.SaveChanges();
                 return Ok("Updated Bruger");
-            }
+            }*/
             return BadRequest();
         }
 

@@ -32,6 +32,14 @@
     <Compile Remove="Migrations\20200616074807_postnummer_FKs.Designer.cs" />
     <Compile Remove="Migrations\20200616075657_postnummer_FKs.cs" />
     <Compile Remove="Migrations\20200616075657_postnummer_FKs.Designer.cs" />
+    <Compile Remove="Migrations\20200617122226_postnummer-identity.cs" />
+    <Compile Remove="Migrations\20200617122226_postnummer-identity.Designer.cs" />
+    <Compile Remove="Migrations\20200617122446_postnummer-identity.cs" />
+    <Compile Remove="Migrations\20200617122446_postnummer-identity.Designer.cs" />
+    <Compile Remove="Migrations\20200617124421_postnummer-identity-03.cs" />
+    <Compile Remove="Migrations\20200617124421_postnummer-identity-03.Designer.cs" />
+    <Compile Remove="Migrations\20200617124759_postnummer-identity-03.cs" />
+    <Compile Remove="Migrations\20200617124759_postnummer-identity-03.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

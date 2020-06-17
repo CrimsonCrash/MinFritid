@@ -15,6 +15,6 @@ namespace MinFritidAPI.Models
         public DateTime SlutTidspunkt { get; set; }
         public int? Postnummer { get; set; }
         public bool Aktiv { get; set; }
-        public IEnumerable<BrugerDto> Deltagere { get; set; }
+        public IEnumerable<AktivitetsBrugerDto> Deltagere { get; set; }
     }
 }
