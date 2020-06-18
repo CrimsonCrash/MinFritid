@@ -4,10 +4,10 @@ import { Ibruger } from './Ibruger';
 export class IaktivitetBrugerTilmeldt {
     constructor
     (
-        AktivitetID: number,
-        Aktivitet: Iaktivitet,
-        BrugerID: number,
-        Bruger: Ibruger
+        _AktivitetID: number,
+        _Aktivitet: Iaktivitet,
+        _BrugerID: number,
+        _Bruger: Ibruger
     )
     {}
 }
