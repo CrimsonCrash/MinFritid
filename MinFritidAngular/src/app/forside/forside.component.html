@@ -5,10 +5,11 @@
     <div>
         <img class="activitiesImg" src="assets/Images/walking.jpg">
         <br>
-        {{Forside.titel}}
+        <label>{{Forside.titel}}</label>
         <br/>
-        {{Forside.postNummer}}
-                
+        <label>{{Forside.postNummer}}</label>
+        <br/>
+        <button routerLink="/aktivitet" (click)="ngOnInit()">gå til aktiviteten</button>
     </div>
         
 </div>

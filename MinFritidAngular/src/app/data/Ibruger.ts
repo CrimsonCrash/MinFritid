@@ -3,16 +3,16 @@ import { IaktivitetBrugerTilmeldt } from './IaktivitetBrugerTilmeldt';
 export class Ibruger {
     constructor
     (
-        BrugerID: number,
-        Fornavn: string,
-        Efternavn: string,
-        Foedselsdato: Date,
-        PostNummer: number,
-        Email: string,
-        Password: string,
-        AktivitetBrugerTilmeldte: IaktivitetBrugerTilmeldt[],
-        Verificeret: boolean,
-        Aktiv: boolean
+        _BrugerID: number,
+        _Fornavn: string,
+        _Efternavn: string,
+        _Foedselsdato: Date,
+        _PostNummer: number,
+        _Email: string,
+        _Password: string,
+        _AktivitetBrugerTilmeldte: IaktivitetBrugerTilmeldt[],
+        _Verificeret: boolean,
+        _Aktiv: boolean
     )
     {}
 }

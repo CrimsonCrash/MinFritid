@@ -16,8 +16,11 @@ const httpOptions = {
 })
 export class DataService {
   [x: string]: any;
-
-  constructor(private http: HttpClient) { }
+  header: any;
+  constructor(private http: HttpClient) { 
+    // const headerSettings: {[name: string]: string | string[];} = {};
+    // this.header = new HttpHeaders(headerSettings);
+  }
 
   getBrugers(): Observable<Ibruger[]>{
     return this.http.get<Ibruger[]>('http://localhost:5001/api/bruger/')
@@ -27,10 +30,14 @@ export class DataService {
   getBruger(brugerId) {
     return this.http.get('http://localhost:5001/api/bruger/'+ brugerId)
   }
-
   postBrugers(bruger: Ibruger): Observable<Ibruger>{
+    //const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/text'}) };
     return this.http.post<Ibruger>('http://localhost:5001/api/bruger/', bruger, httpOptions)
   }
+
+  // postBrugers(bruger: Ibruger): Observable<Ibruger>{
+  //   return this.http.post<Ibruger>('http://localhost:5001/api/bruger/', bruger, httpOptions)
+  // }
 
   delBruger(brugerId) {
     return this.http.delete('http://localhost:5001/api/bruger/'+ brugerId)
