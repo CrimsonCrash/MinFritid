@@ -36,7 +36,7 @@ namespace MinFritidAPI.Controllers
         {
             var brugers = _context.Bruger;
 
-            var bruger = brugers.FirstOrDefault(Bruger => Bruger.BrugerID == id);
+            var bruger = brugers.Include("By").FirstOrDefault(Bruger => Bruger.BrugerID == id);
 
             if (bruger == null)
             {
@@ -46,10 +46,8 @@ namespace MinFritidAPI.Controllers
             return new JsonResult(bruger);
         }
 
-        // PUT: api/Bruger/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+        // PUT: api/Bruger
+        [HttpPut]
         public IActionResult PutBruger(int Id, Bruger bruger)
         {
             if (bruger == null)
@@ -60,18 +58,7 @@ namespace MinFritidAPI.Controllers
             {
                 var Postnummer = _context.By.Any(p => p.Postnummer == bruger.BrugerPostnummer);
                 
-                if (Postnummer == false)
-                {
-                    _context.Bruger.Update(bruger);
-                    _context.SaveChanges();
-                    return Ok("Updated Bruger");
-                }
-            }
-            else if(bruger.By != null)
-            {
-                var By = _context.By.Any(b => b.Bynavn == bruger.By.Bynavn);
-
-                if (bruger.BrugerID == Id)
+                if (Postnummer == true)
                 {
                     _context.Bruger.Update(bruger);
                     _context.SaveChanges();
@@ -197,7 +184,7 @@ namespace MinFritidAPI.Controllers
             return BadRequest();
         }
 
-        // PUT: api/bruger/login
+        // GET: api/bruger/login
         [HttpGet("login")]
         public IActionResult Login(string Email, string Password)
         {
@@ -224,7 +211,7 @@ namespace MinFritidAPI.Controllers
             return new JsonResult(brugerTemp);
         }
 
-        // PUT: api/bruger/logout
+        // GET: api/bruger/logout
         [HttpGet("logout")]
         public IActionResult Logout()
         {
