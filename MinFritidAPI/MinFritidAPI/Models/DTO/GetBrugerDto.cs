@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MinFritidAPI.Models
 {
-    internal class AktivitetsBrugerDto
+    internal class GetBrugerDto
     {
         /*public int BrugerID { get; set; }*/
         public string BrugerEmail { get; set; }

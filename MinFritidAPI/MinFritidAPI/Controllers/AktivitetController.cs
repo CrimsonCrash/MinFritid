@@ -47,7 +47,7 @@ namespace MinFritidAPI.Controllers
                 Postnummer = a.AktivitetPostnummer,
                 Aktiv = a.Aktiv,
                 
-                Deltagere = a.AktivitetBrugerTilmeldt.Select(t => new AktivitetsBrugerDto
+                Deltagere = a.AktivitetBrugerTilmeldt.Select(t => new GetBrugerDto
                 {
                     /*BrugerID = t.Bruger.Id,*/
                     BrugerFornavn = t.Bruger.Fornavn,

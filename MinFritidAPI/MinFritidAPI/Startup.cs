@@ -58,7 +58,7 @@ namespace MinFritidAPI
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // Fortæller at vi vil bruge Identity Framework
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<Models.Bruger, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 6;

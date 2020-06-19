@@ -20,21 +20,18 @@ namespace MinFritidAPI.Controllers
         private readonly UserManager<Bruger> _userManager;
         private MinFritidContext _context { get; }
 
-        public BrugerController(UserManager<Bruger> userManager)
+        public BrugerController(UserManager<Bruger> userManager, MinFritidContext context)
         {
             _userManager = userManager;
-        }
-
-/*        public BrugerController(MinFritidContext context)
-        {
             _context = context;
-        }*/
+        }
 
         // GET: api/Bruger
         [HttpGet]
         public IActionResult GetBrugere()
         {
-            return new JsonResult(_context.Bruger);
+            var temp = _userManager.Users;
+            return new JsonResult(temp);
         }
 
         // GET: api/Bruger/5
@@ -89,24 +86,32 @@ namespace MinFritidAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<IActionResult> PostBruger([FromBody] Bruger bruger)
+        public async Task<IActionResult> PostBruger(CreateBrugerDto brugerDto)
         {
-            using (var PostBruger = _context)
+            if (ModelState.IsValid)
             {
-                if (PostBruger != null)
+                Bruger bruger = new Bruger
                 {
-                    await _userManager.CreateAsync(bruger);
-                    return Ok("Added Bruger");
-                }
-                else
-                {
-                    return NotFound("Not added");
-                }
+                    UserName = brugerDto.UserName,
+                    Email = brugerDto.Email,
+                    Fornavn = brugerDto.Fornavn,
+                    Efternavn = brugerDto.Efternavn,
+                    BrugerPostnummer = brugerDto.Postnummer,
+                    Foedselsdato = brugerDto.Foedselsdag,
+                    PhoneNumber = brugerDto.PhoneNumber
+                };
+
+                IdentityResult result = await _userManager.CreateAsync(bruger, brugerDto.Password);
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest();
             }
         }
 
-        // DELETE: api/Bruger/5
-        [HttpDelete("{id}")]
+        // DELETE: api/Bruger
+        [HttpDelete]
         public IActionResult DeleteBruger(string id)
         {
             var DeleteBruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.Id == id);
@@ -132,61 +137,55 @@ namespace MinFritidAPI.Controllers
             throw new NotImplementedException();
         }
 
-        // PUT: api/bruger/aktiv/5
-        [HttpPut("aktiv/{id}")]
-        public IActionResult AktiverBruger(string Id)
+        // PUT: api/bruger/aktiv
+        [HttpPut("aktiv")]
+        public async Task<IActionResult> AktiverBruger(string Id)
         {
-            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.Id == Id);
+            var bruger = _userManager.FindByIdAsync(Id).Result;
             if (bruger == null)
             {
                 return NotFound("Not found");
             }
-            if (bruger.Id == Id)
+            else
             {
                 bruger.Aktiv = true;
-                _context.Bruger.Update(bruger);
-                _context.SaveChanges();
+                await _userManager.UpdateAsync(bruger);
                 return Ok("Updated Bruger Aktiv");
             }
-            return BadRequest();
         }
 
-        // PUT: api/bruger/deaktiv/5
-        [HttpPut("deaktiv/{id}")]
-        public IActionResult DeaktiverBruger(string Id)
+        // PUT: api/bruger/deaktiv
+        [HttpPut("deaktiv")]
+        public async Task<IActionResult> DeaktiverBruger(string Id)
         {
-            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.Id == Id);
+            var bruger = _userManager.FindByIdAsync(Id).Result;
             if (bruger == null)
             {
                 return NotFound("Not found");
             }
-            if (bruger.Id == Id)
+            else
             {
                 bruger.Aktiv = false;
-                _context.Bruger.Update(bruger);
-                _context.SaveChanges();
-                return Ok("Updated Bruger Deaktiveret");
+                await _userManager.UpdateAsync(bruger);
+                return Ok("Updated Bruger Aktiv");
             }
-            return BadRequest();
         }
 
-        // PUT: api/bruger/verify/5
-        [HttpPut("verify/{id}")]
-        public IActionResult VerificerBruger(string Id)
+        // PUT: api/bruger/verify
+        [HttpPut("verify")]
+        public async Task<IActionResult> VerificerBruger(string Id, bool nyeStatus)
         {
-            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.Id == Id);
+            var bruger = _userManager.FindByIdAsync(Id).Result;
             if (bruger == null)
             {
                 return NotFound("Not found");
             }
-            if (bruger.Id == Id)
+            else
             {
-                bruger.Verificeret = true;
-                _context.Bruger.Update(bruger);
-                _context.SaveChanges();
-                return Ok("Updated Bruger Verificeret");
+                bruger.Verificeret = nyeStatus;
+                await _userManager.UpdateAsync(bruger);
+                return Ok("Updated Bruger Aktiv");
             }
-            return BadRequest();
         }
     }
 }
