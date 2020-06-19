@@ -49,7 +49,7 @@ namespace MinFritidAPI.Controllers
                 
                 Deltagere = a.AktivitetBrugerTilmeldt.Select(t => new AktivitetsBrugerDto
                 {
-                    BrugerID = t.Bruger.BrugerID,
+                    /*BrugerID = t.Bruger.Id,*/
                     BrugerFornavn = t.Bruger.Fornavn,
                     BrugerEfternavn = t.Bruger.Efternavn,
                     BrugerAktiv = t.Bruger.Aktiv,

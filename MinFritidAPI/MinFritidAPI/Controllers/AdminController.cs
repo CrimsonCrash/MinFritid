@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -30,21 +31,24 @@ namespace MinFritidAPI.Controllers
         [HttpGet]
         public IActionResult GetAllAdmins()
         {
-            var admins = from a in _context.Admin
-                         join b in _context.Bruger on a.AdminID equals b.BrugerID
+            var admins = from a in _context.UserRoles
+                         join b in _context.Bruger on a.UserId equals b.Id
                          select b;
 
             return new JsonResult(admins);
         }
 
+        public UserManager<Bruger> userManager;
+
         // GET: api/admin/id
         // Henter én specifik admin ud fra BrugerID
         [HttpGet("{id}")]
-        public IActionResult GetAdmin(int id)
+        public IActionResult GetAdmin(string id)
         {
-            var admins = from a in _context.Admin
-                         join b in _context.Bruger on a.AdminID equals b.BrugerID
-                         where a.AdminID == id
+            
+            var admins = from a in _context.UserRoles
+                         join b in _context.Bruger on a.UserId equals b.Id
+                         where a.UserId == id
                          select b;
 
             var admin = admins.FirstOrDefault();
@@ -60,17 +64,18 @@ namespace MinFritidAPI.Controllers
         // POST: api/admin/id
         // Tilføj en ny bruger som admin ud fra BrugerID
         [HttpPost("{id}")]
-        public IActionResult PostAdmin(int id)
+        public IActionResult PostAdmin(string id)
         {
-                var admins = from a in _context.Admin
-                             join b in _context.Bruger on id equals b.BrugerID
+                var admins = from a in _context.UserRoles
+                             join b in _context.Bruger on id equals b.Id
                              select b;
 
                 var admin = admins.FirstOrDefault();
 
                 if (admin != null)
                 {
-                _context.Admin.Add(new Admin { AdminID = id } );
+                /*_context.UserRoles.Add (new IdentityUserRole { UserId = id } );*/
+                userManager.AddToRoleAsync(admin, "Admin");
                     _context.SaveChanges();
                     return Ok("Admin successfully created");
                 }
@@ -83,18 +88,18 @@ namespace MinFritidAPI.Controllers
         // DELETE: api/admin/id
         // Slet en bruger som admin ud fra BrugerID
         [HttpDelete("{id}")]
-        public IActionResult DeleteAdmin(int id)
+        public IActionResult DeleteAdmin(string id)
         {
-            var admins = from a in _context.Admin
-                         join b in _context.Bruger on a.AdminID equals b.BrugerID
-                         where b.BrugerID == id
+            var admins = from a in _context.UserRoles
+                         join b in _context.Bruger on a.UserId equals b.Id
+                         where b.Id == id
                          select a;
 
             var admin = admins.FirstOrDefault();
 
             if (admin != null)
             {
-                    _context.Admin.Remove(admin);
+                    _context.UserRoles.Remove(admin);
                     _context.SaveChanges();
                     return Ok("Admin successfully removed");
             }

@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace MinFritidAPI.Data
 {
-    public class MinFritidContext : IdentityDbContext<IdentityUser>
+    public class MinFritidContext : IdentityDbContext<Bruger>
     {
         //opsætter en constructor
-        public MinFritidContext()
+/*        public MinFritidContext()
         {
             //skal være en blank constuctor, den opretter en blank instans af context
-        }
+        }*/
 
         public MinFritidContext(DbContextOptions<MinFritidContext> options) : base(options)
         {
@@ -64,8 +64,6 @@ namespace MinFritidAPI.Data
         public DbSet<AktivitetBrugerTilmeldt> AktivitetBrugerTilmeldt { get; set; }
 
         public DbSet<By> By { get; set; }
-
-        public DbSet<Admin> Admin { get; set; }
 
     }
 }

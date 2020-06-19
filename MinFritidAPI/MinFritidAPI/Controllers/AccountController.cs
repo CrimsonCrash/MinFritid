@@ -24,11 +24,11 @@ namespace MinFritidAPI.Controllers
     [ApiController]
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<Bruger> _userManager;
+        private readonly SignInManager<Bruger> _signInManager;
         private readonly AppSettings _appSettings;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IOptions<AppSettings> appSettings)
+        public AccountController(UserManager<Bruger> userManager, SignInManager<Bruger> signInManager, IOptions<AppSettings> appSettings)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -49,7 +49,7 @@ namespace MinFritidAPI.Controllers
             // List med fejl i forbindelse med registrering
             List<string> errorList = new List<string>();
 
-            var user = new IdentityUser
+            var user = new Bruger
             {
                 UserName = formdata.Email,
                 Email = formdata.Email,

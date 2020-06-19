@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MinFritidAPI.Data;
@@ -16,12 +17,18 @@ namespace MinFritidAPI.Controllers
     [ApiController]
     public class BrugerController : ControllerBase
     {
+        private readonly UserManager<Bruger> _userManager;
         private MinFritidContext _context { get; }
 
-        public BrugerController(MinFritidContext context)
+        public BrugerController(UserManager<Bruger> userManager)
+        {
+            _userManager = userManager;
+        }
+
+/*        public BrugerController(MinFritidContext context)
         {
             _context = context;
-        }
+        }*/
 
         // GET: api/Bruger
         [HttpGet]
@@ -32,11 +39,11 @@ namespace MinFritidAPI.Controllers
 
         // GET: api/Bruger/5
         [HttpGet("{id}")]
-        public IActionResult GetBruger(int id)
+        public IActionResult GetBruger(string id)
         {
             var brugers = _context.Bruger;
 
-            var bruger = brugers.Include("By").FirstOrDefault(Bruger => Bruger.BrugerID == id);
+            var bruger = brugers.Include("By").FirstOrDefault(Bruger => Bruger.Id == id);
 
             if (bruger == null)
             {
@@ -48,20 +55,19 @@ namespace MinFritidAPI.Controllers
 
         // PUT: api/Bruger
         [HttpPut]
-        public IActionResult PutBruger(int Id, Bruger bruger)
+        public async Task<IActionResult> PutBruger(int Id, Bruger bruger)
         {
             if (bruger == null)
             {
                 return NotFound("Not found");
             }
-            if (bruger.BrugerPostnummer != null)
+            if (bruger.BrugerPostnummer != null) // TODO: Look into this
             {
                 var Postnummer = _context.By.Any(p => p.Postnummer == bruger.BrugerPostnummer);
                 
                 if (Postnummer == true)
                 {
-                    _context.Bruger.Update(bruger);
-                    _context.SaveChanges();
+                    await _userManager.UpdateAsync(bruger);
                     return Ok("Updated Bruger");
                 }
             }
@@ -83,14 +89,13 @@ namespace MinFritidAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public IActionResult PostBruger([FromBody] Bruger bruger)
+        public async Task<IActionResult> PostBruger([FromBody] Bruger bruger)
         {
             using (var PostBruger = _context)
             {
                 if (PostBruger != null)
                 {
-                    _context.Bruger.Add(bruger);
-                    _context.SaveChanges();
+                    await _userManager.CreateAsync(bruger);
                     return Ok("Added Bruger");
                 }
                 else
@@ -102,9 +107,9 @@ namespace MinFritidAPI.Controllers
 
         // DELETE: api/Bruger/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteBruger(int id)
+        public IActionResult DeleteBruger(string id)
         {
-            var DeleteBruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == id);
+            var DeleteBruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.Id == id);
             if (DeleteBruger != null)
             {
                 _context.Bruger.Remove(DeleteBruger);
@@ -117,9 +122,9 @@ namespace MinFritidAPI.Controllers
             }
         }
 
-        private bool BrugerExists(int id)
+        private bool BrugerExists(string id)
         {
-            return _context.Bruger.Any(e => e.BrugerID == id);
+            return _context.Bruger.Any(e => e.Id == id);
         }
 
         private IActionResult HttpNotFound()
@@ -129,14 +134,14 @@ namespace MinFritidAPI.Controllers
 
         // PUT: api/bruger/aktiv/5
         [HttpPut("aktiv/{id}")]
-        public IActionResult AktiverBruger(int Id)
+        public IActionResult AktiverBruger(string Id)
         {
-            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == Id);
+            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.Id == Id);
             if (bruger == null)
             {
                 return NotFound("Not found");
             }
-            if (bruger.BrugerID == Id)
+            if (bruger.Id == Id)
             {
                 bruger.Aktiv = true;
                 _context.Bruger.Update(bruger);
@@ -148,14 +153,14 @@ namespace MinFritidAPI.Controllers
 
         // PUT: api/bruger/deaktiv/5
         [HttpPut("deaktiv/{id}")]
-        public IActionResult DeaktiverBruger(int Id)
+        public IActionResult DeaktiverBruger(string Id)
         {
-            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == Id);
+            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.Id == Id);
             if (bruger == null)
             {
                 return NotFound("Not found");
             }
-            if (bruger.BrugerID == Id)
+            if (bruger.Id == Id)
             {
                 bruger.Aktiv = false;
                 _context.Bruger.Update(bruger);
@@ -167,14 +172,14 @@ namespace MinFritidAPI.Controllers
 
         // PUT: api/bruger/verify/5
         [HttpPut("verify/{id}")]
-        public IActionResult VerificerBruger(int Id)
+        public IActionResult VerificerBruger(string Id)
         {
-            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == Id);
+            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.Id == Id);
             if (bruger == null)
             {
                 return NotFound("Not found");
             }
-            if (bruger.BrugerID == Id)
+            if (bruger.Id == Id)
             {
                 bruger.Verificeret = true;
                 _context.Bruger.Update(bruger);
@@ -182,40 +187,6 @@ namespace MinFritidAPI.Controllers
                 return Ok("Updated Bruger Verificeret");
             }
             return BadRequest();
-        }
-
-        // GET: api/bruger/login
-        [HttpGet("login")]
-        public IActionResult Login(string Email, string Password)
-        {
-            var brugers = _context.Bruger;
-            var brugerTemp = brugers.FirstOrDefault(Bruger => Bruger.Email == Email);
-
-
-            if (Email == null)
-            {
-                return HttpNotFound();
-            }
-            else
-            {
-                if (brugerTemp.Password == Password)
-                {
-                    //lige nu gør den intet
-                }
-                else
-                {
-                    return NotFound("Wrong Password");
-                }
-            }
-
-            return new JsonResult(brugerTemp);
-        }
-
-        // GET: api/bruger/logout
-        [HttpGet("logout")]
-        public IActionResult Logout()
-        {
-            return Ok("Logged out");
         }
     }
 }

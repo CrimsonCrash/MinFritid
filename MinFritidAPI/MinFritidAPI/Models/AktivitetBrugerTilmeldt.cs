@@ -18,7 +18,7 @@ namespace MinFritidAPI.Models
         [Key]
         [Column(Order = 2)]
         [ForeignKey("Bruger")]
-        public int BrugerID { get; set; }
+        public string BrugerID { get; set; }
         public virtual Bruger Bruger { get; set; }
 
         public Prioritet? Prioritet { get; set; }

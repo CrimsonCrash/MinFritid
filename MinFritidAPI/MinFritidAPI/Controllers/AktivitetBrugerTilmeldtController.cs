@@ -48,7 +48,7 @@ namespace MinFritidAPI.Controllers
 
         // GET: api/AktivitetBrugerTilmeldt/Bruger/5
         [HttpGet("bruger/{id}")]
-        public async Task<ActionResult<IEnumerable<AktivitetBrugerTilmeldt>>> GetListByBrugerID(int id)
+        public async Task<ActionResult<IEnumerable<AktivitetBrugerTilmeldt>>> GetListByBrugerID(string id)
         {
             var aktivitetBrugerTilmeldt = await _context.AktivitetBrugerTilmeldt.Where(b => b.BrugerID == id).ToListAsync();
 
@@ -127,7 +127,7 @@ namespace MinFritidAPI.Controllers
             return abt;
         }
 
-        private bool AktivitetBrugerTilmeldtExists(int aktivitetID, int brugerID)
+        private bool AktivitetBrugerTilmeldtExists(int aktivitetID, string brugerID)
         {
             return _context.AktivitetBrugerTilmeldt.Any(e => e.AktivitetID == aktivitetID && e.BrugerID == brugerID);
         }

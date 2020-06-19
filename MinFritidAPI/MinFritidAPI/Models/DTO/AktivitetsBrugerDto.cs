@@ -5,7 +5,7 @@ namespace MinFritidAPI.Models
 {
     internal class AktivitetsBrugerDto
     {
-        public int BrugerID { get; set; }
+        /*public int BrugerID { get; set; }*/
         public string BrugerEmail { get; set; }
         public string BrugerFornavn { get; set; }
         public string BrugerEfternavn { get; set; }
