@@ -51,7 +51,7 @@ namespace MinFritidAPI.Controllers
 
             var user = new Bruger
             {
-                UserName = formdata.UserName,
+                UserName = formdata.Email,
                 Email = formdata.Email,
                 Fornavn = formdata.Fornavn,
                 Efternavn = formdata.Efternavn,
