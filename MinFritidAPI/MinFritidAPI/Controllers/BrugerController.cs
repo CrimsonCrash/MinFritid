@@ -85,40 +85,40 @@ namespace MinFritidAPI.Controllers
         // POST: api/Bruger
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
- /*       [HttpPost]
-        public async Task<IActionResult> PostBruger(CreateBrugerDto brugerDto)
-        {
-            if (ModelState.IsValid)
-            {
-                Bruger bruger = new Bruger
-                {
-                    UserName = brugerDto.UserName,
-                    Email = brugerDto.Email,
-                    Fornavn = brugerDto.Fornavn,
-                    Efternavn = brugerDto.Efternavn,
-                    BrugerPostnummer = brugerDto.Postnummer,
-                    Foedselsdato = brugerDto.Foedselsdag,
-                    PhoneNumber = brugerDto.PhoneNumber
-                };
+        /*       [HttpPost]
+               public async Task<IActionResult> PostBruger(CreateBrugerDto brugerDto)
+               {
+                   if (ModelState.IsValid)
+                   {
+                       Bruger bruger = new Bruger
+                       {
+                           UserName = brugerDto.UserName,
+                           Email = brugerDto.Email,
+                           Fornavn = brugerDto.Fornavn,
+                           Efternavn = brugerDto.Efternavn,
+                           BrugerPostnummer = brugerDto.Postnummer,
+                           Foedselsdato = brugerDto.Foedselsdag,
+                           PhoneNumber = brugerDto.PhoneNumber
+                       };
 
-                IdentityResult result = await _userManager.CreateAsync(bruger, brugerDto.Password);
-                return Ok(result);
-            }
-            else
-            {
-                return BadRequest();
-            }
-        }*/
+                       IdentityResult result = await _userManager.CreateAsync(bruger, brugerDto.Password);
+                       return Ok(result);
+                   }
+                   else
+                   {
+                       return BadRequest();
+                   }
+               }
+        */
 
         // DELETE: api/Bruger
         [HttpDelete]
         public IActionResult DeleteBruger(string id)
         {
-            var DeleteBruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.Id == id);
+            var DeleteBruger = _userManager.FindByIdAsync(id).Result;
             if (DeleteBruger != null)
             {
-                _context.Bruger.Remove(DeleteBruger);
-                _context.SaveChanges();
+                _userManager.DeleteAsync(DeleteBruger);
                 return Ok("Removed Bruger");
             }
             else
@@ -127,9 +127,11 @@ namespace MinFritidAPI.Controllers
             }
         }
 
+        [HttpGet("test")]
         private bool BrugerExists(string id)
         {
-            return _context.Bruger.Any(e => e.Id == id);
+            bool BrugerExists = _userManager.FindByIdAsync(id).Result.Id.Any();
+            return _userManager.FindByIdAsync(id).Result.Id.Any();
         }
 
         private IActionResult HttpNotFound()

@@ -32,7 +32,7 @@ export class DataService {
   }
   postBrugers(bruger: Ibruger): Observable<Ibruger>{
     //const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/text'}) };
-    return this.http.post<Ibruger>('http://localhost:5001/api/bruger/', bruger, httpOptions)
+    return this.http.post<Ibruger>('http://localhost:5001/api/account/register', bruger, httpOptions)
   }
 
   // postBrugers(bruger: Ibruger): Observable<Ibruger>{
