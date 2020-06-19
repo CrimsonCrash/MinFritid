@@ -22,7 +22,7 @@ namespace MinFritidAPI.Models
         [Required]
         public string Efternavn { get; set; }
         [Required]
-        public DateTime Foedselsdag { get; set; }
+        public DateTime Foedselsdato { get; set; }
         public int Postnummer { get; set; }
     }
 }

@@ -55,7 +55,7 @@ namespace MinFritidAPI.Controllers
                 Email = formdata.Email,
                 Fornavn = formdata.Fornavn,
                 Efternavn = formdata.Efternavn,
-                Foedselsdato = formdata.Foedselsdag,
+                Foedselsdato = formdata.Foedselsdato,
                 BrugerPostnummer = formdata.Postnummer,
                 SecurityStamp = Guid.NewGuid().ToString()
             };
