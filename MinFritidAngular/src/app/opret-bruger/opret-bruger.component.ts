@@ -24,6 +24,7 @@ export class OpretBrugerComponent implements OnInit {
       Foedselsdato: ['', [Validators.required]],
       PostNummer: ['', [Validators.required]],
       Email: ['', [Validators.required]],
+      Username: ['', [Validators.required]],
       Password: ['', [Validators.required]],
     });
   }

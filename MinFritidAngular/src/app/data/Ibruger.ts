@@ -9,6 +9,7 @@ export class Ibruger {
         _Foedselsdato: Date,
         _PostNummer: number,
         _Email: string,
+        _UserName: string,
         _Password: string,
         _AktivitetBrugerTilmeldte: IaktivitetBrugerTilmeldt[],
         _Verificeret: boolean,
