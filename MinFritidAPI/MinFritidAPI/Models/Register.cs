@@ -15,5 +15,14 @@ namespace MinFritidAPI.Models
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+        [Required]
+        public string UserName { get; set; }
+        [Required]
+        public string Fornavn { get; set; }
+        [Required]
+        public string Efternavn { get; set; }
+        [Required]
+        public DateTime Foedselsdag { get; set; }
+        public int Postnummer { get; set; }
     }
 }
