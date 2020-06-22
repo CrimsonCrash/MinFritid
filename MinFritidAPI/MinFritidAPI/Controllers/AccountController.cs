@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
@@ -49,6 +50,12 @@ namespace MinFritidAPI.Controllers
             // List med fejl i forbindelse med registrering
             List<string> errorList = new List<string>();
 
+            if(!Regex.IsMatch((formdata.Fornavn + formdata.Efternavn), @"^[a-zA-ZæøåÆØÅ]+$")) // Hvis Fornavn eller Efternavn indeholder andet end bogstaver
+            {
+                return BadRequest("Der må kun være bogstaver fra det danske alfabet i fornavn og efternavn.");
+            }
+
+            formdata.Fornavn = formdata.Fornavn.Substring(0,1).ToUpper() + formdata.Fornavn.Substring(1).ToLower(); // TODO: Tag højde for potentielle mellemnavne
             var user = new Bruger
             {
                 UserName = formdata.Email,

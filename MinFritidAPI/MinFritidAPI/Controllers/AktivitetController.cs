@@ -23,18 +23,26 @@ namespace MinFritidAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Aktivitet
+        /*// GET: api/Aktivitet
         [HttpGet]
         public IActionResult GetAllAktiviteter()
         {
             return new JsonResult(_context.Aktivitet);
+        }*/
+
+        // GET: api/Aktivitet
+        [HttpGet]
+        public async Task<IActionResult> GetAktiveAktiviteter()
+        {
+            var aktiviteter = await _context.Aktivitet.Where(a => a.Aktiv == true).ToListAsync();
+            return new JsonResult(aktiviteter);
         }
 
         // GET: api/Aktivitet/5
         [HttpGet("{id}")]
         public IActionResult GetAktivitet(int id)
         {
-            var aktivitet = _context.Aktivitet.Include("AktivitetBrugerTilmeldt").Select(a => new AktivitetDto
+            var aktivitet = _context.Aktivitet.Include("AktivitetBrugerTilmeldt").Include("By").Select(a => new AktivitetDto
             {
                 AktivitetID = a.AktivitetID,
                 Titel = a.Titel,
@@ -46,15 +54,15 @@ namespace MinFritidAPI.Controllers
                 SlutTidspunkt = a.SlutTidspunkt,
                 Postnummer = a.AktivitetPostnummer,
                 Aktiv = a.Aktiv,
-                
-                Deltagere = a.AktivitetBrugerTilmeldt.Select(t => new GetBrugerDto
+                Deltagere = a.AktivitetBrugerTilmeldt.Select(t => new GetBrugerDto // Henter listen af tilmeldte brugere
                 {
-                    /*BrugerID = t.Bruger.Id,*/
+                    BrugerID = t.Bruger.Id,
                     BrugerFornavn = t.Bruger.Fornavn,
                     BrugerEfternavn = t.Bruger.Efternavn,
                     BrugerAktiv = t.Bruger.Aktiv,
+                    BrugerVerificeret = t.Bruger.Verificeret,
                     BrugerFoedselsdag = t.Bruger.Foedselsdato,
-                    BrugerPostnummer = t.Bruger.BrugerPostnummer,
+                    BrugerBynavn = t.Bruger.By.Bynavn,
                     BrugerEmail = t.Bruger.Email
                 })
             }).Where(a => a.AktivitetID == id);
@@ -69,7 +77,7 @@ namespace MinFritidAPI.Controllers
 
         // PUT: api/Aktivitet/5
         [HttpPut("{id}")]
-        public IActionResult PutAktivitet(int Id, Aktivitet aktivitet)
+        public async Task<IActionResult> PutAktivitet(int Id, Aktivitet aktivitet) // TODO: Check rettigheder
         {
             //var PutAktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.ID == Id);
             if (aktivitet == null)
@@ -79,7 +87,7 @@ namespace MinFritidAPI.Controllers
             if (aktivitet.AktivitetID == Id)
             {
                 _context.Aktivitet.Update(aktivitet);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return Ok("Opdateret Aktivitet");
             }
             return BadRequest();
@@ -88,7 +96,7 @@ namespace MinFritidAPI.Controllers
 
         // POST: api/Aktivitet
         [HttpPost]
-        public IActionResult PostAktivitet(Aktivitet aktivitet)
+        public IActionResult PostAktivitet(Aktivitet aktivitet) // TODO: Check om bruger er verificeret
         {
             using (var PostAktivitet = _context)
             {
@@ -107,7 +115,7 @@ namespace MinFritidAPI.Controllers
 
         // DELETE: api/Aktivitet/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteAktivitet(int Id)
+        public IActionResult DeleteAktivitet(int Id) // TODO: Check rettigheder
         {
             var DeleteAktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.AktivitetID == Id);
             if (DeleteAktivitet != null)
@@ -124,7 +132,7 @@ namespace MinFritidAPI.Controllers
 
         // PUT: api/aktivitet/deaktiv/5
         [HttpPut("deaktiv/{id}")]
-        public IActionResult DeaktiverAktivitet(int Id)
+        public IActionResult DeaktiverAktivitet(int Id) // TODO: Check rettigheder
         {
             var aktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.AktivitetID == Id);
             if (aktivitet == null)
@@ -143,7 +151,7 @@ namespace MinFritidAPI.Controllers
 
         // PUT: api/aktivitet/aktiv/5
         [HttpPut("aktiv/{id}")]
-        public IActionResult GenaktiverAktivitet(int Id)
+        public IActionResult GenaktiverAktivitet(int Id) // TODO: Check rettigheder
         {
             var aktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.AktivitetID == Id);
             if (aktivitet == null)

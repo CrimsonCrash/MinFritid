@@ -30,7 +30,17 @@ namespace MinFritidAPI.Controllers
         [HttpGet]
         public IActionResult GetBrugere()
         {
-            var temp = _userManager.Users.Include("By");
+            var temp = _userManager.Users.Include("By").Select(b => new GetBrugerDto
+            {
+                BrugerID = b.Id,
+                BrugerEmail = b.Email,
+                BrugerFornavn = b.Fornavn,
+                BrugerEfternavn = b.Efternavn,
+                BrugerAktiv = b.Aktiv,
+                BrugerVerificeret = b.Verificeret,
+                BrugerFoedselsdag = b.Foedselsdato,
+                BrugerBynavn = b.By.Bynavn
+            });
             return new JsonResult(temp);
         }
 
@@ -52,7 +62,7 @@ namespace MinFritidAPI.Controllers
 
         // PUT: api/Bruger
         [HttpPut]
-        public async Task<IActionResult> PutBruger(Bruger bruger)
+        public async Task<IActionResult> PutBruger(Bruger bruger) // TODO: Flyt til account
         {
             if (bruger == null)
             {
