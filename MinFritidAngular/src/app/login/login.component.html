@@ -1,15 +1,21 @@
 <div class="boxBackground">
-    <div class="tempfix">
-        <label>Email</label>
-        <br>
-        <input class="navContent2" type="text">
-    </div>
-    <br>
-    <div class="tempfix">
-        <label>Password</label>
-        <br>
-        <input class="navContent2" type="text">
-    </div>
-    <br>
-    <button class="navContent2" routerLink="">Log in</button>
+    <form [formGroup]="UserForm" (ngSubmit)="OnSubmit()">
+        <div class="tempfix">
+            <label>Email</label>
+            <br />
+            <input formControlName="Email" class="navContent2" type="email" />
+        </div>
+        <br />
+        <div class="tempfix">
+            <label>Password</label>
+            <br />
+            <input
+                formControlName="Password"
+                class="navContent2"
+                type="password"
+            />
+        </div>
+        <br />
+        <button class="navContent2" type="submit">Login</button>
+    </form>
 </div>

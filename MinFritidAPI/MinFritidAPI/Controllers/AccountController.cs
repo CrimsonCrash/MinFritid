@@ -123,8 +123,6 @@ namespace MinFritidAPI.Controllers
             // Bruger bliver logget ind
             if (result.Succeeded)
             {
-                // Conf Email
-
                 // JWT logik
                 var tokenHandler = new JwtSecurityTokenHandler();
 
