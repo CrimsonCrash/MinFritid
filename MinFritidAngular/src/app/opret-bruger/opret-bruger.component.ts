@@ -33,6 +33,7 @@ export class OpretBrugerComponent implements OnInit {
             Email: ["", [Validators.required]],
             Username: ["NeededButNotUsed"],
             Password: ["", [Validators.required]],
+            ConfirmPassword: ["", [Validators.required]],
         });
     }
     OnSubmit() {
