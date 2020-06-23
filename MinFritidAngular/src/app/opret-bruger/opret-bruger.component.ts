@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../data.service';
-import { Ibruger } from '../data/Ibruger';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from "@angular/core";
+import { DataService } from "../data.service";
+import { Ibruger } from "../data/Ibruger";
+import { Observable } from "rxjs";
 import {
     FormBuilder,
     Validators,
     FormGroup,
     FormControl,
-} from '@angular/forms';
+} from "@angular/forms";
 
 @Component({
-    selector: 'app-opret-bruger',
-    templateUrl: './opret-bruger.component.html',
-    styleUrls: ['./opret-bruger.component.css'],
+    selector: "app-opret-bruger",
+    templateUrl: "./opret-bruger.component.html",
+    styleUrls: ["./opret-bruger.component.css"],
 })
 export class OpretBrugerComponent implements OnInit {
     data = false;
@@ -26,13 +26,13 @@ export class OpretBrugerComponent implements OnInit {
 
     ngOnInit(): void {
         this.UserForm = this.formbuilder.group({
-            Fornavn: ['', [Validators.required]],
-            Efternavn: ['', [Validators.required]],
-            Foedselsdato: ['', [Validators.required]],
-            PostNummer: ['', [Validators.required]],
-            Email: ['', [Validators.required]],
-            Username: ['NeededButNotUsed'],
-            Password: ['', [Validators.required]],
+            Fornavn: ["", [Validators.required]],
+            Efternavn: ["", [Validators.required]],
+            Foedselsdato: ["", [Validators.required]],
+            PostNummer: ["", [Validators.required]],
+            Email: ["", [Validators.required]],
+            Username: ["NeededButNotUsed"],
+            Password: ["", [Validators.required]],
         });
     }
     OnSubmit() {
@@ -46,7 +46,7 @@ export class OpretBrugerComponent implements OnInit {
     CreateUser(bruger: Ibruger) {
         this.dataService.createBruger(bruger).subscribe(() => {
             this.data = true;
-            this.massage = 'Bruger oprettet.';
+            this.massage = "Bruger oprettet.";
             this.UserForm.reset();
         });
     }
