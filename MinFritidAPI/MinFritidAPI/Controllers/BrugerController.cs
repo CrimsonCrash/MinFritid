@@ -118,13 +118,13 @@ namespace MinFritidAPI.Controllers
         */
 
         // DELETE: api/Bruger
-        [HttpDelete]
-        public IActionResult DeleteBruger(string id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBruger(string id)
         {
-            var DeleteBruger = _userManager.FindByIdAsync(id).Result;
+            var DeleteBruger = await _userManager.FindByIdAsync(id);
             if (DeleteBruger != null)
             {
-                _userManager.DeleteAsync(DeleteBruger);
+                await _userManager.DeleteAsync(DeleteBruger);
                 return Ok("Removed Bruger");
             }
             else
@@ -145,54 +145,37 @@ namespace MinFritidAPI.Controllers
             throw new NotImplementedException();
         }
 
-        // PUT: api/bruger/aktiv
-        [HttpPut("aktiv")]
-        public async Task<IActionResult> AktiverBruger(string Id)
+        // PUT: api/bruger/aktiver
+        [HttpPut("aktiver")]
+        public async Task<IActionResult> AktiverBruger(VerificerAktiverBrugerDto aktiverBruger)
         {
-            var bruger = _userManager.FindByIdAsync(Id).Result;
+            var bruger = await _userManager.FindByIdAsync(aktiverBruger.Id);
             if (bruger == null)
             {
-                return NotFound("Not found");
+                return NotFound("Brugeren blev ikke fundet");
             }
             else
             {
-                bruger.Aktiv = true;
-                await _userManager.UpdateAsync(bruger);
-                return Ok("Updated Bruger Aktiv");
+                bruger.Aktiv = aktiverBruger.NyeStatus;
+                var result = await _userManager.UpdateAsync(bruger);
+                return Ok(result);
             }
         }
 
-        // PUT: api/bruger/deaktiv
-        [HttpPut("deaktiv")]
-        public async Task<IActionResult> DeaktiverBruger(string Id)
+        // PUT: api/bruger/verificer
+        [HttpPut("verificer")]
+        public async Task<IActionResult> VerificerBruger(VerificerAktiverBrugerDto verificerBruger)
         {
-            var bruger = _userManager.FindByIdAsync(Id).Result;
+            var bruger = await _userManager.FindByIdAsync(verificerBruger.Id);
             if (bruger == null)
             {
-                return NotFound("Not found");
+                return NotFound("Brugeren blev ikke fundet");
             }
             else
             {
-                bruger.Aktiv = false;
-                await _userManager.UpdateAsync(bruger);
-                return Ok("Updated Bruger Aktiv");
-            }
-        }
-
-        // PUT: api/bruger/verify
-        [HttpPut("verify")]
-        public async Task<IActionResult> VerificerBruger(string Id, bool nyeStatus)
-        {
-            var bruger = _userManager.FindByIdAsync(Id).Result;
-            if (bruger == null)
-            {
-                return NotFound("Not found");
-            }
-            else
-            {
-                bruger.Verificeret = nyeStatus;
-                await _userManager.UpdateAsync(bruger);
-                return Ok("Updated Bruger Aktiv");
+                bruger.Verificeret = verificerBruger.NyeStatus;
+                var result = await _userManager.UpdateAsync(bruger);
+                return Ok(result);
             }
         }
     }
