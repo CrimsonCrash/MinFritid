@@ -62,34 +62,30 @@ namespace MinFritidAPI.Controllers
 
         // PUT: api/Bruger
         [HttpPut]
-        public async Task<IActionResult> PutBruger(Bruger bruger) // TODO: Flyt til account
+        public async Task<IActionResult> PutBruger([FromBody]UpdateBrugerDto bruger) // TODO: Flyt til account
         {
             if (bruger == null)
             {
                 return NotFound("Not found");
             }
-            if (bruger.BrugerPostnummer != null) // TODO: Look into this
+
+            var Postnummer = _context.By.Any(p => p.Postnummer == bruger.BrugerPostnummer);
+            var user = await _userManager.FindByIdAsync(bruger.Id);
+
+            user.Fornavn = bruger.Fornavn;
+            user.Efternavn = bruger.Efternavn;
+            if (Postnummer == true)
             {
-                var Postnummer = _context.By.Any(p => p.Postnummer == bruger.BrugerPostnummer);
+                user.BrugerPostnummer = bruger.BrugerPostnummer;
+            }
+            user.Foedselsdato = bruger.Foedselsdato;
+            user.Email = bruger.Email;
+            user.UserName = bruger.Email;
+            user.PhoneNumber = bruger.PhoneNumber;
+            user.SecurityStamp = bruger.SecurityStamp;
                 
-                if (Postnummer == true)
-                {
-                    await _userManager.UpdateAsync(bruger);
-                    return Ok("Updated Bruger");
-                }
-            }
-            /*var By = _context.By.FirstOrDefault(b => b.Postnummer == Id);
-            if (bruger == null)
-            {
-                return NotFound("Not found");
-            }
-            if (bruger.BrugerID == Id)
-            {
-                _context.Bruger.Update(bruger);
-                _context.SaveChanges();
-                return Ok("Updated Bruger");
-            }*/
-            return BadRequest();
+            var result = await _userManager.UpdateAsync(user);
+            return Ok(result);
         }
 
         // POST: api/Bruger
