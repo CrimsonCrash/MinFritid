@@ -1,5 +1,5 @@
 <div class="boxBackground">
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
         <div class="tempfix">
             <label>Email</label>
             <br />
