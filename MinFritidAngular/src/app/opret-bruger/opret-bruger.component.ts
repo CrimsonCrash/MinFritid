@@ -45,7 +45,7 @@ export class OpretBrugerComponent implements OnInit {
         //this.CreateUser(user);
     }
     CreateUser(bruger: Ibruger) {
-        this.dataService.createBruger(bruger).subscribe(() => {
+        this.dataService.postBrugers(bruger).subscribe(() => {
             this.data = true;
             this.massage = "Bruger oprettet.";
             this.UserForm.reset();

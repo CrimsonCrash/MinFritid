@@ -75,27 +75,26 @@ namespace MinFritidAPI.Controllers
             return new JsonResult(aktivitet);
         }
 
-        // PUT: api/Aktivitet/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAktivitet(int Id, Aktivitet aktivitet) // TODO: Check rettigheder
+        // PUT: api/Aktivitet
+        [HttpPut]
+        public async Task<IActionResult> PutAktivitet(Aktivitet aktivitet) // TODO: Check rettigheder & brug en Dto i stedet for Aktivitet
         {
             //var PutAktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.ID == Id);
             if (aktivitet == null)
             {
                 return NotFound("Ikke fundet");
             }
-            if (aktivitet.AktivitetID == Id)
+            else
             {
                 _context.Aktivitet.Update(aktivitet);
                 await _context.SaveChangesAsync();
                 return Ok("Opdateret Aktivitet");
             }
-            return BadRequest();
-            
+            //return BadRequest();
         }
 
         // POST: api/Aktivitet
-        [HttpPost]
+        [HttpPost]  // TODO tilmeld opretteren og sæt vedkommende som vært
         public IActionResult PostAktivitet(Aktivitet aktivitet) // TODO: Check om bruger er verificeret
         {
             using (var PostAktivitet = _context)
@@ -144,7 +143,7 @@ namespace MinFritidAPI.Controllers
                 aktivitet.Aktiv = false;
                 _context.Aktivitet.Update(aktivitet);
                 _context.SaveChanges();
-                return Ok("Updated Aktivitet Deaktiveret");
+                return Ok("Aktivitet sat til ikke aktiv");
             }
             return BadRequest();
         }
@@ -163,7 +162,7 @@ namespace MinFritidAPI.Controllers
                 aktivitet.Aktiv = true;
                 _context.Aktivitet.Update(aktivitet);
                 _context.SaveChanges();
-                return Ok("Updated Aktivitet Deaktiveret");
+                return Ok("Aktivitet sat til aktiv");
             }
             return BadRequest("Der opstod en fejl. Prøv at check om aktiviteten allerede er aktiv.");
         }
