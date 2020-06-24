@@ -1,48 +1,66 @@
-
 <div class="boxBackground">
     <form [formGroup]="UserForm" (ngSubmit)="OnSubmit()">
         <div class="tempfix">
             <label>Fornavn</label>
-            <br>
-            <input class="navContent2" formControlName="Fornavn" type="text">
+            <br />
+            <input class="navContent2" formControlName="Fornavn" type="text" />
         </div>
-        <br>
+        <br />
         <div class="tempfix">
             <label>Efternavn</label>
-            <br>
-            <input class="navContent2" formControlName="Efternavn" type="text">
+            <br />
+            <input
+                class="navContent2"
+                formControlName="Efternavn"
+                type="text"
+            />
         </div>
-        <br>
+        <br />
         <div class="tempfix">
             <label>Fødselsdato</label>
-            <br>
-            <input type="date" formControlName="Foedselsdato">
+            <br />
+            <input type="date" formControlName="Foedselsdato" />
         </div>
-        <br>
+        <br />
         <div class="tempfix">
             <label>Postnummer</label>
-            <br>
-            <input formControlName="PostNummer" type="number" pattern="[0-9]{4}" min="1000" max="9990" title="4 cifre postnummer" />
+            <br />
+            <input
+                formControlName="PostNummer"
+                type="number"
+                pattern="[0-9]{4}"
+                min="1000"
+                max="9990"
+                title="4 cifre postnummer"
+            />
         </div>
-        <br>
+        <br />
         <div class="tempfix">
             <label>Email</label>
-            <br>
-            <input formControlName="Email" class="navContent2" type="text">
+            <br />
+            <input formControlName="Email" class="navContent2" type="email" />
         </div>
-        <br>
+        <br />
         <div class="tempfix">
             <label>Password</label>
-            <br>
-            <input formControlName="Password" class="navContent2" type="text">
+            <br />
+            <input
+                formControlName="Password"
+                class="navContent2"
+                type="password"
+            />
         </div>
-        <br>
+        <br />
         <div class="tempfix">
             <label>Gentag Password</label>
-            <br>
-            <input type="text">
+            <br />
+            <input
+                formControlName="ConfirmPassword"
+                class="navContent2"
+                type="password"
+            />
         </div>
-        <br>
-        <button class="navContent2" type="submit">Log in</button>
+        <br />
+        <button class="navContent2" type="submit">Opret Bruger</button>
     </form>
 </div>

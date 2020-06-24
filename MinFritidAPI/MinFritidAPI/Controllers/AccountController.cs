@@ -56,6 +56,7 @@ namespace MinFritidAPI.Controllers
             }
 
             formdata.Fornavn = formdata.Fornavn.Substring(0,1).ToUpper() + formdata.Fornavn.Substring(1).ToLower(); // TODO: Tag højde for potentielle mellemnavne
+            formdata.Efternavn = formdata.Efternavn.Substring(0, 1).ToUpper() + formdata.Efternavn.Substring(1).ToLower();
             var user = new Bruger
             {
                 UserName = formdata.Email,
@@ -123,8 +124,6 @@ namespace MinFritidAPI.Controllers
             // Bruger bliver logget ind
             if (result.Succeeded)
             {
-                // Conf Email
-
                 // JWT logik
                 var tokenHandler = new JwtSecurityTokenHandler();
 

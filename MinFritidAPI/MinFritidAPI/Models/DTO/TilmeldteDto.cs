@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace MinFritidAPI.Models
 {
-    internal class TilmeldteDto
+    public class TilmeldteDto
     {
-        public int TilmeldtBrugerID { get; set; }
+        public string BrugerID { get; set; }
 
-        public int TilmeldtAktivitetID { get; set; }
+        public int AktivitetID { get; set; }
     }
 }

@@ -7,13 +7,13 @@ import { Iaktivitet } from './data/Iaktivitet';
 
 
 const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
+    headers: new HttpHeaders({
+        "Content-Type": "application/json",
+    }),
 };
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: "root",
 })
 export class DataService {
   [x: string]: any;
