@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Ibruger } from './data/Ibruger';
 import { Iaktivitet } from './data/Iaktivitet';
 
@@ -33,6 +34,19 @@ export class DataService {
   postBrugers(bruger: Ibruger): Observable<Ibruger>{
     //const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/text'}) };
     return this.http.post<Ibruger>('http://localhost:5001/api/account/register', bruger, httpOptions)
+  }
+  login(email: string, password: string) {
+    return this.http.post<any>('http://localhost:5001/api/account/register', { email, password})
+    .pipe(map(user => {
+      if(user && user.token) {
+        localStorage.setItem('TokenInfo', JSON.stringify(user));
+      }
+      return user;
+    }));
+  }
+
+  logout() {
+    localStorage.removeItem('TokenInfo');
   }
 
   // postBrugers(bruger: Ibruger): Observable<Ibruger>{
