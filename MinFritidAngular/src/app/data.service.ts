@@ -36,7 +36,7 @@ export class DataService {
     return this.http.post<Ibruger>('http://localhost:5001/api/account/register', bruger, httpOptions)
   }
   login(email: string, password: string) {
-    return this.http.post<any>('http://localhost:5001/api/account/register', { email, password})
+    return this.http.post<any>('http://localhost:5001/api/account/login/', { email, password})
     .pipe(map(user => {
       if(user && user.token) {
         localStorage.setItem('TokenInfo', JSON.stringify(user));
