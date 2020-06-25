@@ -1,13 +1,11 @@
-import { Iaktivitet } from './Iaktivitet';
-import { Ibruger } from './Ibruger';
+import { Iaktivitet } from "./Iaktivitet";
+import { Ibruger } from "./Ibruger";
 
 export class IaktivitetBrugerTilmeldt {
-    constructor
-    (
+    constructor(
         _AktivitetID: number,
         _Aktivitet: Iaktivitet,
         _BrugerID: number,
         _Bruger: Ibruger
-    )
-    {}
+    ) {}
 }

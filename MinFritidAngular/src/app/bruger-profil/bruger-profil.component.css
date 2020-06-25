@@ -1,4 +1,4 @@
-.person{
+.person {
     margin-left: auto;
     margin-right: auto;
     margin-top: 2%;
@@ -6,24 +6,21 @@
     background-color: rgb(183, 196, 209);
     width: 200px;
     height: auto;
-    
 }
-.textlbl{
+.textlbl {
     display: block;
     width: auto;
     text-align: center;
-    
 }
-.person2{
+.person2 {
     text-align: center;
     margin-top: 2%;
 }
-.profileimg{
+.profileimg {
     height: 200px;
     width: 200px;
-    
 }
-.btnclick{
+.btnclick {
     display: block;
     margin-left: auto;
     margin-right: auto;

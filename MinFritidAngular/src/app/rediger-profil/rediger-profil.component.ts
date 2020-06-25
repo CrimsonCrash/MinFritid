@@ -1,29 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-rediger-profil',
-  templateUrl: './rediger-profil.component.html',
-  styleUrls: ['./rediger-profil.component.css']
+    selector: "app-rediger-profil",
+    templateUrl: "./rediger-profil.component.html",
+    styleUrls: ["./rediger-profil.component.css"],
 })
 export class RedigerProfilComponent implements OnInit {
-  url = "";
-  constructor() { }
+    url = "";
+    constructor() {}
 
-  ngOnInit(): void {
-  }
-  // vælg en billed fra drevet
-  onSelectImg(event) {
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
+    ngOnInit(): void {}
+    // vælg en billed fra drevet
+    onSelectImg(event) {
+        if (event.target.files && event.target.files[0]) {
+            var reader = new FileReader();
 
+            reader.readAsDataURL(event.target.files[0]);
 
-      reader.readAsDataURL(event.target.files[0]);
-
-      reader.onload = (event) => {
-
-        this.url = event.target.result as string;
-      }
+            reader.onload = (event) => {
+                this.url = event.target.result as string;
+            };
+        }
     }
-  }
-
 }

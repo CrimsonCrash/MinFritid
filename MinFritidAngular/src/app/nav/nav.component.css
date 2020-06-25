@@ -1,28 +1,25 @@
-#navbar{
+#navbar {
     background-color: #ffffff;
     opacity: 0.9;
     height: 40px;
     min-height: 2%;
 }
-#navContent{
+#navContent {
     background-color: #ffffff;
     text-align: center;
-    
 }
-.navContent2{
+.navContent2 {
     margin: 0px 50px 0px 0px;
-    
 }
-#menuimg{
+#menuimg {
     width: 35px;
     height: 40px;
     float: left;
 }
-.submenu{
+.submenu {
     display: none;
-
 }
-#menuimg:hover + .submenu{
+#menuimg:hover + .submenu {
     background-color: darkorange;
     display: block;
     text-align: left;
@@ -30,7 +27,7 @@
     margin-top: 40px;
     padding: 1rem;
 }
-.submenu:hover{
+.submenu:hover {
     display: block;
     text-align: left;
     float: none;
@@ -39,7 +36,3 @@
     margin-top: 40px;
     padding: 1rem;
 }
-
- 
-
-

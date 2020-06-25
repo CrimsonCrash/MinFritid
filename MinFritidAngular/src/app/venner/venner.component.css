@@ -1,12 +1,12 @@
-.name{
+.name {
     display: block;
     float: left;
 }
-.choice{
+.choice {
     display: block;
     float: right;
     margin: 0px 0px 0px 10px;
 }
-.friends{
+.friends {
     display: block;
 }

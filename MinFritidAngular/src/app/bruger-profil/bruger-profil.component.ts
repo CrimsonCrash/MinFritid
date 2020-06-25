@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-bruger-profil',
-  templateUrl: './bruger-profil.component.html',
-  styleUrls: ['./bruger-profil.component.css']
+    selector: "app-bruger-profil",
+    templateUrl: "./bruger-profil.component.html",
+    styleUrls: ["./bruger-profil.component.css"],
 })
 export class BrugerProfilComponent implements OnInit {
+    constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+    ngOnInit(): void {}
 }

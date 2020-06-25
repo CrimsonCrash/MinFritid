@@ -1,31 +1,30 @@
-.person2{
+.person2 {
     text-align: center;
     margin-top: 2%;
 }
-.profileimg{
+.profileimg {
     height: 200px;
     width: 200px;
-    
 }
-.btnclick{
+.btnclick {
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 2%;
 }
-.time{
+.time {
     margin: 0px 10px 0px 10px;
     width: 60px;
     background-color: #ffc266;
 }
-.message{
+.message {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
-.address{
+.address {
     width: 250px;
 }
-.readonly{
+.readonly {
     background-color: #ffc266;
 }

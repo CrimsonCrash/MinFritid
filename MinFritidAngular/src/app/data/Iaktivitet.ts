@@ -1,8 +1,7 @@
-import { IaktivitetBrugerTilmeldt } from './IaktivitetBrugerTilmeldt';
+import { IaktivitetBrugerTilmeldt } from "./IaktivitetBrugerTilmeldt";
 
 export class Iaktivitet {
-    constructor
-    (
+    constructor(
         _AktivitetID: number,
         _BrugerID: number,
         _Titel: string,
@@ -15,6 +14,5 @@ export class Iaktivitet {
         _PostNummer: number,
         _AktivitetBrugerTilmeldte: IaktivitetBrugerTilmeldt[],
         _Aktiv: boolean
-    )
-    {}
+    ) {}
 }
