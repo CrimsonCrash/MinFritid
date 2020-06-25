@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MinFritidAPI.Models
 {
-    internal class AktivitetDto
+    internal class GetAktivitetDto
     {
         public int AktivitetID { get; set; }
         public string Titel { get; set; }
@@ -13,7 +13,7 @@ namespace MinFritidAPI.Models
         public int MaxDeltagere { get; set; }
         public DateTime StartTidspunkt { get; set; }
         public DateTime SlutTidspunkt { get; set; }
-        public int? Postnummer { get; set; }
+        public string Bynavn { get; set; }
         public bool Aktiv { get; set; }
         public IEnumerable<GetBrugerDto> Deltagere { get; set; }
     }

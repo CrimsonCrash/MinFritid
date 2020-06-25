@@ -34,15 +34,9 @@ namespace MinFritidAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAktiveAktiviteter()
         {
-            var aktiviteter = await _context.Aktivitet.Where(a => a.Aktiv == true).ToListAsync();
-            return new JsonResult(aktiviteter);
-        }
-
-        // GET: api/Aktivitet/5
-        [HttpGet("{id}")]
-        public IActionResult GetAktivitet(int id)
-        {
-            var aktivitet = _context.Aktivitet.Include("AktivitetBrugerTilmeldt").Include("By").Select(a => new AktivitetDto
+            /*var aktiviteter = await _context.Aktivitet.Where(a => a.Aktiv == true).ToListAsync();
+            return new JsonResult(aktiviteter);*/
+            var temp = await _context.Aktivitet.Select(a => new GetAktivitetDto
             {
                 AktivitetID = a.AktivitetID,
                 Titel = a.Titel,
@@ -52,7 +46,27 @@ namespace MinFritidAPI.Controllers
                 MaxDeltagere = a.MaxDeltagere,
                 StartTidspunkt = a.StartTidspunkt,
                 SlutTidspunkt = a.SlutTidspunkt,
-                Postnummer = a.AktivitetPostnummer,
+                Bynavn = a.By.Bynavn,
+                Aktiv = a.Aktiv
+            }).ToListAsync();
+            return new JsonResult(temp);
+        }
+
+        // GET: api/Aktivitet/5
+        [HttpGet("{id}")]
+        public IActionResult GetAktivitet(int id)
+        {
+            var aktivitet = _context.Aktivitet.Include("AktivitetBrugerTilmeldt").Include("By").Select(a => new GetAktivitetDto
+            {
+                //AktivitetID = a.AktivitetID,
+                Titel = a.Titel,
+                Beskrivelse = a.Beskrivelse,
+                Huskeliste = a.Huskeliste,
+                Pris = a.Pris,
+                MaxDeltagere = a.MaxDeltagere,
+                StartTidspunkt = a.StartTidspunkt,
+                SlutTidspunkt = a.SlutTidspunkt,
+                Bynavn = a.By.Bynavn,
                 Aktiv = a.Aktiv,
                 Deltagere = a.AktivitetBrugerTilmeldt.Select(t => new GetBrugerDto // Henter listen af tilmeldte brugere
                 {
@@ -95,13 +109,15 @@ namespace MinFritidAPI.Controllers
 
         // POST: api/Aktivitet
         [HttpPost]  // TODO tilmeld opretteren og sæt vedkommende som vært
-        public IActionResult PostAktivitet(Aktivitet aktivitet) // TODO: Check om bruger er verificeret
+        public IActionResult PostAktivitet(PostAktivitetDto aktivitet) // TODO: Check om bruger er verificeret
         {
             using (var PostAktivitet = _context)
             {
                 if (PostAktivitet != null)
                 {
-                    _context.Aktivitet.Add(aktivitet);
+                    var Aktivitet = new Aktivitet { Beskrivelse = aktivitet.Beskrivelse };
+                    _context.Aktivitet.Add(Aktivitet);
+                    //_context.AktivitetBrugerTilmeldt.Add();
                     _context.SaveChanges();
                     return Ok("Tilfoejet Aktivitet");
                 }
