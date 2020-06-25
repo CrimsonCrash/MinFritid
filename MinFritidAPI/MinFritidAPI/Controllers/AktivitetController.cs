@@ -34,7 +34,22 @@ namespace MinFritidAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAktiveAktiviteter()
         {
-            var aktiviteter = await _context.Aktivitet.Where(a => a.Aktiv == true).ToListAsync();
+            var aktiviteter = await _context.Aktivitet.Include("By").Where(a => a.Aktiv == true).ToListAsync();
+            //return new JsonResult(aktiviteter);
+
+/*            var aktiviteter = await _context.Aktivitet.Include("By").Select(a => new GetAktivitetDto
+            {
+                AktivitetID = a.AktivitetID,
+                Titel = a.Titel,
+                Beskrivelse = a.Beskrivelse,
+                Huskeliste = a.Huskeliste,
+                Pris = a.Pris,
+                MaxDeltagere = a.MaxDeltagere,
+                StartTidspunkt = a.StartTidspunkt,
+                SlutTidspunkt = a.SlutTidspunkt,
+                AktivitetBynavn = a.By.Bynavn
+            }).Where(a => a.Aktiv == true).ToListAsync();*/
+
             return new JsonResult(aktiviteter);
         }
 
@@ -103,11 +118,11 @@ namespace MinFritidAPI.Controllers
                 {
                     _context.Aktivitet.Add(aktivitet);
                     _context.SaveChanges();
-                    return Ok("Tilfoejet Aktivitet");
+                    return Ok(new { status = 1, message = "Aktivitet oprettet" });
                 }
                 else
                 {
-                    return NotFound("Ikke Tilfoejet");
+                    return BadRequest(new { status = 0, message = "FEJL: Aktivitet ikke oprettet" });
                 }
             }
         }

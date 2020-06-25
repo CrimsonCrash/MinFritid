@@ -30,7 +30,7 @@ namespace MinFritidAPI.Controllers
         [HttpGet]
         public IActionResult GetBrugere()
         {
-            var temp = _userManager.Users.Include("By").Select(b => new GetBrugerDto
+            var users = _userManager.Users.Include("By").Select(b => new GetBrugerDto
             {
                 BrugerID = b.Id,
                 BrugerEmail = b.Email,
@@ -41,7 +41,8 @@ namespace MinFritidAPI.Controllers
                 BrugerFoedselsdag = b.Foedselsdato,
                 BrugerBynavn = b.By.Bynavn
             });
-            return new JsonResult(temp);
+
+            return new JsonResult(users);
         }
 
         // GET: api/Bruger/5
