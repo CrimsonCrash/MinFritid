@@ -30,7 +30,7 @@ export class OpretBrugerComponent implements OnInit {
             Efternavn: ["", [Validators.required]],
             Foedselsdato: ["", [Validators.required]],
             PostNummer: ["", [Validators.required]],
-            Email: ["", [Validators.required]],
+            Email: ["", [Validators.email, Validators.required]],
             Username: ["NeededButNotUsed"],
             Password: ["", [Validators.required]],
             ConfirmPassword: ["", [Validators.required]],

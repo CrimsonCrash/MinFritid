@@ -119,11 +119,11 @@ namespace MinFritidAPI.Controllers
                     _context.Aktivitet.Add(Aktivitet);
                     //_context.AktivitetBrugerTilmeldt.Add();
                     _context.SaveChanges();
-                    return Ok("Tilfoejet Aktivitet");
+                    return Ok(new { status = 1, message = "Aktivitet oprettet" });
                 }
                 else
                 {
-                    return NotFound("Ikke Tilfoejet");
+                    return BadRequest(new { status = 0, message = "FEJL: Aktivitet ikke oprettet" });
                 }
             }
         }
