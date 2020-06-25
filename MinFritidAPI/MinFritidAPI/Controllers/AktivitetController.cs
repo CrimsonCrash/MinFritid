@@ -58,7 +58,7 @@ namespace MinFritidAPI.Controllers
         {
             var aktivitet = _context.Aktivitet.Include("AktivitetBrugerTilmeldt").Include("By").Select(a => new GetAktivitetDto
             {
-                //AktivitetID = a.AktivitetID,
+                AktivitetID = a.AktivitetID,
                 Titel = a.Titel,
                 Beskrivelse = a.Beskrivelse,
                 Huskeliste = a.Huskeliste,
