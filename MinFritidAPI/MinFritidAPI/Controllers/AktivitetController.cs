@@ -34,8 +34,6 @@ namespace MinFritidAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAktiveAktiviteter()
         {
-            /*var aktiviteter = await _context.Aktivitet.Where(a => a.Aktiv == true).ToListAsync();
-            return new JsonResult(aktiviteter);*/
             var temp = await _context.Aktivitet.Select(a => new GetAktivitetDto
             {
                 AktivitetID = a.AktivitetID,
@@ -47,16 +45,34 @@ namespace MinFritidAPI.Controllers
                 StartTidspunkt = a.StartTidspunkt,
                 SlutTidspunkt = a.SlutTidspunkt,
                 Bynavn = a.By.Bynavn,
-                Aktiv = a.Aktiv
-            }).ToListAsync();
+                Aktiv = a.Aktiv,
+            }).Where(a => a.Aktiv == true).ToListAsync();
+
+            if (temp == null)
+            {
+                return NotFound("Der er ingen aktiviteter");
+            }
+            foreach (var item in temp)
+            {
+                item.PladserTilbage = NumberOfSpotsLeft(item.AktivitetID);
+            }
             return new JsonResult(temp);
+        }
+        public int NumberOfSpotsLeft(int aktivitetID) // Returnere antallet af ledige pladser
+        {
+            int aktivitetBrugerTilmeldt = _context.AktivitetBrugerTilmeldt.Where(a => a.AktivitetID == aktivitetID).ToList().Count();
+            int maxAntalDeltagere = _context.Aktivitet.Find(aktivitetID).MaxDeltagere;
+
+            int numberOfSpotsLeft = maxAntalDeltagere - aktivitetBrugerTilmeldt;
+
+            return numberOfSpotsLeft;
         }
 
         // GET: api/Aktivitet/5
         [HttpGet("{id}")]
-        public IActionResult GetAktivitet(int id)
+        public async Task<IActionResult> GetAktivitet(int id)
         {
-            var aktivitet = _context.Aktivitet.Include("AktivitetBrugerTilmeldt").Include("By").Select(a => new GetAktivitetDto
+            var aktivitet = await _context.Aktivitet.Select(a => new GetAktivitetDto
             {
                 AktivitetID = a.AktivitetID,
                 Titel = a.Titel,
@@ -79,13 +95,14 @@ namespace MinFritidAPI.Controllers
                     BrugerBynavn = t.Bruger.By.Bynavn,
                     BrugerEmail = t.Bruger.Email
                 })
-            }).Where(a => a.AktivitetID == id);
-
+            }).SingleOrDefaultAsync(a => a.AktivitetID == id);
+            
             if (aktivitet == null)
             {
                 return NotFound();
             }
-            
+
+            aktivitet.PladserTilbage = NumberOfSpotsLeft(aktivitet.AktivitetID);
             return new JsonResult(aktivitet);
         }
 

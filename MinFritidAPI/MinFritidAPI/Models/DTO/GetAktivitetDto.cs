@@ -11,6 +11,7 @@ namespace MinFritidAPI.Models
         public string Huskeliste { get; set; }
         public int Pris { get; set; }
         public int MaxDeltagere { get; set; }
+        public int PladserTilbage { get; set; }
         public DateTime StartTidspunkt { get; set; }
         public DateTime SlutTidspunkt { get; set; }
         public string Bynavn { get; set; }

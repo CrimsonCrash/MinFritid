@@ -64,7 +64,7 @@ namespace MinFritidAPI.Controllers
         }
 
         // PUT: api/AktivitetBrugerTilmeldt
-        [HttpPut]
+        [HttpPut] // TODO: Denne her PUT skal bruges til at give deltagere en ny Prioritet. Den skal dog ikke være i stand til at give eller ændre hvem der er Vært.
         public async Task<ActionResult<AktivitetBrugerTilmeldt>> PutAktivitetBrugerTilmeldt(AktivitetBrugerTilmeldt aktivitetBrugerTilmeldt)
         {
             var abt = await _context.AktivitetBrugerTilmeldt.FindAsync(aktivitetBrugerTilmeldt.AktivitetID, aktivitetBrugerTilmeldt.BrugerID);
@@ -107,7 +107,11 @@ namespace MinFritidAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<AktivitetBrugerTilmeldt>> PostAktivitetBrugerTilmeldt(TilmeldteDto Dto)
         {
-            if (MaxParticipantsReached(Dto.AktivitetID) == false)
+            if (AktivitetBrugerTilmeldtExists(Dto.AktivitetID, Dto.BrugerID))
+            {
+                return BadRequest("Brugeren er allerede tilmeldt.");
+            }
+            if (NumberOfSpotsLeft(Dto.AktivitetID) > 0)
             {
                 AktivitetBrugerTilmeldt aktivitetBrugerTilmeldt = new AktivitetBrugerTilmeldt
                 {
@@ -115,22 +119,8 @@ namespace MinFritidAPI.Controllers
                     BrugerID = Dto.BrugerID
                 };
 
-                _context.AktivitetBrugerTilmeldt.Add(aktivitetBrugerTilmeldt);
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateException)
-                {
-                    if (AktivitetBrugerTilmeldtExists(aktivitetBrugerTilmeldt.AktivitetID, aktivitetBrugerTilmeldt.BrugerID))
-                    {
-                        return Conflict("Brugeren er allerede på listen.");
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _context.AktivitetBrugerTilmeldt.AddAsync(aktivitetBrugerTilmeldt);
+                await _context.SaveChangesAsync();
 
                 return CreatedAtAction("GetAktivitetBrugerTilmeldt", new { id = aktivitetBrugerTilmeldt.AktivitetID }, Dto);
             }
@@ -160,17 +150,14 @@ namespace MinFritidAPI.Controllers
         {
             return _context.AktivitetBrugerTilmeldt.Any(e => e.AktivitetID == aktivitetID && e.BrugerID == brugerID);
         }
-        public bool MaxParticipantsReached(int aktivitetID) // Hvis aktiviteten er fyldt return true, else return false.
+        public int NumberOfSpotsLeft(int aktivitetID) // Returnere antallet af ledige pladser
         {
-            var aktivitetBrugerTilmeldt = _context.AktivitetBrugerTilmeldt.Where(a => a.AktivitetID == aktivitetID).ToList();
-            int MaxAntalDeltagere = _context.Aktivitet.Find(aktivitetID).MaxDeltagere;
-            
-            if (aktivitetBrugerTilmeldt.Count() >= MaxAntalDeltagere)
-            {
-                return true;
-            }
+            int aktivitetBrugerTilmeldt = _context.AktivitetBrugerTilmeldt.Where(a => a.AktivitetID == aktivitetID).ToList().Count();
+            int maxAntalDeltagere = _context.Aktivitet.Find(aktivitetID).MaxDeltagere;
 
-            return false;
+            int numberOfSpotsLeft = maxAntalDeltagere - aktivitetBrugerTilmeldt;
+
+            return numberOfSpotsLeft;
         }
     }
 }
