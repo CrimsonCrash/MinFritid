@@ -132,16 +132,29 @@ namespace MinFritidAPI.Controllers
             {
                 if (PostAktivitet != null)
                 {
-                    var Aktivitet = new Aktivitet { Beskrivelse = aktivitet.Beskrivelse };
-                    _context.Aktivitet.Add(Aktivitet);
-                    //_context.AktivitetBrugerTilmeldt.Add();
-                    _context.SaveChanges();
-                    return Ok(new { status = 1, message = "Aktivitet oprettet" });
+                    var Aktivitet = new Aktivitet 
+                    { 
+                        Titel = aktivitet.Titel,
+                        Beskrivelse = aktivitet.Beskrivelse,
+                        AktivitetPostnummer = aktivitet.Postnummer,
+                        StartTidspunkt = aktivitet.StartTidspunkt,
+                        SlutTidspunkt = aktivitet.SlutTidspunkt,
+                        MaxDeltagere = aktivitet.MaxDeltagere,
+                        Pris = aktivitet.Pris,
+                        Huskeliste = aktivitet.Huskeliste
+                    };
+                    if (Aktivitet != null)
+                    {
+                        //var abt = new AktivitetBrugerTilmeldt { AktivitetID = Aktivitet.AktivitetID, BrugerID = aktivitet.BrugerID, Prioritet = Prioritet.Vaert }; // TODO: Find current user.
+                        _context.Aktivitet.Add(Aktivitet);
+                        //_context.AktivitetBrugerTilmeldt.Add(abt);
+                        _context.SaveChanges();
+                        return Ok(new { status = 1, message = "Aktivitet oprettet" });
+                    }
                 }
-                else
-                {
-                    return BadRequest(new { status = 0, message = "FEJL: Aktivitet ikke oprettet" });
-                }
+
+                return BadRequest(new { status = 0, message = "FEJL: Aktivitet ikke oprettet" });
+
             }
         }
 

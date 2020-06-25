@@ -29,7 +29,7 @@ export class NyAktivitetComponent implements OnInit {
         this.UserForm = this.formbuilder.group({
             Titel: ["", [Validators.required]],
             Beskrivelse: ["", [Validators.required]],
-            AktivitetPostnummer: ["", [Validators.required]],
+            Postnummer: ["", [Validators.required]],
             Starttidspunkt: ["", [Validators.required]],
             Sluttidspunkt: ["", [Validators.required]],
             MaxDeltagere: ["", [Validators.required]],
