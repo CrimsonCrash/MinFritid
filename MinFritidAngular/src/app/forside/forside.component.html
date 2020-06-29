@@ -4,10 +4,20 @@
         <br />
         <label>{{ Forside.titel }}</label>
         <br />
-        <label>{{ Forside.postNummer }}</label>
+        <label>{{ Forside.bynavn }}</label>
+        <br />
+        <label>{{ Forside.startTidspunkt }}</label>
+        <br />
+        <label>{{ Forside.slutTidspunkt }}</label>
+        <br />
+        <label>Max antal deltagere: {{ Forside.maxDeltagere }}</label>
+        <br />
+        <label>Pladser tilbage: {{ Forside.pladserTilbage }}</label>
+        <br />
+        <label>Pris: {{ Forside.pris }}</label>
         <br />
         <button routerLink="/aktivitet" (click)="ngOnInit()">
-            gå til aktiviteten
+            Gå til aktiviteten
         </button>
     </div>
 </div>
