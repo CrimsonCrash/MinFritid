@@ -1,23 +1,25 @@
-<div class="boxBackground" *ngFor="let Forside of Forsider">
-    <div>
-        <img class="activitiesImg" src="assets/Images/walking.jpg" />
-        <br />
-        <label>{{ Forside.titel }}</label>
-        <br />
-        <label>{{ Forside.bynavn }}</label>
-        <br />
-        <label>{{ Forside.startTidspunkt }}</label>
-        <br />
-        <label>{{ Forside.slutTidspunkt }}</label>
-        <br />
-        <label>Max antal deltagere: {{ Forside.maxDeltagere }}</label>
-        <br />
-        <label>Pladser tilbage: {{ Forside.pladserTilbage }}</label>
-        <br />
-        <label>Pris: {{ Forside.pris }}</label>
-        <br />
-        <button routerLink="/aktivitet" (click)="ngOnInit()">
-            Gå til aktiviteten
-        </button>
+<div class="container">
+    <div class="boxBackground" *ngFor="let Forside of Forsider">
+        <div>
+            <img class="activitiesImg" src="assets/Images/walking.jpg" />
+            <br />
+            <label>{{ Forside.titel }}</label>
+            <br />
+            <label>{{ Forside.bynavn }}</label>
+            <br />
+            <label>{{ Forside.startTidspunkt }}</label>
+            <br />
+            <label>{{ Forside.slutTidspunkt }}</label>
+            <br />
+            <label>Max antal deltagere: {{ Forside.maxDeltagere }}</label>
+            <br />
+            <label>Pladser tilbage: {{ Forside.pladserTilbage }}</label>
+            <br />
+            <label>Pris: {{ Forside.pris }}</label>
+            <br />
+            <button routerLink="/aktivitet" (click)="ngOnInit()">
+                Gå til aktiviteten
+            </button>
+        </div>
     </div>
 </div>
