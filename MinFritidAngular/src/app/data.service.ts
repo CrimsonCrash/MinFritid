@@ -91,6 +91,12 @@ export class DataService {
         );
     }
 
+    getBrugersAktiviteter(brugerId): Observable<Iaktivitet[]> {
+        return this.http.get<Iaktivitet[]>(
+            "http://localhost:5001/api/aktivitetbrugertilmeldt/bruger/" + brugerId
+        );
+    }
+
     getAktivitet(aktivitetId) {
         return this.http.get(
             "http://localhost:5001/api/aktivitet/" + aktivitetId

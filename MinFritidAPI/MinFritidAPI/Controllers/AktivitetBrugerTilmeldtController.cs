@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -37,30 +38,54 @@ namespace MinFritidAPI.Controllers
 
         // GET: api/AktivitetBrugerTilmeldt/Aktivitet/5
         [HttpGet("aktivitet/{id}")]
-        public async Task<ActionResult<IEnumerable<AktivitetBrugerTilmeldt>>> GetListByAktivitetID(int id)
+        public async Task<ActionResult> GetListByAktivitetID(int id)
         {
-            var aktivitetBrugerTilmeldt = await _context.AktivitetBrugerTilmeldt.Where(a => a.AktivitetID == id).ToListAsync();
+            var tilmeldteBrugere = await _context.AktivitetBrugerTilmeldt.Where(a => a.AktivitetID == id).Select(a => new GetParticipantsDto
+            {
+                Fornavn = a.Bruger.Fornavn,
+                Efternavn = a.Bruger.Efternavn,
+                Bynavn = a.Bruger.By.Bynavn,
+                Verificeret = a.Bruger.Verificeret
+            }).ToListAsync();
 
-            if (aktivitetBrugerTilmeldt == null)
+            if (tilmeldteBrugere == null)
             {
                 return NotFound();
             }
 
-            return aktivitetBrugerTilmeldt;
+            return new JsonResult(tilmeldteBrugere);
         }
 
-        // GET: api/AktivitetBrugerTilmeldt/Bruger/5
+        // GET: api/AktivitetBrugerTilmeldt/Bruger/5e34359b-dd51-4515-b47e-7c9bea9fdfbf
         [HttpGet("bruger/{id}")]
-        public async Task<ActionResult<IEnumerable<AktivitetBrugerTilmeldt>>> GetListByBrugerID(string id)
+        public async Task<ActionResult> GetListByBrugerID(string id)
         {
-            var aktivitetBrugerTilmeldt = await _context.AktivitetBrugerTilmeldt.Where(b => b.BrugerID == id).ToListAsync();
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var aktiviteter = await _context.AktivitetBrugerTilmeldt.Where(a => a.BrugerID == userID).Select(a => new GetAktivitetDto
+            {
+                AktivitetID = a.AktivitetID,
+                Titel = a.Aktivitet.Titel,
+                Beskrivelse = a.Aktivitet.Beskrivelse,
+                Huskeliste = a.Aktivitet.Huskeliste,
+                Pris = a.Aktivitet.Pris,
+                MaxDeltagere = a.Aktivitet.MaxDeltagere,
+                StartTidspunkt = a.Aktivitet.StartTidspunkt,
+                SlutTidspunkt = a.Aktivitet.SlutTidspunkt,
+                Bynavn = a.Aktivitet.By.Bynavn,
+                Aktiv = a.Aktivitet.Aktiv,
+            }).ToListAsync();
 
-            if (aktivitetBrugerTilmeldt == null)
+            if (aktiviteter == null)
             {
                 return NotFound();
             }
 
-            return aktivitetBrugerTilmeldt;
+            foreach (var aktivitet in aktiviteter)
+            {
+                aktivitet.PladserTilbage = NumberOfSpotsLeft(aktivitet.AktivitetID);
+            }
+
+            return new JsonResult(aktiviteter);
         }
 
         // PUT: api/AktivitetBrugerTilmeldt

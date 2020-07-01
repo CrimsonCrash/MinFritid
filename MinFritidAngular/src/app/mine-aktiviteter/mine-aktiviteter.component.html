@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="boxBackground" *ngFor="let Aktivitet of Aktiviteten">
+        <div class="mineAktiviteter">
+            <label>Aktivitet ID: {{ Aktivitet.aktivitetID }}</label>
+            <br />
+            <label>Titel: {{ Aktivitet.titel }}</label>
+            <br />
+            <label>Beskrivelse: {{ Aktivitet.beskrivelse }}</label>
+            <br />
+            <label>Starttidspunkt: {{ Aktivitet.startTidspunkt }}</label>
+            <br />
+            <label>Sluttidspunkt: {{ Aktivitet.slutTidspunkt }}</label>
+            <br />
+            <label>Huskeliste: {{ Aktivitet.huskeliste }}</label>
+            <br />
+            <label>Max antal deltagere: {{ Aktivitet.maxDeltagere }}</label>
+            <br />
+            <label>Pladser tilbage: {{ Aktivitet.pladserTilbage }}</label>
+            <br />
+            <label>Pris: {{ Aktivitet.pris }}</label>
+            <br />
+            <button routerLink="/aktivitet" (click)="ngOnInit()">
+                Gå til aktiviteten
+            </button>
+        </div>
+    </div>
+</div>

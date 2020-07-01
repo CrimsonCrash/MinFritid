@@ -34,7 +34,7 @@ namespace MinFritidAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAktiveAktiviteter()
         {
-            var temp = await _context.Aktivitet.Select(a => new GetAktivitetDto
+            var aktiviteter = await _context.Aktivitet.Select(a => new GetAktivitetDto
             {
                 AktivitetID = a.AktivitetID,
                 Titel = a.Titel,
@@ -48,15 +48,15 @@ namespace MinFritidAPI.Controllers
                 Aktiv = a.Aktiv,
             }).Where(a => a.Aktiv == true).ToListAsync();
 
-            if (temp == null)
+            if (aktiviteter == null)
             {
                 return NotFound("Der er ingen aktiviteter");
             }
-            foreach (var item in temp)
+            foreach (var aktivitet in aktiviteter)
             {
-                item.PladserTilbage = NumberOfSpotsLeft(item.AktivitetID);
+                aktivitet.PladserTilbage = NumberOfSpotsLeft(aktivitet.AktivitetID);
             }
-            return new JsonResult(temp);
+            return new JsonResult(aktiviteter);
         }
         public int NumberOfSpotsLeft(int aktivitetID) // Returnere antallet af ledige pladser
         {

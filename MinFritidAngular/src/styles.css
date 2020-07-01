@@ -197,6 +197,8 @@ select {
 .container {
     margin-top: 45px;
 }
-.tempfix {
-    /* text-align: left; */
+
+.mineAktiviteter {
+    max-width: 500px;
+    min-width: 500px;
 }
