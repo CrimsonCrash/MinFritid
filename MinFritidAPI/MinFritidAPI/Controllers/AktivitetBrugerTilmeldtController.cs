@@ -60,8 +60,8 @@ namespace MinFritidAPI.Controllers
         [HttpGet("bruger/{id}")]
         public async Task<ActionResult> GetListByBrugerID(string id)
         {
-            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var aktiviteter = await _context.AktivitetBrugerTilmeldt.Where(a => a.BrugerID == userID).Select(a => new GetAktivitetDto
+            //var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var aktiviteter = await _context.AktivitetBrugerTilmeldt.Where(a => a.BrugerID == id).Select(a => new GetAktivitetDto
             {
                 AktivitetID = a.AktivitetID,
                 Titel = a.Aktivitet.Titel,
