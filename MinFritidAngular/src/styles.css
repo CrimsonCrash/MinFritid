@@ -90,6 +90,8 @@ body {
     /* line-height: 1; */
     background-image: url("/assets/Images/background.jpg");
     height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
