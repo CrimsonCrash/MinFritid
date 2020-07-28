@@ -72,7 +72,7 @@ namespace MinFritidAPI.Controllers
                 StartTidspunkt = a.Aktivitet.StartTidspunkt,
                 SlutTidspunkt = a.Aktivitet.SlutTidspunkt,
                 Bynavn = a.Aktivitet.By.Bynavn,
-                Aktiv = a.Aktivitet.Aktiv,
+                Aktiv = a.Aktivitet.Aktiv
             }).ToListAsync();
 
             if (aktiviteter == null)
