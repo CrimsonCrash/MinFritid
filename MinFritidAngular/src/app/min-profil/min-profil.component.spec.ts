@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MinProfilComponent } from './min-profil.component';
 
@@ -6,7 +6,7 @@ describe('MinProfilComponent', () => {
   let component: MinProfilComponent;
   let fixture: ComponentFixture<MinProfilComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MinProfilComponent ]
     })

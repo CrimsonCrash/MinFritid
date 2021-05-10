@@ -14,8 +14,8 @@ namespace MinFritidAPI.Models
         private bool verificeret = false;
         private bool aktiv = true;
 
-/*        [Key]
-        public int BrugerID { get; set; }*/
+        [Key]
+        public int BrugerID { get; set; }
 
         [Required]
         public string Fornavn { get; set; }
