@@ -19,7 +19,7 @@ import { BrugerAktivitetComponent } from './bruger-aktivitet/bruger-aktivitet.co
 
 const routes: Routes = [
   {path: '', component: ForsideComponent},
-  {path: 'aktivitet', component: AktivitetComponent},
+  {path: 'aktivitet/:id/vis', component: AktivitetComponent},
   {path: 'login', component: LoginComponent},
   {path: 'opretBruger', component: OpretBrugerComponent},
   {path: 'omOs', component: OmosComponent},

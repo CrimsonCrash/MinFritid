@@ -59,8 +59,8 @@ export class DataService {
     return this.http.get<Iaktivitet[]>('http://localhost:5001/api/aktivitet/') 
   }
 
-  getAktivitet(aktivitetId){
-    return this.http.get('http://localhost:5001/api/aktivitet/' + aktivitetId) 
+  getAktivitet(aktivitetId): Observable<Iaktivitet>{
+    return this.http.get<Iaktivitet>('http://localhost:5001/api/aktivitet/' + aktivitetId) 
   }
 
   postAktivitet(aktivitet : Iaktivitet): Observable<Iaktivitet>{
