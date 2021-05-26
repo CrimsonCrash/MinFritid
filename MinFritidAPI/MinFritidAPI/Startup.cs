@@ -58,7 +58,7 @@ namespace MinFritidAPI
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // Fortæller at vi vil bruge Identity Framework
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            /*services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 6;
@@ -72,6 +72,7 @@ namespace MinFritidAPI
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<MinFritidContext>().AddDefaultTokenProviders();
+            */
 
             services.AddMvc();
 

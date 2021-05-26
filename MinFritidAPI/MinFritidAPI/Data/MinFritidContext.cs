@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MinFritidAPI.Data
 {
-    public class MinFritidContext //: IdentityDbContext<IdentityUser>
+    public class MinFritidContext : DbContext//: IdentityDbContext<IdentityUser>
     {
         //opsætter en constructor
         public MinFritidContext()
