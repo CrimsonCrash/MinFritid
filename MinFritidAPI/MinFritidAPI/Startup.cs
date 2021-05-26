@@ -112,7 +112,7 @@ namespace MinFritidAPI
             }
 
             app.UseCors("AnotherPolicy");
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseMvc();
             
         }
