@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MinFritidAPI.Migrations
 {
-    public partial class recreate : Migration
+    public partial class Reset : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
+            /*migrationBuilder.CreateTable(
                 name: "Admin",
                 columns: table => new
                 {
@@ -30,6 +30,20 @@ namespace MinFritidAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_By", x => x.Postnummer);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IdentityRole",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    NormalizedName = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IdentityRole", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,8 +79,22 @@ namespace MinFritidAPI.Migrations
                 {
                     BrugerID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Fornavn = table.Column<string>(nullable: true),
-                    Efternavn = table.Column<string>(nullable: true),
+                    Id = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: true),
+                    NormalizedUserName = table.Column<string>(nullable: true),
+                    NormalizedEmail = table.Column<string>(nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Fornavn = table.Column<string>(nullable: false),
+                    Efternavn = table.Column<string>(nullable: false),
                     Foedselsdato = table.Column<DateTime>(type: "Date", nullable: false),
                     BrugerPostnummer = table.Column<int>(nullable: true),
                     Email = table.Column<string>(nullable: true),
@@ -96,6 +124,7 @@ namespace MinFritidAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AktivitetBrugerTilmeldt", x => new { x.AktivitetID, x.BrugerID });
+                    table.UniqueConstraint("AK_AktivitetBrugerTilmeldt_AktivitetID", x => x.AktivitetID);
                     table.ForeignKey(
                         name: "FK_AktivitetBrugerTilmeldt_Aktivitet_AktivitetID",
                         column: x => x.AktivitetID,
@@ -110,6 +139,16 @@ namespace MinFritidAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "IdentityRole",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "1", null, "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "IdentityRole",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "2", null, "Bruger", "BRUGER" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Aktivitet_AktivitetPostnummer",
                 table: "Aktivitet",
@@ -123,7 +162,7 @@ namespace MinFritidAPI.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Bruger_BrugerPostnummer",
                 table: "Bruger",
-                column: "BrugerPostnummer");
+                column: "BrugerPostnummer");*/
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -133,6 +172,9 @@ namespace MinFritidAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "AktivitetBrugerTilmeldt");
+
+            migrationBuilder.DropTable(
+                name: "IdentityRole");
 
             migrationBuilder.DropTable(
                 name: "Aktivitet");

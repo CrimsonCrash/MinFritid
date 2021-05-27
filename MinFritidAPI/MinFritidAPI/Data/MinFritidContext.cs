@@ -23,7 +23,7 @@ namespace MinFritidAPI.Data
             
         }
 
-        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
@@ -53,7 +53,7 @@ namespace MinFritidAPI.Data
 
             modelBuilder.Entity<Bruger>().ToTable("Bruger");
             modelBuilder.Entity<Aktivitet>().ToTable("Aktivitet");
-        }*/
+        }
 
         //er et kald på Aktiviteter synlig for databasen
         public DbSet<Aktivitet> Aktivitet { get; set; }

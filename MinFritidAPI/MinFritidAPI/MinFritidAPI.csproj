@@ -40,6 +40,8 @@
     <Compile Remove="Migrations\20200617124421_postnummer-identity-03.Designer.cs" />
     <Compile Remove="Migrations\20200617124759_postnummer-identity-03.cs" />
     <Compile Remove="Migrations\20200617124759_postnummer-identity-03.Designer.cs" />
+    <Compile Remove="Migrations\20200617125506_postnummer-remvoe-identity.cs" />
+    <Compile Remove="Migrations\20200617125506_postnummer-remvoe-identity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
