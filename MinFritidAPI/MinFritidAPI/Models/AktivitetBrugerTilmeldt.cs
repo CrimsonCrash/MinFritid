@@ -15,7 +15,6 @@ namespace MinFritidAPI.Models
         public int AktivitetID { get; set; }
         public virtual Aktivitet Aktivitet { get; set; }
 
-        [Key]
         [Column(Order = 2)]
         [ForeignKey("Bruger")]
         public int BrugerID { get; set; }
