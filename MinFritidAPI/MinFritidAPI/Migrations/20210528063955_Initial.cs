@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MinFritidAPI.Migrations
 {
-    public partial class Reset : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            /*migrationBuilder.CreateTable(
+            migrationBuilder.CreateTable(
                 name: "Admin",
                 columns: table => new
                 {
@@ -162,7 +162,7 @@ namespace MinFritidAPI.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Bruger_BrugerPostnummer",
                 table: "Bruger",
-                column: "BrugerPostnummer");*/
+                column: "BrugerPostnummer");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
