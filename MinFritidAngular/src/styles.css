@@ -111,7 +111,8 @@ input, select {
 /* Reset End */
 
 .boxBackground{
-    background-color: blanchedalmond;
+    background: rgb(179, 255, 255, 0.8);
+    /* background-color: #DBFFFF; */
     background-size: auto;
     padding: 1%;
     width: fit-content;
