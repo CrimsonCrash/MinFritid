@@ -1,13 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MinFritidAPI.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MinFritidAPI.Data
 {
-    public class MinFritidContext
+    public class MinFritidContext : DbContext
     {
         public MinFritidContext()
         {
@@ -30,6 +26,5 @@ namespace MinFritidAPI.Data
         public DbSet<By> By { get; set; }
 
         public DbSet<Admin> Admin { get; set; }
-        public object Database { get; internal set; }
     }
 }
