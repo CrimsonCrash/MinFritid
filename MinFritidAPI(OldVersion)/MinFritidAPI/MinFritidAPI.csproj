@@ -7,45 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200611085240_test2.cs" />
-    <Compile Remove="Migrations\20200611085240_test2.Designer.cs" />
-    <Compile Remove="Migrations\20200611104040_test3.cs" />
-    <Compile Remove="Migrations\20200611104040_test3.Designer.cs" />
-    <Compile Remove="Migrations\20200611104847_Test4.cs" />
-    <Compile Remove="Migrations\20200611104847_Test4.Designer.cs" />
-    <Compile Remove="Migrations\20200611105105_Test5.cs" />
-    <Compile Remove="Migrations\20200611105105_Test5.Designer.cs" />
-    <Compile Remove="Migrations\20200611110723_Test6.cs" />
-    <Compile Remove="Migrations\20200611110723_Test6.Designer.cs" />
-    <Compile Remove="Migrations\20200611112344_Test7.cs" />
-    <Compile Remove="Migrations\20200611112344_Test7.Designer.cs" />
-    <Compile Remove="Migrations\20200611112446_Test8.cs" />
-    <Compile Remove="Migrations\20200611112446_Test8.Designer.cs" />
-    <Compile Remove="Migrations\20200611124245_Test9.cs" />
-    <Compile Remove="Migrations\20200611124245_Test9.Designer.cs" />
-    <Compile Remove="Migrations\20200615115713_BrugerAktivitetTilmeldt-Prioritet-01.cs" />
-    <Compile Remove="Migrations\20200615115713_BrugerAktivitetTilmeldt-Prioritet-01.Designer.cs" />
-    <Compile Remove="Migrations\20200616073656_postnummer_FKs.cs" />
-    <Compile Remove="Migrations\20200616073656_postnummer_FKs.Designer.cs" />
-    <Compile Remove="Migrations\20200616074342_postnummer_FKs.cs" />
-    <Compile Remove="Migrations\20200616074342_postnummer_FKs.Designer.cs" />
-    <Compile Remove="Migrations\20200616074807_postnummer_FKs.cs" />
-    <Compile Remove="Migrations\20200616074807_postnummer_FKs.Designer.cs" />
-    <Compile Remove="Migrations\20200616075657_postnummer_FKs.cs" />
-    <Compile Remove="Migrations\20200616075657_postnummer_FKs.Designer.cs" />
-    <Compile Remove="Migrations\20200617122226_postnummer-identity.cs" />
-    <Compile Remove="Migrations\20200617122226_postnummer-identity.Designer.cs" />
-    <Compile Remove="Migrations\20200617122446_postnummer-identity.cs" />
-    <Compile Remove="Migrations\20200617122446_postnummer-identity.Designer.cs" />
-    <Compile Remove="Migrations\20200617124421_postnummer-identity-03.cs" />
-    <Compile Remove="Migrations\20200617124421_postnummer-identity-03.Designer.cs" />
-    <Compile Remove="Migrations\20200617124759_postnummer-identity-03.cs" />
-    <Compile Remove="Migrations\20200617124759_postnummer-identity-03.Designer.cs" />
-    <Compile Remove="Migrations\20200617125506_postnummer-remvoe-identity.cs" />
-    <Compile Remove="Migrations\20200617125506_postnummer-remvoe-identity.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
@@ -58,10 +19,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 

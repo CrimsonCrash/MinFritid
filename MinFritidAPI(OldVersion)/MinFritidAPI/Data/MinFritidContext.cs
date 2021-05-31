@@ -26,7 +26,7 @@ namespace MinFritidAPI.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            /*
             modelBuilder.Entity<IdentityRole>().HasData(
                 new { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
                 new { Id = "2", Name = "Bruger", NormalizedName = "BRUGER" }
@@ -53,6 +53,7 @@ namespace MinFritidAPI.Data
 
             modelBuilder.Entity<Bruger>().ToTable("Bruger");
             modelBuilder.Entity<Aktivitet>().ToTable("Aktivitet");
+            */
         }
 
         //er et kald på Aktiviteter synlig for databasen

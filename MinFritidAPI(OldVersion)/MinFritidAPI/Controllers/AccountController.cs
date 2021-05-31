@@ -28,19 +28,19 @@ namespace MinFritidAPI.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly AppSettings _appSettings;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IOptions<AppSettings> appSettings)
+        /*public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IOptions<AppSettings> appSettings)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _appSettings = appSettings.Value;
-        }
+        }*/
 
-/*        private MinFritidContext _context { get; }
+        private MinFritidContext _context { get; }
 
         public AccountController(MinFritidContext context)
         {
             _context = context;
-        }*/
+        }
 
         // POST: api/account/register
         [HttpPost("register")]

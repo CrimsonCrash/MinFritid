@@ -36,7 +36,7 @@ namespace MinFritidAPI.Controllers
         {
             var brugers = _context.Bruger;
 
-            var bruger = brugers.Include("By").FirstOrDefault(Bruger => Bruger.BrugerID == id);
+            var bruger = brugers.Include("By").FirstOrDefault(Bruger => Bruger.ID == id);
 
             if (bruger == null)
             {
@@ -104,7 +104,7 @@ namespace MinFritidAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteBruger(int id)
         {
-            var DeleteBruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == id);
+            var DeleteBruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.ID == id);
             if (DeleteBruger != null)
             {
                 _context.Bruger.Remove(DeleteBruger);
@@ -119,7 +119,7 @@ namespace MinFritidAPI.Controllers
 
         private bool BrugerExists(int id)
         {
-            return _context.Bruger.Any(e => e.BrugerID == id);
+            return _context.Bruger.Any(e => e.ID == id);
         }
 
         private IActionResult HttpNotFound()
@@ -131,12 +131,12 @@ namespace MinFritidAPI.Controllers
         [HttpPut("aktiv/{id}")]
         public IActionResult AktiverBruger(int Id)
         {
-            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == Id);
+            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.ID == Id);
             if (bruger == null)
             {
                 return NotFound("Not found");
             }
-            if (bruger.BrugerID == Id)
+            if (bruger.ID == Id)
             {
                 bruger.Aktiv = true;
                 _context.Bruger.Update(bruger);
@@ -150,12 +150,12 @@ namespace MinFritidAPI.Controllers
         [HttpPut("deaktiv/{id}")]
         public IActionResult DeaktiverBruger(int Id)
         {
-            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == Id);
+            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.ID == Id);
             if (bruger == null)
             {
                 return NotFound("Not found");
             }
-            if (bruger.BrugerID == Id)
+            if (bruger.ID == Id)
             {
                 bruger.Aktiv = false;
                 _context.Bruger.Update(bruger);
@@ -169,12 +169,12 @@ namespace MinFritidAPI.Controllers
         [HttpPut("verify/{id}")]
         public IActionResult VerificerBruger(int Id)
         {
-            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.BrugerID == Id);
+            var bruger = _context.Bruger.FirstOrDefault(Bruger => Bruger.ID == Id);
             if (bruger == null)
             {
                 return NotFound("Not found");
             }
-            if (bruger.BrugerID == Id)
+            if (bruger.ID == Id)
             {
                 bruger.Verificeret = true;
                 _context.Bruger.Update(bruger);

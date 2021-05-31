@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace MinFritidAPI.Models
 {
-    public class Bruger : IdentityUser
+    public class Bruger  // IdentityUser
     {
         private bool verificeret = false;
         private bool aktiv = true;
 
         [Key]
-        public int BrugerID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         public string Fornavn { get; set; }

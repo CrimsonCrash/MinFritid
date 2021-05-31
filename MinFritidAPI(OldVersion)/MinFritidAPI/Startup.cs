@@ -57,6 +57,7 @@ namespace MinFritidAPI
             services.AddDbContext<MinFritidContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            /*
             // Fortæller at vi vil bruge Identity Framework
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
@@ -72,7 +73,7 @@ namespace MinFritidAPI
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<MinFritidContext>().AddDefaultTokenProviders();
-            
+            */
 
             services.AddMvc();
 
@@ -82,7 +83,7 @@ namespace MinFritidAPI
 
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-            
+            /*
             // Authentication middleware
             services.AddAuthentication(o =>
             {
@@ -100,7 +101,7 @@ namespace MinFritidAPI
                     IssuerSigningKey = new SymmetricSecurityKey(key)
                 };
             });
-
+            */
         }
 
 
@@ -113,7 +114,7 @@ namespace MinFritidAPI
             }
 
             app.UseCors("AnotherPolicy");
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseMvc();
             
         }

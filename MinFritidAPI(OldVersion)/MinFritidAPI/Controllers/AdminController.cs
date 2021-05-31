@@ -31,7 +31,7 @@ namespace MinFritidAPI.Controllers
         public IActionResult GetAllAdmins()
         {
             var admins = from a in _context.Admin
-                         join b in _context.Bruger on a.AdminID equals b.BrugerID
+                         join b in _context.Bruger on a.AdminID equals b.ID
                          select b;
 
             return new JsonResult(admins);
@@ -43,7 +43,7 @@ namespace MinFritidAPI.Controllers
         public IActionResult GetAdmin(int id)
         {
             var admins = from a in _context.Admin
-                         join b in _context.Bruger on a.AdminID equals b.BrugerID
+                         join b in _context.Bruger on a.AdminID equals b.ID
                          where a.AdminID == id
                          select b;
 
@@ -63,7 +63,7 @@ namespace MinFritidAPI.Controllers
         public IActionResult PostAdmin(int id)
         {
                 var admins = from a in _context.Admin
-                             join b in _context.Bruger on id equals b.BrugerID
+                             join b in _context.Bruger on id equals b.ID
                              select b;
 
                 var admin = admins.FirstOrDefault();
@@ -86,8 +86,8 @@ namespace MinFritidAPI.Controllers
         public IActionResult DeleteAdmin(int id)
         {
             var admins = from a in _context.Admin
-                         join b in _context.Bruger on a.AdminID equals b.BrugerID
-                         where b.BrugerID == id
+                         join b in _context.Bruger on a.AdminID equals b.ID
+                         where b.ID == id
                          select a;
 
             var admin = admins.FirstOrDefault();
