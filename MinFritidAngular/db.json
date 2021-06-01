@@ -1,0 +1,48 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "tobias"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "_BrugerID": "some comment",
+      "postId": 1
+    }
+  ],
+  "aktivitet": [
+    {
+      "_AktivitetID": 1,
+      "BrugerID": 1,
+      "_Title": "Gåtur",
+      "_Beskrivelse": "Gåtur i birkerød",
+      "_Huskeliste": "Bacon",
+      "_Pris": 0,
+      "_MaxDeltagere": 20,
+      "_StartTidspungt": "2021-06-03 13:00",
+      "_SlutTidspungt": "2021-06-03 16:00",
+      "_PostNummer": 3460,
+      "Aktiv": 1
+    },
+    {
+      "_AktivitetID": 2,
+      "BrugerID": 2,
+      "_Title": "løbetur",
+      "_Beskrivelse": "løbetur i birkerød",
+      "_Huskeliste": "Bacon med bacon",
+      "_Pris": 0,
+      "_MaxDeltagere": 20,
+      "_StartTidspungt": "2021-06-05 14:00",
+      "_SlutTidspungt": "2021-06-05 17:00",
+      "_PostNummer": 3460,
+      "Aktiv": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+  
+}
