@@ -54,7 +54,7 @@ namespace MinFritidAPI.Controllers
                     BrugerEfternavn = t.Bruger.Efternavn,
                     BrugerAktiv = t.Bruger.Aktiv,
                     BrugerFoedselsdag = t.Bruger.Foedselsdato,
-                    BrugerPostnummer = t.Bruger.BrugerPostnummer,
+                    BrugerPostnummer = t.Bruger.Postnummer,
                     BrugerEmail = t.Bruger.Email
                 })
             }).Where(a => a.AktivitetID == id);

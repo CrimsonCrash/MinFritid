@@ -26,8 +26,8 @@ namespace MinFritidAPI.Models
         [Column(TypeName = "Date")]
         public DateTime Foedselsdato { get; set; }
 
-        public int? BrugerPostnummer { get; set; }
-        [ForeignKey("BrugerPostnummer")]
+        public int? /*Bruger*/Postnummer { get; set; }
+        //[ForeignKey("BrugerPostnummer")]
         public By By { get; set; }
 
         public string Email { get; set; }
@@ -37,6 +37,6 @@ namespace MinFritidAPI.Models
         public bool Verificeret { get => verificeret; set => verificeret = value; }
         public bool Aktiv { get => aktiv; set => aktiv = value; }
 
-        public ICollection<AktivitetBrugerTilmeldt> AktivitetBrugerTilmeldt { get; set; }
+        //public ICollection<AktivitetBrugerTilmeldt> AktivitetBrugerTilmeldt { get; set; }
     }
 }

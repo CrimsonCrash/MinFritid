@@ -54,9 +54,9 @@ namespace MinFritidAPI.Controllers
             {
                 return NotFound("Not found");
             }
-            if (bruger.BrugerPostnummer != null)
+            if (bruger.Postnummer != null)
             {
-                var Postnummer = _context.By.Any(p => p.Postnummer == bruger.BrugerPostnummer);
+                var Postnummer = _context.By.Any(p => p.Postnummer == bruger.Postnummer);
                 
                 if (Postnummer == true)
                 {
