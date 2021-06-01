@@ -1,11 +1,11 @@
 #navbar{
-    background-color: #ffffff;
+    background-color: #d2eefa;
     opacity: 0.9;
     height: 40px;
     min-height: 2%;
 }
 #navContent{
-    background-color: #ffffff;
+    background-color: #d2eefa;
     text-align: center;
     
 }
@@ -24,7 +24,7 @@
 
 }
 #menuimg:hover + .submenu{
-    background-color: darkorange;
+    background-color: #d2eefa;
     display: block;
     text-align: left;
     position: fixed;
@@ -35,7 +35,7 @@
     display: block;
     text-align: left;
     float: none;
-    background-color: darkorange;
+    background-color: #d2eefa;
     position: fixed;
     margin-top: 40px;
     padding: 1rem;
