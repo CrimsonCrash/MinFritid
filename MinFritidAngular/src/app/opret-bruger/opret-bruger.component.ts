@@ -19,13 +19,13 @@ export class OpretBrugerComponent implements OnInit {
   
   ngOnInit(): void {
     this.UserForm = this.formbuilder.group({
-      _BrugerID: '',
-      _Fornavn: ['', [Validators.required]],
-      _Efternavn: ['', [Validators.required]],
-      _Foedselsdato: ['', [Validators.required]],
-      _PostNummer: ['', [Validators.required]],
-      _Email: ['', [Validators.required]],
-      _Password: ['', [Validators.required]],
+      BrugerID: '',
+      Fornavn: ['', [Validators.required]],
+      Efternavn: ['', [Validators.required]],
+      Foedselsdato: ['', [Validators.required]],
+      PostNummer: ['', [Validators.required]],
+      Email: ['', [Validators.required]],
+      Password: ['', [Validators.required]],
     });
   }
   OnSubmit() {
