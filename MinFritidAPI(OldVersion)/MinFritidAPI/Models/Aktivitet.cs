@@ -28,7 +28,7 @@ namespace MinFritidAPI.Models
 
         public DateTime SlutTidspunkt { get; set; }
 
-        public int? AktivitetPostnummer { get; set; }
+        public int? Postnummer { get; set; }
         [ForeignKey("AktivitetPostnummer")]
         public By By { get; set; }
 
