@@ -88,7 +88,7 @@ namespace MinFritidAPI.Controllers
 
         // POST: api/Aktivitet
         [HttpPost]
-        public IActionResult PostAktivitet(Aktivitet aktivitet)
+        public IActionResult PostAktivitet([FromBody]Aktivitet aktivitet)
         {
             using (var PostAktivitet = _context)
             {
