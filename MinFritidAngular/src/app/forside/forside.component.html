@@ -9,7 +9,8 @@
         <br/>
         <label>{{Forside.postnummer}}</label>
         <br/>
-        <button routerLink="/aktivitet" (click)="ngOnInit()">gå til aktiviteten</button>
+        <button [routerLink]="['/aktivitet/', Forside.id]">gå til aktiviteten</button>
+        <a href="#" [routerLink]="['/aktivitet/', Forside.AktivitetID]" class="btn btn-info">View</a>
     </div>
         
 </div>

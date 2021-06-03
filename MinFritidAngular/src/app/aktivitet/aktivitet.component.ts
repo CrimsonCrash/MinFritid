@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { ParamMap, Params, Router } from '@angular/router';
 import { DataService } from './../data.service';
 import { Component, OnInit } from '@angular/core';
 import { Iaktivitet } from '../data/Iaktivitet';
@@ -16,11 +16,18 @@ export class AktivitetComponent implements OnInit {
   constructor( public dataService: DataService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id']
+     this.id = +this.route.snapshot.paramMap.get['id']
+    // this.route.paramMap.subscribe((params: ParamMap) => {
+    //   this.id = +params.get['id'];
+    //   this.dataService.getAktivitet(this.id).subscribe((data: Iaktivitet) =>{
+    //     this.iaktivitet = data;
+    //   });
+    // })
 
     this.dataService.getAktivitet(this.id).subscribe((data: Iaktivitet) =>{
       this.iaktivitet = data;
-    })
+    });
+    
   }
 
 }

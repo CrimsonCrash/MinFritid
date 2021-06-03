@@ -28,5 +28,5 @@ export class Iaktivitet {
     SlutTidspunkt: Date;
     PostNummer: number;
     AktivitetBrugerTilmeldte: IaktivitetBrugerTilmeldt[];
-    Aktiv: boolean
+    Aktiv: boolean;
 }
