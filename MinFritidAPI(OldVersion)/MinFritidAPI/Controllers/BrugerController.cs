@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MinFritidAPI.Data;
 using MinFritidAPI.Models;
+using BC = BCrypt.Net.BCrypt;
 
 namespace MinFritidAPI.Controllers
 {
@@ -89,6 +90,8 @@ namespace MinFritidAPI.Controllers
             {
                 if (PostBruger != null)
                 {
+                    bruger.Password = BC.HashPassword(bruger.Password);
+
                     _context.Bruger.Add(bruger);
                     _context.SaveChanges();
                     return Ok("Added Bruger");
