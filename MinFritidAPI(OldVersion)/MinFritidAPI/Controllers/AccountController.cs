@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Net.Http;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Internal;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.ResponseCaching.Internal;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using MinFritidAPI.Data;
-using MinFritidAPI.Helpers;
 using MinFritidAPI.Models;
 using BC = BCrypt.Net.BCrypt;
 
@@ -36,7 +24,7 @@ namespace MinFritidAPI.Controllers
 
         // POST: api/account/login
         [HttpPost("login")]
-        public bool Login([FromBody] Login login)
+        public ActionResult Login([FromBody] Login login)
         {
             
             
@@ -45,17 +33,29 @@ namespace MinFritidAPI.Controllers
 
             var bruger = brugers.Include("By").FirstOrDefault(Bruger => Bruger.Email == login.Email);
 
+            //checker at passwords matcher
             if (bruger == null || !BC.Verify(bruger.Password, login.Password))
             {
-                return false;
+                ViewBag.error = "Invalid Email or Password";
+                return View("Forside");
             }
             else
             {
-                return true;
+                var loggedIn = HttpContext.Session.GetString("LoggedOn");
+                HttpContext.Session.SetString("LoggedOn",loggedIn);
+                return View();
             }
 
-            // Bruger bliver logget ind
             
+
+        }
+
+        // Bruger bliver logget ud
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Remove("LoggedOn");
+            return View();
         }
     }
 }

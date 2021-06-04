@@ -57,25 +57,9 @@ namespace MinFritidAPI
             services.AddDbContext<MinFritidContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            /*
-            // Fortæller at vi vil bruge Identity Framework
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
-            {
-                options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 6;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequireLowercase = true;
-                options.User.RequireUniqueEmail = true;
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                options.Lockout.MaxFailedAccessAttempts = 5;
-                options.Lockout.AllowedForNewUsers = true;
-                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                options.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<MinFritidContext>().AddDefaultTokenProviders();
-            */
+            
 
-            services.AddMvc();
+            
 
             // Configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -83,25 +67,14 @@ namespace MinFritidAPI
 
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-            /*
-            // Authentication middleware
-            services.AddAuthentication(o =>
+
+            services.AddSession(options =>
             {
-                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                o.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
-                o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options => {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidIssuer = appSettings.Site,
-                    ValidAudience = appSettings.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(key)
-                };
+                options.IdleTimeout = TimeSpan.FromMinutes(appSettings.SessionTimeout);
+                options.Cookie.HttpOnly = true;
             });
-            */
+
+            services.AddMvc();
         }
 
 
@@ -114,7 +87,7 @@ namespace MinFritidAPI
             }
 
             app.UseCors("AnotherPolicy");
-            //app.UseAuthentication();
+            app.UseSession();
             app.UseMvc();
             
         }
