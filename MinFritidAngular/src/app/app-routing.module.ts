@@ -31,7 +31,7 @@ const routes: Routes = [
   {path: 'kontakt', component: KontaktComponent},
   {path: 'mineAktiviteter', component: MineAktiviteterComponent},
   {path: 'nyAktivitet', component: NyAktivitetComponent},
-  {path: 'redigerAktivitet', component: RedigerAktivitetComponent},
+  {path: 'redigerAktivitet/:id', component: RedigerAktivitetComponent},
   {path: 'søg', component: SoegComponent},
   {path: 'venner', component: VennerComponent}
 ];

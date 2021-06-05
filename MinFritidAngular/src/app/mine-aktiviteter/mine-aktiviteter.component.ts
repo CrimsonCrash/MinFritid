@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-mine-aktiviteter',
@@ -6,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mine-aktiviteter.component.css']
 })
 export class MineAktiviteterComponent implements OnInit {
-  constructor() { }
+  constructor(private dataService : DataService) { }
+  public Forsider = [];
 
-  ngOnInit(): void {
+  
+  ngOnInit() {
+    this.dataService.getAktiviteter()
+    .subscribe(data => this.Forsider = data)
   }
   
 

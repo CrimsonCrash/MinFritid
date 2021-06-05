@@ -11,9 +11,6 @@ import { Ibruger } from '../data/Ibruger';
 })
 export class LoginComponent implements OnInit {
 
-
-  
-
   data = false;
   UserForm: any;
   massage: string;
@@ -34,11 +31,11 @@ export class LoginComponent implements OnInit {
     
   }
   login(bruger: Ibruger) {
-    this.dataService.postBrugers(bruger).subscribe(
+    this.dataService.login(bruger).subscribe(
       () =>
       {
         this.data = true;
-        this.massage = 'Data saved Successfully';
+        this.massage = 'Login Successfully';
         this.UserForm.reset();
       });
   }

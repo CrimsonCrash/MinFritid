@@ -35,6 +35,10 @@ export class DataService {
     return this.http.post<Ibruger>('http://localhost:5001/api/bruger', bruger, httpOptions)
   }
 
+  public login(bruger: Ibruger): Observable<Ibruger> {
+    return this.http.post<Ibruger>('http://localhost:5001/api/account', bruger, httpOptions);
+  }
+
   // postBrugers(bruger: Ibruger): Observable<Ibruger>{
   //   return this.http.post<Ibruger>('http://localhost:5001/api/bruger/', bruger, httpOptions)
   // }
@@ -67,8 +71,8 @@ export class DataService {
     return this.http.post<Iaktivitet>('http://localhost:5001/api/aktivitet/', aktivitet, httpOptions)
   }
 
-  putAktivitet(aktivitet : Iaktivitet, brugerId): Observable<Iaktivitet>{
-    return this.http.put<Iaktivitet>('http://localhost:5001/api/aktivitet/' + brugerId, aktivitet, httpOptions)
+  putAktivitet(aktivitet, id): Observable<Iaktivitet>{
+    return this.http.put<Iaktivitet>('http://localhost:5001/api/aktivitet/' + id, JSON.stringify(aktivitet), httpOptions)
   }
 
   delAktivitet(aktivitetId) {
