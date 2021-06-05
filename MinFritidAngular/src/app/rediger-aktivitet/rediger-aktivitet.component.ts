@@ -34,7 +34,7 @@ export class RedigerAktivitetComponent implements OnInit {
         BrugerID: '',
         Titel: ['', [Validators.required]],
         Beskrivelse: ['', [Validators.required]],
-        HuskeListe: ['', [Validators.required]],
+        Huskeliste: ['', [Validators.required]],
         Pris: ['', [Validators.required]],
         MaxDeltagere: ['', [Validators.required]],
         StartTidspunkt: ['', [Validators.required]],

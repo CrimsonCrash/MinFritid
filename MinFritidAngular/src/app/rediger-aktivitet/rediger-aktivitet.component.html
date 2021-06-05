@@ -17,31 +17,31 @@
         </div>
         <div >
             <div>
-                <label>Dato for aktivitet</label>
+                <label>Start Dato og tid for aktivitet</label>
                 <br>
-                <input type="" class="navContent2" class="readonly" type="text" readonly>
+                <input type="" class="navContent2" formControlName="StartTidspunkt" class="readonly" type="text" readonly>
             </div>
             <br>
             <div>
-                <label>Tidspunkt for aktivitet</label>
+                <label>Slut dato og tid for aktivitetet</label>
                 <br>
-                <input class="navContent2" class="time" type="text" readonly>
-                <input class="navContent2" class="time" type="text" readonly>
+                <input type="" class="navContent2" formControlName="SlutTidspunkt" class="readonly" type="text" readonly>
             </div>
             <br>
             <div>
                 <label>Beskrivelse</label>
-                <br>
                 
+                <br>
+                <textarea class="message" type="text" class="navContent2" formControlName="Beskrivelse"></textarea>
             </div>
             <br>
         </div>
-        <textarea class="message"></textarea>
+        
         <div >
             <div>
                 <label>Max antal deltagere</label>
                 <br>
-                <input class="navContent2" class="readonly" type="text" readonly>
+                <input class="navContent2" class="readonly" formControlName="MaxDeltagere" type="text" readonly>
                 <br>
                 <label>Note: Opretteren vil selv optage en plads</label>
             </div>
@@ -54,12 +54,12 @@
             <br>
             <div>
                 <label>huskeliste</label>
-                
+                <textarea class="message" formControlName="Huskeliste"></textarea>
             </div>
             <br>
             
         </div>
-        <textarea class="message"></textarea>
-        <button class="btnclick" routerLink="/">Opret aktivitet</button>
+        
+        <button class="btnclick" routerLink="/">Rediger aktivitet</button>
     </form>
 </body>
