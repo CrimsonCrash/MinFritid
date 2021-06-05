@@ -18,6 +18,8 @@ export class AktivitetComponent implements OnInit {
   ngOnInit(): void {
      //this.id = +this.route.snapshot.paramMap.get['id']
 
+    
+
      this.getAktivitetet(this.route.snapshot.params.id);
     // this.route.paramMap.subscribe((params: ParamMap) => {
     //   this.id = +params.get['id'];

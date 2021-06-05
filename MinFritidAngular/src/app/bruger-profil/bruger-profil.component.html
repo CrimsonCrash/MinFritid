@@ -1,16 +1,29 @@
 <body>
     <div class="person">
-        <label for="" class="textlbl">Henning Henriksen</label>
-        <br>
-        <label for="" class="textlbl">Alder 32</label>
-        <br>
-        <label for="" class="textlbl">By Herlev</label>
+        <div>
+            <p>{{ibruger.Fornavn}}</p>
+        </div>
+        <div>
+            <p>{{ibruger.Efternavn}}</p>
+        </div>
+        <div>
+            <p>{{ibruger.Efternavn}}</p>
+        </div>
+        <div>
+            <p>{{ibruger.Foedselsdato}}</p>
+        </div>
+        <div>
+            <p>{{ibruger.PostNummer}}</p>
+        </div>
+        <div>
+            <p>{{ibruger.Email}}</p>
+        </div>
         <br>
     </div>
     <div class="person2">
         <img src="assets/Images/natur.jpg" class="profileimg">
         <button class="btnclick" routerLink="/brugerAktivitet">Vis brugerens aktiviteter</button>
-        <button class="btnclick" routerLink="/redigerProfil">Rapporter bruger</button>
+        <button class="btnclick" routerLink="/redigerProfil">Rediger bruger</button>
         <button class="btnclick" routerLink="/">Tilbage til forside</button>
     </div>
 

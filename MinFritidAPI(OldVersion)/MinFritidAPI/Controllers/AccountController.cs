@@ -14,7 +14,7 @@ namespace MinFritidAPI.Controllers
     [ApiController]
     public class AccountController : Controller
     {
-
+        //opsætter context
         private MinFritidContext _context { get; }
 
         public AccountController(MinFritidContext context)
@@ -24,38 +24,38 @@ namespace MinFritidAPI.Controllers
 
         // POST: api/account/login
         [HttpPost("login")]
-        public ActionResult Login([FromBody] Login login)
+        public bool Login([FromBody] Login login)
         {
-            
-            
+            //login.Password = BC.HashPassword(login.Password);
+
             // Hent Bruger fra database
             var brugers = _context.Bruger;
 
             var bruger = brugers.Include("By").FirstOrDefault(Bruger => Bruger.Email == login.Email);
 
-            //checker at passwords matcher
-            if (bruger == null || !BC.Verify(bruger.Password, login.Password))
+            //checker at passwords ikke matcher
+            if (bruger == null || !BC.Verify(login.Password, bruger.Password))
             {
                 ViewBag.error = "Invalid Email or Password";
-                return View("Forside");
+                return false;
             }
+            //Hvis passwords matcher, logges bruger ind
             else
             {
-                var loggedIn = HttpContext.Session.GetString("LoggedOn");
-                HttpContext.Session.SetString("LoggedOn",loggedIn);
-                return View();
+                var loggedIn = HttpContext.Session.GetInt32("LoggedOn");
+                HttpContext.Session.SetInt32("LoggedOn",bruger.ID);
+                System.Console.WriteLine("Session Created");
+                return true;
             }
-
-            
-
         }
 
         // Bruger bliver logget ud
-        [HttpGet]
-        public ActionResult Logout()
+        [HttpGet("logout")]
+        public bool Logout()
         {
             HttpContext.Session.Remove("LoggedOn");
-            return View();
+            System.Console.WriteLine("Session Closed");
+            return false;
         }
     }
 }

@@ -187,38 +187,6 @@ namespace MinFritidAPI.Controllers
             return BadRequest();
         }
 
-        // GET: api/bruger/login
-        [HttpGet("login")]
-        public IActionResult Login(string Email, string Password)
-        {
-            var brugers = _context.Bruger;
-            var brugerTemp = brugers.FirstOrDefault(Bruger => Bruger.Email == Email);
-
-
-            if (Email == null)
-            {
-                return HttpNotFound();
-            }
-            else
-            {
-                if (brugerTemp.Password == Password)
-                {
-                    //lige nu gør den intet
-                }
-                else
-                {
-                    return NotFound("Wrong Password");
-                }
-            }
-
-            return new JsonResult(brugerTemp);
-        }
-
-        // GET: api/bruger/logout
-        [HttpGet("logout")]
-        public IActionResult Logout()
-        {
-            return Ok("Logged out");
-        }
+        
     }
 }
