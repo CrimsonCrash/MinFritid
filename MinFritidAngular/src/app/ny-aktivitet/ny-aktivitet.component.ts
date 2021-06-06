@@ -31,7 +31,7 @@ export class NyAktivitetComponent implements OnInit {
   }
     OnSubmit() {
       this.dataService.postAktivitet(this.UserForm.value).subscribe(res => {
-        this.router.navigateByUrl('post/index')
+        this.router.navigateByUrl('');
       })
     }
     onSelectImg(event) {

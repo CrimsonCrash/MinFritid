@@ -1,18 +1,18 @@
-<div *ngIf="iaktivitet" class="background">
+<div  class="background">
     <div>
-        <p>{{iaktivitet.Titel}}</p>
+        <p>{{iaktivitet?.Titel}}</p>
     </div>
 
     <div>
-        <p>{{iaktivitet.Beskrivelse}}</p>
+        <p>{{iaktivitet?.Beskrivelse}}</p>
     </div>
 
     <div>
-        <p>{{iaktivitet.Huskeliste}}</p>
+        <p>{{iaktivitet?.Huskeliste}}</p>
     </div>
 
     <div>
-        <p>{{iaktivitet.Pris}}</p>
+        <p>{{iaktivitet?.Pris}}</p>
     </div>
     <button>Tilmeld</button>
 </div>

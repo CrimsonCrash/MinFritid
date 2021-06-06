@@ -20,13 +20,14 @@ export class AktivitetComponent implements OnInit {
 
     
 
-     this.getAktivitetet(this.route.snapshot.params.id);
-    // this.route.paramMap.subscribe((params: ParamMap) => {
-    //   this.id = +params.get['id'];
-    //   this.dataService.getAktivitet(this.id).subscribe((data: Iaktivitet) =>{
-    //     this.iaktivitet = data;
-    //   });
-    // })
+     //this.getAktivitetet(this.route.snapshot.params.id);
+    this.route.paramMap.subscribe(params => {
+      this.id = +params.get['id'];
+      this.dataService.getAktivitet(this.id).subscribe((data: Iaktivitet) =>{
+        this.iaktivitet = data;
+        console.log(this.id);
+      });
+    })
 
     // this.dataService.getAktivitet(this.id).subscribe((data: Iaktivitet) =>{
     //   this.iaktivitet = data;
@@ -36,10 +37,10 @@ export class AktivitetComponent implements OnInit {
     
   }
 
-  getAktivitetet(id: number) {
-    this.dataService.getAktivitet(id).subscribe((data: Iaktivitet) =>{
-      this.iaktivitet = data;
-    });
-  }
+  // getAktivitetet(id: number) {
+  //   this.dataService.getAktivitet(id).subscribe(data =>{
+  //     this.iaktivitet = data;
+  //   });
+  // }
 
 }

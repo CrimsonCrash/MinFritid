@@ -4,7 +4,7 @@
             <div>
                 <label>Titel</label>
                 <br>
-                <input class="navContent2" formControlName="Titel" type="text">
+                <input class="navContent2" [(ngModel)]="iaktivitet.Titel" formControlName="Titel" type="text">
             </div>
             <br>
             
@@ -19,20 +19,20 @@
             <div>
                 <label>Start Dato og tid for aktivitet</label>
                 <br>
-                <input type="" class="navContent2" formControlName="StartTidspunkt" class="readonly" type="text" readonly>
+                <input type="" class="navContent2" [(ngModel)]="iaktivitet.StartTidspunkt" formControlName="StartTidspunkt" class="readonly" type="text" readonly>
             </div>
             <br>
             <div>
                 <label>Slut dato og tid for aktivitetet</label>
                 <br>
-                <input type="" class="navContent2" formControlName="SlutTidspunkt" class="readonly" type="text" readonly>
+                <input type="" class="navContent2" [(ngModel)]="iaktivitet.SlutTidspunkt" formControlName="SlutTidspunkt" class="readonly" type="text" readonly>
             </div>
             <br>
             <div>
                 <label>Beskrivelse</label>
                 
                 <br>
-                <textarea class="message" type="text" class="navContent2" formControlName="Beskrivelse"></textarea>
+                <textarea class="message" type="text" class="navContent2" [(ngModel)]="iaktivitet.Beskrivelse" formControlName="Beskrivelse"></textarea>
             </div>
             <br>
         </div>
@@ -41,7 +41,7 @@
             <div>
                 <label>Max antal deltagere</label>
                 <br>
-                <input class="navContent2" class="readonly" formControlName="MaxDeltagere" type="text" readonly>
+                <input class="navContent2" class="readonly" [(ngModel)]="iaktivitet.MaxDeltagere" formControlName="MaxDeltagere" type="text" readonly>
                 <br>
                 <label>Note: Opretteren vil selv optage en plads</label>
             </div>
@@ -49,12 +49,12 @@
             <div>
                 <label>Tilmeldingspris</label>
                 <br>
-                <input class="navContent2" class="readonly" type="text" readonly>
+                <input class="navContent2" [(ngModel)]="iaktivitet.Pris" formControlName="Pris" class="readonly" type="text" readonly>
             </div>
             <br>
             <div>
                 <label>huskeliste</label>
-                <textarea class="message" formControlName="Huskeliste"></textarea>
+                <textarea class="message" [(ngModel)]="iaktivitet.Huskeliste" formControlName="Huskeliste"></textarea>
             </div>
             <br>
             

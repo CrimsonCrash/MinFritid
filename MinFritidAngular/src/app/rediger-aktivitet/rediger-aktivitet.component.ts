@@ -1,8 +1,8 @@
+import { Iaktivitet } from './../data/Iaktivitet';
 import { FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { DataService } from '../data.service';
-import { Iaktivitet } from '../data/Iaktivitet';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
