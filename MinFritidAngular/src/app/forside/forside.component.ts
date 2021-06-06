@@ -10,12 +10,12 @@ import { DataService } from '../data.service';
 export class ForsideComponent implements OnInit {
 
   constructor(private dataService : DataService) { }
-  public Forsider = [];
+  public Aktiviteter = [];
 
   
   ngOnInit() {
     this.dataService.getAktiviteter()
-    .subscribe(data => this.Forsider = data)
+    .subscribe(data => this.Aktiviteter = data)
   }
   
 
