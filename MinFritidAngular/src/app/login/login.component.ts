@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Ibruger } from '../data/Ibruger';
+import { IloginRequest } from '../data/IloginRequest';
 
 @Component({
   selector: 'app-login',
@@ -12,31 +13,32 @@ import { Ibruger } from '../data/Ibruger';
 export class LoginComponent implements OnInit {
 
   data = false;
-  UserForm: any;
+  loginRequest: any;
   massage: string;
+  loginform: any;
 
   constructor(private formbuilder: FormBuilder, private dataService: DataService) { }
 
   
   ngOnInit(): void {
-    this.UserForm = this.formbuilder.group({
-      BrugerID: '',
+    this.loginform = this.formbuilder.group({
       Email: ['', [Validators.required]],
-      Password: ['', [Validators.required]],
+      Password: ['', [Validators.required]]
     });
   }
   submit() {
-    const user = this.UserForm.value;
+    const user = this.loginform.value;
     this.login(user);
     
   }
-  login(bruger: Ibruger) {
-    this.dataService.login(bruger).subscribe(
+  login(loginRequest: IloginRequest) {
+    this.dataService.login(loginRequest).subscribe(
       () =>
       {
         this.data = true;
         this.massage = 'Login Successfully';
-        this.UserForm.reset();
+        this.loginform.reset();
+        
       });
   }
 

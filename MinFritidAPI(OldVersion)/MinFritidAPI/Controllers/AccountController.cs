@@ -24,29 +24,48 @@ namespace MinFritidAPI.Controllers
 
         // POST: api/account/login
         [HttpPost("login")]
-        public bool Login([FromBody] Login login)
+        public IActionResult Login([FromBody] Login login)
         {
             //login.Password = BC.HashPassword(login.Password);
+            ;
 
             // Hent Bruger fra database
             var brugers = _context.Bruger;
 
             var bruger = brugers.Include("By").FirstOrDefault(Bruger => Bruger.Email == login.Email);
 
+            LoggedIn logged = new LoggedIn();
+
             //checker at passwords ikke matcher
             if (bruger == null || !BC.Verify(login.Password, bruger.Password))
             {
-                ViewBag.error = "Invalid Email or Password";
-                return false;
+                return NotFound("Invalid Email or Password");
             }
             //Hvis passwords matcher, logges bruger ind
             else
             {
+                logged.isLoggedIn = true;
+                logged.LoginId = bruger.ID;
                 var loggedIn = HttpContext.Session.GetInt32("LoggedOn");
                 HttpContext.Session.SetInt32("LoggedOn",bruger.ID);
                 System.Console.WriteLine("Session Created");
-                return true;
+                return new JsonResult(logged);
             }
+        }
+
+        //checker om brugeren er logget ind
+        [HttpGet("loggedIn")]
+        public IActionResult LoggedIn(LoggedIn logged)
+        {
+            if (HttpContext.Session.GetInt32("LoggedOn") == logged.LoginId)
+            {
+                return new JsonResult(logged);
+            }
+            else
+            {
+                return NotFound("Du er blevet logget ud automatisk");
+            }
+            
         }
 
         // Bruger bliver logget ud

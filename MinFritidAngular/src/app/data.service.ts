@@ -3,6 +3,8 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Ibruger } from './data/Ibruger';
 import { Iaktivitet } from './data/Iaktivitet';
+import { IloginRequest } from './data/IloginRequest';
+import { IloggedIn } from './data/IloggedIn';
 
 
 const httpOptions = {
@@ -35,8 +37,16 @@ export class DataService {
     return this.http.post<Ibruger>('http://localhost:5001/api/bruger', bruger, httpOptions)
   }
 
-  public login(bruger: Ibruger): Observable<Ibruger> {
-    return this.http.post<Ibruger>('http://localhost:5001/api/account', bruger, httpOptions);
+  public login(loginRequest: IloginRequest): Observable<IloginRequest> {
+    return this.http.post<IloginRequest>('http://localhost:5001/api/account/login', loginRequest, httpOptions);
+  }
+
+  public getLogin(){
+    return this.http.get<IloggedIn>('http://localhost:5001/api/account/loggedIn');
+  }
+
+  public logOut(){
+    return this.http.get('http://localhost:5001/api/account/logout')
   }
 
   // postBrugers(bruger: Ibruger): Observable<Ibruger>{
