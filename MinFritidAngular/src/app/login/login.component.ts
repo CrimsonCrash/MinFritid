@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Ibruger } from '../data/Ibruger';
 import { IloginRequest } from '../data/IloginRequest';
+import { IloggedIn } from '../data/IloggedIn';
+
 
 @Component({
   selector: 'app-login',
@@ -16,6 +18,7 @@ export class LoginComponent implements OnInit {
   loginRequest: any;
   massage: string;
   loginform: any;
+  LoggedIn: IloggedIn;
 
   constructor(private formbuilder: FormBuilder, private dataService: DataService) { }
 
@@ -29,7 +32,7 @@ export class LoginComponent implements OnInit {
   submit() {
     const user = this.loginform.value;
     this.login(user);
-    
+    this.getLogin();
   }
   login(loginRequest: IloginRequest) {
     this.dataService.login(loginRequest).subscribe(
@@ -40,6 +43,12 @@ export class LoginComponent implements OnInit {
         this.loginform.reset();
         
       });
+  }
+
+  getLogin(){
+    this.dataService.getLogin().subscribe((data: IloggedIn) =>{
+      this.LoggedIn = data;
+    });
   }
 
 

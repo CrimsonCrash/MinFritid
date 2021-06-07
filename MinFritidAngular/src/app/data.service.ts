@@ -42,7 +42,7 @@ export class DataService {
     return this.http.post<IloginRequest>('http://localhost:5001/api/account/login', loginRequest, httpOptions);
   }
 
-  public getLogin(){
+  public getLogin(): Observable<IloggedIn>{
     return this.http.get<IloggedIn>('http://localhost:5001/api/account/loggedIn');
   }
 

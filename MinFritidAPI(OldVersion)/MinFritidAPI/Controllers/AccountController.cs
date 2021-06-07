@@ -14,6 +14,8 @@ namespace MinFritidAPI.Controllers
     [ApiController]
     public class AccountController : Controller
     {
+        public LoggedIn logged;
+
         //opsætter context
         private MinFritidContext _context { get; }
 
@@ -27,14 +29,12 @@ namespace MinFritidAPI.Controllers
         public IActionResult Login([FromBody] Login login)
         {
             //login.Password = BC.HashPassword(login.Password);
-            ;
+            logged = new LoggedIn();
 
             // Hent Bruger fra database
             var brugers = _context.Bruger;
 
             var bruger = brugers.Include("By").FirstOrDefault(Bruger => Bruger.Email == login.Email);
-
-            LoggedIn logged = new LoggedIn();
 
             //checker at passwords ikke matcher
             if (bruger == null || !BC.Verify(login.Password, bruger.Password))
@@ -74,6 +74,8 @@ namespace MinFritidAPI.Controllers
         {
             HttpContext.Session.Remove("LoggedOn");
             System.Console.WriteLine("Session Closed");
+            logged.isLoggedIn = false;
+            logged.LoginId = 0;
             return false;
         }
     }
