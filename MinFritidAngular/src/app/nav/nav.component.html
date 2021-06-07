@@ -22,7 +22,8 @@
                 <div><a routerLink="/kontakt">Kontakt os</a></div>
             </div>
             
-            <input class="navContent2" type="text" placeholder="Search..">
+            <input class="navContent2" [(ngModel)]="titel" type="text" placeholder="Search..">
+            <button class="navContent2" (click)="searchTitel()">Søg</button>
             <button class="navContent2" routerLink="/login">Log in</button>
             <Button class="navContent2" routerLink="/opretBruger">Opret bruger</Button>
         </div>

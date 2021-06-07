@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataService } from '../data.service';
+import { Iaktivitet } from '../data/Iaktivitet';
 
 @Component({
   selector: 'app-mine-aktiviteter',
@@ -7,8 +9,9 @@ import { DataService } from '../data.service';
   styleUrls: ['./mine-aktiviteter.component.css']
 })
 export class MineAktiviteterComponent implements OnInit {
-  constructor(private dataService : DataService) { }
+  constructor(private dataService : DataService, private router: Router) { }
   public Forsider = [];
+  iaktivitet: Iaktivitet;
 
   
   ngOnInit() {
@@ -16,5 +19,10 @@ export class MineAktiviteterComponent implements OnInit {
     .subscribe(data => this.Forsider = data)
   }
   
+  // redigerAktivitet(iaktivitet: Iaktivitet): void {
+  //   window.localStorage.removeItem("id");
+  //   window.localStorage.setItem("id", iaktivitet.AktivitetID.toString());
+  //   this.router.navigate['redigerAktivitet']
+  // }
 
 }

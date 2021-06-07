@@ -39,6 +39,10 @@ body {
     background-attachment: fixed;
 }
 
+button, input{
+    border-radius: 12px;
+}
+
 .activitiesImg{
     height: auto;
     width: 300px;

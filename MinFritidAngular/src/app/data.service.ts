@@ -32,6 +32,7 @@ export class DataService {
   getBruger(brugerId) {
     return this.http.get('http://localhost:5001/api/bruger/'+ brugerId)
   }
+
   postBrugers(bruger: Ibruger): Observable<Ibruger>{
     //const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/text'}) };
     return this.http.post<Ibruger>('http://localhost:5001/api/bruger', bruger, httpOptions)
@@ -75,6 +76,10 @@ export class DataService {
 
   getAktivitet(aktivitetId): Observable<Iaktivitet>{
     return this.http.get<Iaktivitet>('http://localhost:5001/api/aktivitet/' + aktivitetId) 
+  }
+
+  findAktivitet(titel : any): Observable<Iaktivitet>{
+    return this.http.get<Iaktivitet>('http://localhost:5001/api/aktivitet/' + titel)
   }
 
   postAktivitet(aktivitet : Iaktivitet): Observable<Iaktivitet>{

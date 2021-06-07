@@ -43,6 +43,13 @@ export class RedigerAktivitetComponent implements OnInit {
         Aktiv: ''
         
       });
+      
+      // let aktivitetid = window.localStorage.getItem("id");
+
+      // // this.id = this.route.snapshot.paramMap['id'];
+      // this.dataService.putAktivitet(+aktivitetid).subscribe(data => {
+      //   this.UserForm.setValue(data);
+      // })
     }
     OnSubmit() {
       
