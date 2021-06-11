@@ -11,7 +11,6 @@ import { LoginComponent } from './login/login.component';
 import { OpretBrugerComponent } from './opret-bruger/opret-bruger.component';
 import { OmosComponent } from './om-os/om-os.component';
 import { KontaktComponent } from './kontakt/kontakt.component';
-import { MinProfilComponent } from './min-profil/min-profil.component';
 import { BrugerProfilComponent } from './bruger-profil/bruger-profil.component';
 import { NyAktivitetComponent } from './ny-aktivitet/ny-aktivitet.component';
 import { RedigerAktivitetComponent } from './rediger-aktivitet/rediger-aktivitet.component';
@@ -20,7 +19,6 @@ import { FavoritterComponent } from './favoritter/favoritter.component';
 import { SoegComponent } from './soeg/soeg.component';
 import { MineAktiviteterComponent } from './mine-aktiviteter/mine-aktiviteter.component';
 import { RedigerProfilComponent } from './rediger-profil/rediger-profil.component';
-import { BrugerAktivitetComponent } from './bruger-aktivitet/bruger-aktivitet.component';
 import { DataService} from './data.service';
 
 @NgModule({
@@ -34,7 +32,6 @@ import { DataService} from './data.service';
     OpretBrugerComponent,
     OmosComponent,
     KontaktComponent,
-    MinProfilComponent,
     BrugerProfilComponent,
     NyAktivitetComponent,
     RedigerAktivitetComponent,
@@ -43,7 +40,6 @@ import { DataService} from './data.service';
     SoegComponent,
     MineAktiviteterComponent,
     RedigerProfilComponent,
-    BrugerAktivitetComponent
   ],
   imports: [
     BrowserModule,

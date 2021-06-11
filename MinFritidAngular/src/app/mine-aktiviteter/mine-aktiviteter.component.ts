@@ -10,13 +10,13 @@ import { Iaktivitet } from '../data/Iaktivitet';
 })
 export class MineAktiviteterComponent implements OnInit {
   constructor(private dataService : DataService, private router: Router) { }
-  public Forsider = [];
+  public Aktiviteter = [];
   iaktivitet: Iaktivitet;
 
   
   ngOnInit() {
     this.dataService.getAktiviteter()
-    .subscribe(data => this.Forsider = data)
+    .subscribe(data => this.Aktiviteter = data)
   }
   
   // redigerAktivitet(iaktivitet: Iaktivitet): void {

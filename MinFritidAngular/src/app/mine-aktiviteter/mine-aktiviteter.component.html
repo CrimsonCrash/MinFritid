@@ -1,14 +1,14 @@
-<div class="boxBackground" *ngFor="let Forside of Forsider">
+<div class="boxBackground" *ngFor="let Aktivitet of Aktiviteter">
         
     <div>
         <img class="activitiesImg" src="assets/Images/walking.jpg">
         <br>
-        <label>{{Forside.titel}}</label>
+        <label>{{Aktivitet.titel}}</label>
         <br/>
-        <label>{{Forside.postnummer}}</label>
+        <label>{{Aktivitet.postnummer}}</label>
         <br/>
-        <button [routerLink]="['/redigerAktivitet/', Forside.id]">gå til aktiviteten</button>
-        <a href="#" [routerLink]="['/redigerAktivitet/', Forside.aktivitetId]" class="btn btn-info">View</a>
+        <button [routerLink]="['/redigerAktivitet/', Aktivitet.aktivitetId]">gå til aktiviteten</button>
+        
     </div>
         
 </div>

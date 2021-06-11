@@ -8,14 +8,13 @@ import { OmosComponent } from './om-os/om-os.component';
 import { BrugerProfilComponent } from './bruger-profil/bruger-profil.component';
 import { FavoritterComponent } from './favoritter/favoritter.component';
 import { KontaktComponent } from './kontakt/kontakt.component';
-import { MinProfilComponent } from './min-profil/min-profil.component';
 import { MineAktiviteterComponent } from './mine-aktiviteter/mine-aktiviteter.component';
 import { NyAktivitetComponent } from './ny-aktivitet/ny-aktivitet.component';
 import { RedigerAktivitetComponent } from './rediger-aktivitet/rediger-aktivitet.component';
 import { SoegComponent } from './soeg/soeg.component';
 import { VennerComponent } from './venner/venner.component';
 import { RedigerProfilComponent } from './rediger-profil/rediger-profil.component';
-import { BrugerAktivitetComponent } from './bruger-aktivitet/bruger-aktivitet.component';
+
 
 const routes: Routes = [
   {path: '', component: ForsideComponent},
@@ -23,10 +22,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'opretBruger', component: OpretBrugerComponent},
   {path: 'omOs', component: OmosComponent},
-  {path: 'minProfil', component: MinProfilComponent},
   {path: 'redigerProfil', component: RedigerProfilComponent},
   {path: 'brugerProfil', component: BrugerProfilComponent},
-  {path: 'brugerAktivitet', component: BrugerAktivitetComponent},
   {path: 'favorit', component: FavoritterComponent},
   {path: 'kontakt', component: KontaktComponent},
   {path: 'mineAktiviteter', component: MineAktiviteterComponent},
@@ -42,5 +39,5 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 export const routingComponent = [ForsideComponent, AktivitetComponent, OmosComponent, BrugerProfilComponent,
-  FavoritterComponent, KontaktComponent, MinProfilComponent, MineAktiviteterComponent, NyAktivitetComponent,
-  RedigerAktivitetComponent, SoegComponent, VennerComponent, RedigerProfilComponent, BrugerAktivitetComponent]
+  FavoritterComponent, KontaktComponent, MineAktiviteterComponent, NyAktivitetComponent,
+  RedigerAktivitetComponent, SoegComponent, VennerComponent, RedigerProfilComponent]
