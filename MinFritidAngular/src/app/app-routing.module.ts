@@ -18,7 +18,7 @@ import { RedigerProfilComponent } from './rediger-profil/rediger-profil.componen
 
 const routes: Routes = [
   {path: '', component: ForsideComponent},
-  {path: 'aktivitet/:id', component: AktivitetComponent},
+  {path: 'aktivitet/:AktivitetId', component: AktivitetComponent},
   {path: 'login', component: LoginComponent},
   {path: 'opretBruger', component: OpretBrugerComponent},
   {path: 'omOs', component: OmosComponent},

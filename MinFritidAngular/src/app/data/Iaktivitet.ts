@@ -18,7 +18,7 @@ export class Iaktivitet {
     // )
     // {}
     AktivitetID: number;
-    BrugerID: number;
+    //BrugerID: number;
     Titel: string;
     Beskrivelse: string;
     Huskeliste: string;

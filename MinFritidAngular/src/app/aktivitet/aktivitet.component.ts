@@ -22,7 +22,7 @@ export class AktivitetComponent implements OnInit {
 
      //this.getAktivitetet(this.route.snapshot.params.id);
     this.route.paramMap.subscribe(params => {
-      this.id = +params.get['id'];
+      this.id = +params.get['AktivitetId'];
       this.dataService.getAktivitet(this.id).subscribe((data: Iaktivitet) =>{
         this.iaktivitet = data;
         console.log(this.id);

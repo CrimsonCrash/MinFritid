@@ -1,4 +1,4 @@
-<form class="boxBackground" [formGroup]="UserForm" (ngSubmit)="OnSubmit()">
+<form class="boxBackground" [formGroup]="aktivitetForm" (ngSubmit)="OnSubmit()">
     <div >
         <div>
             <label>Titel</label>
@@ -18,13 +18,19 @@
         <div>
             <label>Start Dato og tid for aktivitet</label>
             <br>
-            <input type="" class="navContent2" formControlName="StartTidspunkt"  type="text" >
+            <input  class="navContent2" formControlName="StartTidspunkt"  type="text" >
         </div>
         <br>
         <div>
             <label>Slut dato og tid for aktivitetet</label>
             <br>
-            <input type="" class="navContent2" formControlName="SlutTidspunkt"  type="text" >
+            <input class="navContent2" formControlName="SlutTidspunkt"  type="text" >
+        </div>
+        <br>
+        <div>
+            <label>Postnummer</label>
+            <br>
+            <input formControlName="PostNummer" type="number" pattern="[0-9]{4}" min="1000" max="9990">
         </div>
         <br>
         <div>
@@ -40,7 +46,7 @@
         <div>
             <label>Max antal deltagere</label>
             <br>
-            <input class="navContent2" formControlName="MaxDeltagere" type="text">
+            <input class="navContent2" formControlName="MaxDeltagere" type="number">
             <br>
             <label>Note: Opretteren vil selv optage en plads</label>
         </div>
@@ -48,7 +54,7 @@
         <div>
             <label>Tilmeldingspris</label>
             <br>
-            <input class="navContent2" type="text">
+            <input class="navContent2" type="number" formControlName="Pris">
         </div>
         <br>
         <div>
@@ -59,5 +65,5 @@
         
     </div>
     
-    <button class="btnclick" routerLink="/">Opret aktivitet</button>
+    <button class="btnclick" >Opret aktivitet</button>
 </form>
