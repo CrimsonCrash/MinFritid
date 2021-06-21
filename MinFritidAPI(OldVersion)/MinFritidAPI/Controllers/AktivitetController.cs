@@ -69,21 +69,29 @@ namespace MinFritidAPI.Controllers
 
         // PUT: api/Aktivitet/5
         [HttpPut("{id}")]
-        public IActionResult PutAktivitet(int Id, Aktivitet aktivitet)
+        public IActionResult PutAktivitet(int Id,[FromBody]Aktivitet aktivitet)
         {
-            //var PutAktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.ID == Id);
-            if (aktivitet == null)
+            var putAktivitet = _context.Aktivitet.FirstOrDefault(Aktivitet => Aktivitet.AktivitetID == Id);
+            if (putAktivitet != null)
+                {
+                putAktivitet.Titel = aktivitet.Titel;
+                putAktivitet.Beskrivelse = aktivitet.Beskrivelse;
+                putAktivitet.Huskeliste = aktivitet.Huskeliste;
+                putAktivitet.Pris = aktivitet.Pris;
+                putAktivitet.MaxDeltagere = aktivitet.MaxDeltagere;
+                putAktivitet.StartTidspunkt = aktivitet.StartTidspunkt;
+                putAktivitet.SlutTidspunkt = aktivitet.SlutTidspunkt;
+                putAktivitet.Postnummer = aktivitet.Postnummer;
+                putAktivitet.Aktiv = aktivitet.Aktiv;
+                _context.SaveChanges();
+                return Ok("Opdateret Aktivitet");
+                    
+            }
+            else
             {
                 return NotFound("Ikke fundet");
             }
-            if (aktivitet.AktivitetID == Id)
-            {
-                _context.Aktivitet.Update(aktivitet);
-                _context.SaveChanges();
-                return Ok("Opdateret Aktivitet");
-            }
-            return BadRequest();
-            
+            //return BadRequest();
         }
 
         // POST: api/Aktivitet
