@@ -47,9 +47,9 @@ namespace MinFritidAPI.Controllers
             return new JsonResult(bruger);
         }
 
-        // PUT: api/Bruger
-        [HttpPut]
-        public IActionResult PutBruger(int Id, Bruger bruger)
+        // PUT: api/Bruger/5
+        [HttpPut("{id}")]
+        public IActionResult PutBruger(int Id,[FromBody]Bruger bruger)
         {
             if (bruger == null)
             {
@@ -58,10 +58,19 @@ namespace MinFritidAPI.Controllers
             if (bruger.Postnummer != null)
             {
                 var Postnummer = _context.By.Any(p => p.Postnummer == bruger.Postnummer);
+
+                var putBruger = _context.Bruger.FirstOrDefault(i => i.ID == Id);
                 
                 if (Postnummer == true)
                 {
-                    _context.Bruger.Update(bruger);
+                    bruger.Password = BC.HashPassword(bruger.Password);
+
+                    putBruger.Fornavn = bruger.Fornavn;
+                    putBruger.Efternavn = bruger.Efternavn;
+                    putBruger.Foedselsdato = bruger.Foedselsdato;
+                    putBruger.Postnummer = bruger.Postnummer;
+                    putBruger.Email = bruger.Email;
+                    putBruger.Password = bruger.Password;
                     _context.SaveChanges();
                     return Ok("Updated Bruger");
                 }
