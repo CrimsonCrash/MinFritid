@@ -13,8 +13,9 @@ export class ForsideComponent implements OnInit {
   constructor(private dataService : DataService) { }
   public Aktiviteter = [];
 
-  iaktivitet: Iaktivitet[];
+  //iaktivitet: Iaktivitet[];
   
+  // den kalder på getAktiviteter fra service filen med brug af subscribe
   ngOnInit() {
     this.dataService.getAktiviteter()
     .subscribe(data => this.Aktiviteter = data)

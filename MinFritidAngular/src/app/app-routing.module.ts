@@ -15,6 +15,7 @@ import { SoegComponent } from './soeg/soeg.component';
 import { VennerComponent } from './venner/venner.component';
 import { RedigerProfilComponent } from './rediger-profil/rediger-profil.component';
 
+// her sættes der url med hjælp fra routeren
 
 const routes: Routes = [
   {path: '', component: ForsideComponent},

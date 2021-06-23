@@ -24,6 +24,10 @@ export class DataService {
     // this.header = new HttpHeaders(headerSettings);
   }
 
+  // det er her den forbinder til apiet i back-end
+  // hver en metode kalder på den bestemte controllers url i apiet 
+
+
   getBrugers(): Observable<Ibruger[]>{
     return this.http.get<Ibruger[]>('http://localhost:5001/api/bruger/')
 
@@ -74,8 +78,8 @@ export class DataService {
     return this.http.get<Iaktivitet[]>('http://localhost:5001/api/aktivitet/') 
   }
 
-  getAktivitet(aktivitetId): Observable<Iaktivitet>{
-    return this.http.get<Iaktivitet>('http://localhost:5001/api/aktivitet/' + aktivitetId) 
+  getAktivitet(AktivitetID: number): Observable<Iaktivitet>{
+    return this.http.get<Iaktivitet>('http://localhost:5001/api/aktivitet/' + AktivitetID) 
   }
 
   findAktivitet(titel : any): Observable<Iaktivitet>{

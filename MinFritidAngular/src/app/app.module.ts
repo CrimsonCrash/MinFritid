@@ -21,6 +21,8 @@ import { MineAktiviteterComponent } from './mine-aktiviteter/mine-aktiviteter.co
 import { RedigerProfilComponent } from './rediger-profil/rediger-profil.component';
 import { DataService} from './data.service';
 
+// her forbinder man modulerne og og komponenterne der er lavet
+
 @NgModule({
   declarations: [
     AppComponent,

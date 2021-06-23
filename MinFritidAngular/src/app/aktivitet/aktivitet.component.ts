@@ -16,22 +16,22 @@ export class AktivitetComponent implements OnInit {
   constructor( public dataService: DataService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-     //this.id = +this.route.snapshot.paramMap.get['id']
+     this.id = +this.route.snapshot.paramMap['AktivitetID']
 
     
 
      //this.getAktivitetet(this.route.snapshot.params.id);
-    this.route.paramMap.subscribe(params => {
-      this.id = +params.get['AktivitetId'];
-      this.dataService.getAktivitet(this.id).subscribe((data: Iaktivitet) =>{
-        this.iaktivitet = data;
-        console.log(this.id);
-      });
-    })
+    // this.route.paramMap.subscribe(params => {
+    //   this.id = params['AktivitetId'];
+    //   this.dataService.getAktivitet(this.id).subscribe((data: Iaktivitet) =>{
+    //     this.iaktivitet = data;
+    //     console.log(this.id);
+    //   });
+    // })
 
-    // this.dataService.getAktivitet(this.id).subscribe((data: Iaktivitet) =>{
-    //   this.iaktivitet = data;
-    // });
+    this.dataService.getAktivitet(this.id).subscribe((data: Iaktivitet) =>{
+      this.iaktivitet = data;
+    });
 
     
     

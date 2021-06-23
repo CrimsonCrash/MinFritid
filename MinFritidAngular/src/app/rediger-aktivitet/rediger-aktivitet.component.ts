@@ -23,7 +23,7 @@ export class RedigerAktivitetComponent implements OnInit {
     
     ngOnInit(): void {
 
-      this.id = this.route.snapshot.paramMap['id'];
+      this.id = this.route.snapshot.paramMap['AktivitetID'];
       this.dataService.putAktivitet(this.id, this.UserForm).subscribe((data: Iaktivitet) => {
         this.iaktivitet = data;
       })
