@@ -1,2 +1,2 @@
 # MinFritid
-P5 arbejdsopgave
+P5 og Svendeprøve arbejdsopgave
